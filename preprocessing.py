@@ -4,23 +4,23 @@ import matplotlib.pyplot as plt # type: ignore
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler # type: ignore
 
 
-def preprocessing():
-    data = pd.read_csv("cardio_data_processed.csv")
+def load_data(filepath):
+    return pd.read_csv(filepath)
 
-    # Drop duplicates
+def remove_duplicates(data):
     data.drop_duplicates(inplace=True)
+    return data
 
+def check_null_values(data):
     print("Null Werte Absolut:")
     print(data.isnull().sum())
-    print("")
-    print("Null Werte Prozentual:")
-    print(data.isnull().mean()*100)
-    print("")
-
-    # Count values out of bounds
+    print("\nNull Werte Prozentual:")
+    print(data.isnull().mean() * 100)
+    print("\n")
+    
+def detect_and_remove_outliers(data, columns):
     total_outliers = 0
-
-    for column in ['age_years','height','weight','ap_hi','ap_lo','bmi']:
+    for column in columns:
         Q1 = data[column].quantile(0.25)
         Q3 = data[column].quantile(0.75)
         IQR = Q3 - Q1
@@ -29,7 +29,6 @@ def preprocessing():
         upper_bound = Q3 + 1.5 * IQR
         
         outliers = data[(data[column] < lower_bound) | (data[column] > upper_bound)]
-        
         outliers_count = len(outliers)
         total_outliers += outliers_count
         
@@ -51,25 +50,45 @@ def preprocessing():
         print(f"Mittelwert von {column}: {mean_value}")
         print("-" * 50)
 
-        # Remove Outliers
         data = data[(data[column] >= lower_bound) & (data[column] <= upper_bound)]
-
+    
     print(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
+    return data
 
-    # One-Hot-Encoding
+def one_hot_encode_bp_category(data):
     data = pd.get_dummies(data, columns=['bp_category'])
     encoder = LabelEncoder()
     data['bp_category'] = encoder.fit_transform(data['bp_category'])
+    return data
 
-    # Normalizing
-    selected_features = ['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'bmi']
+def normalize_data(data, selected_features):
     scaler = MinMaxScaler()
     data[selected_features] = scaler.fit_transform(data[selected_features])
+    return data
 
-    # Boxplot
+def plot_boxplot(data):
     data_long = pd.melt(data, value_vars=['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'bmi'])
     sns.boxplot(x='variable', y='value', data=data_long)
-    plt.xticks(rotation=45)  
+    plt.xticks(rotation=45)
     plt.show()
+
+def preprocessing(filepath):
+    data = load_data(filepath)
+
+    data = remove_duplicates(data)
+
+    check_null_values(data)
+
+    outlier_columns = ['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'bmi']
+
+    data = detect_and_remove_outliers(data, outlier_columns)
+
+    data = one_hot_encode_bp_category(data)
+
+    selected_features = ['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'bmi']
+
+    data = normalize_data(data, selected_features)
+
+    plot_boxplot(data)
 
     return data
