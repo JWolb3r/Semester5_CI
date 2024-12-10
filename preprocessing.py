@@ -1,4 +1,4 @@
-import pandas as pd # type: ignore
+import pandas as pd 
 import seaborn as sns # type: ignore
 import matplotlib.pyplot as plt # type: ignore
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler # type: ignore
@@ -55,10 +55,9 @@ def detect_and_remove_outliers(data, columns):
     print(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
     return data
 
-def one_hot_encode_bp_category(data):
-    data = pd.get_dummies(data, columns=['bp_category'])
+def label_encode_bp_category(data):
     encoder = LabelEncoder()
-    data['bp_category'] = encoder.fit_transform(data['bp_category'])
+    data['bp_category'] = encoder.fit_transform(data[])
     return data
 
 def normalize_data(data, selected_features):
@@ -66,29 +65,39 @@ def normalize_data(data, selected_features):
     data[selected_features] = scaler.fit_transform(data[selected_features])
     return data
 
-def plot_boxplot(data):
-    data_long = pd.melt(data, value_vars=['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'bmi'])
+def plot_boxplot(data, boxplot_features):
+    data_long = pd.melt(data, value_vars=boxplot_features)
     sns.boxplot(x='variable', y='value', data=data_long)
     plt.xticks(rotation=45)
     plt.show()
 
 def preprocessing(filepath):
+    print("Start preprocessing")
     data = load_data(filepath)
+
+    # print(data)
+    # print(len(data))
+    
+    # boxplot_features = ['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'bmi']
+    # plot_boxplot(data)
 
     data = remove_duplicates(data)
 
-    check_null_values(data)
+    # check_null_values(data)
 
     outlier_columns = ['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'bmi']
 
-    data = detect_and_remove_outliers(data, outlier_columns)
+    # data = detect_and_remove_outliers(data, outlier_columns)
 
-    data = one_hot_encode_bp_category(data)
+    toBeEncodedFeature = 'bp_category'
+    data = label_encode_bp_category(data, toBeEncodedFeature)
 
     selected_features = ['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'bmi']
 
     data = normalize_data(data, selected_features)
 
-    plot_boxplot(data)
+    # plot_boxplot(data)
+
+    # print(data)
 
     return data
