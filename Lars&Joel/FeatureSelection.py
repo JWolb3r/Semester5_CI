@@ -9,10 +9,9 @@ def ffs(data, features, label, hiddenLayerSizes=(8,8,8), maxIter=4000, randomSta
  
     model = MLPClassifier(hidden_layer_sizes=hiddenLayerSizes, activation=activation, max_iter=maxIter, random_state=randomState)
     selector = SequentialFeatureSelector(model,
-                                        n_features_to_select=4,
+                                        n_features_to_select=returnFeatures,
                                         scoring='accuracy',
                                         cv=crossValidation)
     selector.fit(x, y)
 
-    print(f"Best Features: {selector.k_feature_names_}")
     return [features[i] for i in selector.get_support(indices=True)]

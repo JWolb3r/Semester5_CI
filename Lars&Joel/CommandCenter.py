@@ -12,6 +12,7 @@ data = preprocessing(filepath, oneHotEncodingFeatures=["bp_category"], normalize
 columns = removeColumns(getColumns(data), ["id", "age_years", "bp_category_encoded", "cardio"] )
 
 bestFeatures = ffs(data, columns, "cardio", maxIter=1000)
+bestFeatures = ["age", "ap_hi", "ap_lo", "cholesterol"]
 bestFeatures.append("cardio")
 
 print(trainAndTestMLP(data[bestFeatures], "cardio"))

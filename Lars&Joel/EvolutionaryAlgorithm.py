@@ -74,7 +74,7 @@ def fitness(genome: [], data, label: str, numOfIterations: int = 5) -> float:
     """
     score = 0
     for i in range(numOfIterations):
-        score += trainAndTestMLP(data, label, genome, 42 + i)
+        score += trainAndTestMLP(data, label, hiddenLayerSizes=genome, randomState=42 + i)
     return round(score / numOfIterations, 6)
 
 
