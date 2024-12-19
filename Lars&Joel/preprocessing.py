@@ -74,7 +74,8 @@ def preprocessing(
         outlierColumns: list = None,
         labelEncodingFeatures: list = None,
         oneHotEncodingFeatures: list = None,
-        normalizeFeatures: list = None
+        normalizeFeatures: list = None,
+        printNullValues = True,
         ):
 
     print("Start preprocessing")
@@ -97,6 +98,10 @@ def preprocessing(
 
     if normalizeFeatures:
         data = normalizeData(data, normalizeFeatures)
+
+    if printNullValues:
+        printNullValues(data)
+
 
     print("Finished Preprocessing")
     return data
