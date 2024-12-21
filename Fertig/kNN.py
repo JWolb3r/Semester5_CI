@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 
 def trainKNN(dataX, dataY, neighbors=3, knnWeight="uniform"):
     # Standard euclidean for distance
-    knn = KNeighborsClassifier(n_neighbors=neighbors, knnWeight=knnWeight)
+    knn = KNeighborsClassifier(n_neighbors=neighbors, weights=knnWeight)
     return knn.fit(dataX, dataY)
 
 

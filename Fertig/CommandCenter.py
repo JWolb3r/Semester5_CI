@@ -117,78 +117,113 @@ def preprocessFetalHealth():
 
 
 def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange=10, dataSetName=None):
-    print(f"Start {dataSetName} knn")
+    printAndWriteInFileAcc(f"Start {dataSetName} knn")
+    printAndWriteInFileAvgAcc(f"Start {dataSetName} knn")
 
     # uniform = neighbors have same weight, distance = neighbors got calculated distance
     sumAccUniform = 0
     sumAccDistance = 0
-    bestKnnComb = ['',0]
+    bestKnnComb = ['','',0]
 
     # Cross-validation
     for neighbors in range(1, neighborsRange):
-        print(f"Current neighbors: {neighbors}")
+        printAndWriteInFileAcc(f"Current neighbors: {neighbors}")
+        printAndWriteInFileAvgAcc(f"Current neighbors: {neighbors}")
 
         sumAccUniform = 0
         sumAccDistance = 0
 
+        printAndWriteInFileAvgAcc("Distance:")
+        printAndWriteInFileAcc("Distance")
+
+
         for i in range(trainRange):
-            sumAccUniform += trainAndTestKNN(data[features], data[label], neighbors=neighbors, randomState=42+i, knnWeight='uniform')
-            sumAccDistance += trainAndTestKNN(data[features], data[label], neighbors=neighbors, knnWeight='distance')
+            distanceAcc = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighbors, randomState=42+i, knnWeight='distance')
+
+            printAndWriteInFileAcc(distanceAcc)
+
+            sumAccDistance += distanceAcc
+
+        averageDistanceAcc = sumAccDistance / trainRange
+        printAndWriteInFileAvgAcc(f"Average Acc Distance: {averageDistanceAcc}")
+
+
+        printAndWriteInFileAcc("Uniform:")
+        printAndWriteInFileAvgAcc("Uniform")
+        for i in range(trainRange):
+            uniformAcc = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighbors, randomState=42+i, knnWeight='uniform')
+
+            printAndWriteInFileAcc(uniformAcc)
+
+            sumAccUniform += uniformAcc
 
         averageUniformAcc = sumAccUniform / trainRange
-        averageDistanceAcc = sumAccDistance / trainRange
-        print(f"Average Acc Uniform: {averageUniformAcc}")
-        print(f"Average Acc Distance: {averageDistanceAcc}")
+        printAndWriteInFileAvgAcc(f"Average Acc Uniform: {averageUniformAcc}")
 
-        if bestKnnComb[1] < sumAccUniform:
-            bestKnnComb = ['Uniform', averageUniformAcc]
-        elif bestKnnComb[1] < sumAccDistance:
-            bestKnnComb = ['Distance', averageDistanceAcc]
+        if bestKnnComb[2] < averageUniformAcc:
+            bestKnnComb = ['Uniform', neighbors , averageUniformAcc]
+        elif bestKnnComb[2] < averageDistanceAcc:
+            bestKnnComb = ['Distance', neighbors, averageDistanceAcc]
 
-    print(f"Best neighbors: {bestKnnComb}")
+    printAndWriteInFileAcc(f"Best neighbors: {bestKnnComb}")
+    printAndWriteInFileAvgAcc(f"Best neighbors: {bestKnnComb}")
+
 
 
 def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=None): 
-    print(f"Start {datasetName} SVM")
+    printAndWriteInFileAcc(f"Start {datasetName} SVM")
+    printAndWriteInFileAvgAcc(f"Start {datasetName} SVM")
 
     bestSvmComb = ['', 0] 
-
     kernelFunctions = ['linear', 'rbf', 'poly', 'sigmoid']
 
     # Cross-validation
     for kernel in kernelFunctions:
-        print(f"Current kernel: {kernel}")
+        printAndWriteInFileAcc(f"Current kernel: {kernel}")
+        printAndWriteInFileAvgAcc(f"Current kernel: {kernel}")
 
         sumAcc = 0
 
         for i in range(trainRange):
-            sumAcc += trainAndTestSVM(data[features], data[label], kernelFunction=kernel)
+            acc = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel)
+            printAndWriteInFileAcc(acc)
+            sumAcc += acc
 
         averageAcc = sumAcc / trainRange
-
-        print(f"Average Acc for {kernel}: {averageAcc}")
+        printAndWriteInFileAvgAcc(f"Average Acc for {kernel}: {averageAcc}")
 
         if averageAcc > bestSvmComb[1]:
             bestSvmComb = [kernel, averageAcc]
 
-    print(f"Best SVM kernel: {bestSvmComb}")
+    printAndWriteInFileAcc(f"Best SVM kernel: {bestSvmComb}")
+    printAndWriteInFileAvgAcc(f"Best SVM kernel: {bestSvmComb}")
+
 
 
 def startNNAverageCreation(data, features, label, trainRange=10, datasetName=None): 
-    print(f"Start {datasetName} default-NN")
+    printAndWriteInFileAcc(f"Start {datasetName} default-NN")
+    printAndWriteInFileAvgAcc(f"Start {datasetName} default-NN")
 
     # Cross-validation
     sumAcc = 0
 
     for i in range(trainRange):
-        sumAcc += trainAndTestMLP(data[features], data[label])
+        acc = trainAndTestMLP(data=data, features=features, label=label)
+        printAndWriteInFileAcc(acc)
+        sumAcc += acc
 
     averageAcc = sumAcc / trainRange
+    printAndWriteInFileAvgAcc(f"Average Acc: {averageAcc}")
 
-    print(f"Average Acc: {averageAcc}")
 
 def printAndWriteInFileBestFeatures(content):
     printAndWriteInFile(content, "Logs/BestFeatures.txt")
+
+def printAndWriteInFileAcc(content):
+    printAndWriteInFile(content, "Logs/AccssOfAlgorithms.txt")
+
+def printAndWriteInFileAvgAcc(content):
+    printAndWriteInFile(content, "Logs/AvgAcssOfAlgs.txt")
 
 def doFFS(datasetName, data, features, label):
     bestFeatures = ffs(datasetName, data, features, label, maxIter=1000)
@@ -197,23 +232,50 @@ def doFFS(datasetName, data, features, label):
 
     return bestFeatures
 
-if __name__ == "__main__":
-    printAndWriteInFileBestFeatures("#######FetalHealth#######")
-    fetalHealthPreprocessed = preprocessFetalHealth()
-    printAndWriteInFileBestFeatures(doFFS("Fetal", fetalHealthPreprocessed.data, fetalHealthPreprocessed.feature, fetalHealthPreprocessed.label))
-    printAndWriteInFileBestFeatures(doFFS("Fetal", fetalHealthPreprocessed.data, fetalHealthPreprocessed.feature, fetalHealthPreprocessed.label))
-
-    printAndWriteInFileBestFeatures("#######Titanic#######")
-    titanicPreprocessed = preprocessTitanic()
-    printAndWriteInFileBestFeatures(doFFS("Fetal", titanicPreprocessed.data, titanicPreprocessed.feature, titanicPreprocessed.label))
-    printAndWriteInFileBestFeatures(doFFS("Fetal", titanicPreprocessed.data, titanicPreprocessed.feature, titanicPreprocessed.label))
     
-    printAndWriteInFileBestFeatures("#######Cardio#######")
-    cardioPreprocessed = preprocessCardioData()
-    printAndWriteInFileBestFeatures(doFFS("Fetal", cardioPreprocessed.data, cardioPreprocessed.feature, cardioPreprocessed.label))
-    printAndWriteInFileBestFeatures(doFFS("Fetal", cardioPreprocessed.data, cardioPreprocessed.feature, cardioPreprocessed.label))
+def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=False):
+    datasets = [
+        {
+            "name": "Titanic",
+            "preprocess": preprocessTitanic,
+            "features": ['Age', 'Parch', 'Sex_female', 'Sex_male']
+        },
+        {
+            "name": "Cardio",
+            "preprocess": preprocessCardioData,
+            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+        },
+        {
+            "name": "Iris",
+            "preprocess": preprocessIris,
+            "features": None
+        },
+        {
+            "name": "FetalHealth",
+            "preprocess": preprocessFetalHealth,
+            "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median']
+        }
+    ]
 
-    printAndWriteInFileBestFeatures("#######Iris#######")
-    irisPreprocessed = preprocessIris()
-    # print(trainAndTestMLP(irisPreprocessed.data, irisPreprocessed.feature, irisPreprocessed.label, printValues=True))
+    for dataset in datasets:
+        printAndWriteInFileBestFeatures(f"#######{dataset['name']}#######")
+        preprocessed = dataset["preprocess"]()
+        features = dataset["features"] or preprocessed.feature
+        label = preprocessed.label
 
+        if bFFS:
+            printAndWriteInFileBestFeatures(doFFS(dataset["name"], preprocessed.data, preprocessed.feature, label))
+        if bKNN:
+            startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=100, trainRange=20)
+        if bNN:
+            startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=20)
+        if bSVM:
+            startSVMAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=20)
+
+    
+    
+    
+    
+
+if __name__ == "__main__":
+    titanic_cardio_iris__fetal_analysis(bKNN=True, bNN=True, bSVM=True)

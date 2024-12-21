@@ -1,5 +1,5 @@
 import pandas as pd
-
+import shutil
 import os
 
 def printAndWriteInFile(content, filename):
@@ -12,7 +12,6 @@ def printAndWriteInFile(content, filename):
     try:
         with open(filename, 'a') as file:
             file.write(str(content) + '\n')
-            file.write('\n')
     except Exception as e:
         print(f"Error updating the file: {e}")
 
