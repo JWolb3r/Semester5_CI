@@ -97,7 +97,8 @@ def preprocessing(
         normalizeFeatures: list = None,
         bPrintNanValues = True,
         bDeleteNanValues = False,
-        bShowBoxplot = False
+        bShowBoxplot = False,
+        bPrintInfo = True
         ):
 
     print(f"\nStart preprocessing of file {filepath}")
@@ -126,8 +127,12 @@ def preprocessing(
     if bDeleteNanValues:
         data = deleteNaNValues(data)
 
+    if bPrintInfo:
+        printLengthAndColumns(data)
+
     if bShowBoxplot:
         showBoxplot()
+
 
 
     print("Finished Preprocessing")

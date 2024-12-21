@@ -3,7 +3,8 @@ import pandas as pd
 import os
 
 def printAndWriteInFile(content, filename):
-    print("\n"+content)
+    print("\n")
+    print(content)
 
     directory = os.path.dirname(filename)
     if directory and not os.path.exists(directory):

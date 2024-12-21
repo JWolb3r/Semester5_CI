@@ -3,6 +3,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 
 def trainMLP(dataX, dataY, hiddenLayerSizes, maxIter=4000, randomState=42, activation="relu"):
+
     model = MLPClassifier(hidden_layer_sizes=hiddenLayerSizes, activation=activation, max_iter=maxIter, random_state=randomState)
     return model.fit(dataX, dataY)
 
@@ -23,7 +24,9 @@ def testMLP(model, testDataX, testDataY, uniqueLabelValues: list = None, printVa
 
         return acScore
 
-def trainAndTestMLP(dataX, dataY, maxIter=4000, hiddenLayerSizes=(4,8,4), randomState=42, uniqueLabelValues: list = None, printValues = False, activationFunction="relu"):
+def trainAndTestMLP(data, features, label, maxIter=4000, hiddenLayerSizes=(4,8,4), randomState=42, uniqueLabelValues: list = None, printValues = False, activationFunction="relu"):
+    dataX = data[features]
+    dataY = data[label]
     # Random State for comparison reasons
     trainDataX, testDataX, trainDataY, testDataY = train_test_split(dataX, dataY, test_size=0.25, random_state=randomState)
     model = trainMLP(trainDataX, trainDataY, hiddenLayerSizes, maxIter=maxIter, randomState=randomState, activation=activationFunction)

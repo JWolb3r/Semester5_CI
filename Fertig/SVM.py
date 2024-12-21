@@ -15,7 +15,10 @@ def testSVM(model, testDataX, testDataY, printValues = False):
 
     return acScore
 
-def trainAndTestSVM(dataX, dataY, kernelFunction='linear', randomState=42, printValues = False,):
+def trainAndTestSVM(data, features, label, kernelFunction='linear', randomState=42, printValues = False,):
+    dataX = data[features]
+    dataY = data[label]
+
     # Random State for comparison reasons
     trainDataX, testDataX, trainDataY, testDataY = train_test_split(dataX, dataY, test_size=0.25, random_state=randomState)
     model = trainSVM(trainDataX, trainDataY, kernelFunction)

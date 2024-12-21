@@ -16,7 +16,10 @@ def testKNN(model, testDataX, testDataY, printValues = False):
 
     return acScore
 
-def trainAndTestKNN(dataX, dataY, neighbors=3, randomState=42, printValues = False, knnWeight="uniform"):
+def trainAndTestKNN(data, features, label, neighbors=3, randomState=42, printValues = False, knnWeight="uniform"):
+    dataX = data[features]
+    dataY = data[label]
+
     # Random State for comparison reasons
     trainDataX, testDataX, trainDataY, testDataY = train_test_split(dataX, dataY, test_size=0.25, random_state=randomState)
     model = trainKNN(trainDataX, trainDataY, neighbors,knnWeight)
