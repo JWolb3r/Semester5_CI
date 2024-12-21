@@ -1,14 +1,16 @@
 from EvolutionaryAlgorithm import evolve
 from FeatureSelection import ffs
 from NN import trainAndTestMLP
-from preprocessing import getColumns, preprocessing, removeColumns
+from preprocessing import getColumns, preprocessing, removeColumns, deleteNaNValues, printLengthAndColumns
 from kNN import trainAndTestKNN
 from SVM import trainAndTestSVM
 from utilty import printAndWriteInFile
+import pandas as pd
 
 class PreprocessedData:
-    def __init__(self, data: object, feature: list, label: str):
-        self.data = data
+    def __init__(self, dataX: pd.DataFrame, dataY: pd.DataFrame, feature: list, label: list):
+        self.dataX = dataX,
+        self.dataY = dataY,
         self.feature = feature
         self.label = label
 
@@ -23,17 +25,19 @@ def preprocessCardioData():
 
     data = preprocessing(filepath, 
                         oneHotEncodingFeatures=["bp_category"], 
-                        normalizeFeatures=normalizeFeatures)
+                        normalizeFeatures=normalizeFeatures,
+                        bDeleteNanValues=True              
+                        )
+
 
     removableColumns = ["id", "age_years", "bp_category_encoded", label]
     features = removeColumns(getColumns(data),  removableColumns)
 
-    bestFeatures = ffs("CardioData",data, features, label, maxIter=1000)
-    bestFeatures = ["age", "ap_hi", "ap_lo", "cholesterol"]
+    data = data[features+[label]]
 
-    print(f"Best features: {bestFeatures}")
+    printLengthAndColumns(data)
 
-    return PreprocessedData(data, bestFeatures, label)
+    return PreprocessedData(data[features], data[label], features, label)
     # print(trainAndTestMLP(data[bestFeatures], label))
 
     # evolve(data[bestFeatures], label)
@@ -42,7 +46,7 @@ def preprocessCardioData():
 #################### Iris ####################
 def preprocessIris():
 
-    print("Preprocess Iris")
+    print("\nPreprocess Iris")
 
     filepath = "DataSets\\Iris.csv"
     label = 'Species'
@@ -52,19 +56,20 @@ def preprocessIris():
     data = preprocessing(
         filepath=filepath, 
         oneHotEncodingFeatures=[label], 
-        normalizeFeatures=normalizeFeatures)
+        normalizeFeatures=normalizeFeatures,
+        bDeleteNanValues=True)
 
-    # Get onehotencoded feature
+    # remove columns manuel, because we just know all labels after onehotencoding species label
     features = getColumns(data)
-    label_columns = [col for col in features if col.startswith(label)]  
-    removableColumns = ["id"] + label_columns
+    label = [col for col in features if col.startswith(label)]  
+    removableColumns = ["Id"] + label
     features = removeColumns(features,  removableColumns)
 
-    bestFeatures = ffs("Iris",data, features, label_columns , maxIter=1000)
+    data = data[features + label]
 
-    print(f"Best features: {bestFeatures}")
+    printLengthAndColumns(data)
 
-    return PreprocessedData(data, bestFeatures, label_columns)
+    return PreprocessedData(data, data[label], features, label)
 
 
 #################### Titanic ####################
@@ -84,17 +89,19 @@ def preprocessTitanic():
     removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
 
     features = removeColumns(getColumns(data), removableColumns)
-    data = data[features]
-    bestFeatures = ffs("Titanic", data, features, label, maxIter=1000)
+    data = data[features+[label]]
 
-    print(f"Best Features for Titanic: {bestFeatures}")
+    # Manuell Nan value removal, because titanic dataset would lose a lot of columns before unecessary columns are removed
+    data = deleteNaNValues(data)
 
-    return PreprocessedData(data, bestFeatures, label)
+    printLengthAndColumns(data)
+
+    return PreprocessedData(data[features], data[label], features, label)
 
 
 #################### FetalHealth ####################
 def preprocessFetalHealth():
-    print("Preprocess Fetal Health Data")
+    print("\nPreprocess Fetal Health Data")
     filepath = "DataSets\\fetal_health.csv"
     label = 'fetal_health'
 
@@ -111,13 +118,12 @@ def preprocessFetalHealth():
     data = preprocessing(
         filepath=filepath,   
         normalizeFeatures=normalizeFeatures,
+        bDeleteNanValues=True
     )
     
-    bestFeatures = ffs("FetalHealth",data, normalizeFeatures, label, maxIter=1000)
+    printLengthAndColumns(data)
 
-    print(f"Best Features for Fetal Health: {bestFeatures}")
-    
-    return PreprocessedData(data, bestFeatures, label)
+    return PreprocessedData(data[normalizeFeatures], data[label], normalizeFeatures, label)
 
 
 
@@ -192,23 +198,28 @@ def startNNAverageCreation(data, features, label, trainRange=10, datasetName=Non
 
     print(f"Average Acc: {averageAcc}")
 
+def doFFS(datsetName, data, features, label):
+    bestFeatures = ffs("FetalHealth",data, features, label, maxIter=1000)
+
+    print(f"Best Features for Fetal Health: {bestFeatures}")
+    return bestFeatures
+
 def printAndWriteInFileBestFeatures(content):
     printAndWriteInFile(content, "Logs/BestFeatures.txt")
 
 if __name__ == "__main__":
-    printAndWriteInFileBestFeatures("#######FetalHealth#######")
-    printAndWriteInFileBestFeatures(preprocessFetalHealth().feature)
-    printAndWriteInFileBestFeatures(preprocessFetalHealth().feature)
+    printAndWriteInFileBestFeatures("\n#######FetalHealth#######")
+    fetalHealthpreprocessed = preprocessFetalHealth()
+    printAndWriteInFileBestFeatures(doFFS("Fetal",fetalHealthpreprocessed.data, fetalHealthpreprocessed.feature, fetalHealthpreprocessed.label))
 
-    printAndWriteInFileBestFeatures("#######Titanic#######")
-    printAndWriteInFileBestFeatures(preprocessTitanic().feature)
-    printAndWriteInFileBestFeatures(preprocessTitanic().feature)
+    print("\n#######Iris Preprocess#######")
+    irisPreprocessed = preprocessIris()
 
-    printAndWriteInFileBestFeatures("#######Cardio#######")
-    printAndWriteInFileBestFeatures(preprocessCardioData().feature)
-    printAndWriteInFileBestFeatures(preprocessCardioData().feature)
+    printAndWriteInFileBestFeatures("\n#######Titanic#######")
+    titanicPreprocessed = preprocessTitanic()
+    printAndWriteInFileBestFeatures(doFFS("Titanic",titanicPreprocessed.data, titanicPreprocessed.feature, titanicPreprocessed.label))
 
-    printAndWriteInFileBestFeatures("#######Iris#######")
-    printAndWriteInFileBestFeatures(preprocessIris().feature)
-    printAndWriteInFileBestFeatures(preprocessIris().feature)
+    printAndWriteInFileBestFeatures("\n#######Cardio#######")
+    cardioPreprocessed = preprocessCardioData()
+    printAndWriteInFileBestFeatures(doFFS("Cardio",cardioPreprocessed.data, cardioPreprocessed.feature, cardioPreprocessed.label))
 

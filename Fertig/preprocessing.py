@@ -6,31 +6,36 @@ from sklearn.preprocessing import LabelEncoder, MinMaxScaler # type: ignore
 
 
 def loadData(filepath):
+    print("\nLoad Data")
     return pd.read_csv(filepath)
 
 def removeDuplicates(data):
+    print("\nRemove Duplicates")
     data.drop_duplicates(inplace=True)
     return data
 
-def printNullValues(data):
-    print("\n### Dataset Summary ###\n")
-    print(f"Length of dataset (before NaN removal): {len(data)}\n")
-
-    print("Null values (absolute):")
-    print(data.isnull().sum().to_string()) 
+def printNaNValues(data):
+    print("\nPrint NaN Values")
+    print("NaN values (absolute):")
+    print(data.isna().sum().to_string()) 
     print("\n")
 
-    print("Null values (percentage):")
-    print(data.isnull().mean().mul(100).round(2).to_string()) 
+    print("NaN values (percentage):")
+    print(data.isna().mean().mul(100).round(2).to_string()) 
     print("\n")
-
-    data = data.dropna(axis=0, how="any")
-
-    print(f"Length of dataset (after NaN removal): {len(data)}\n")
 
     return data
+
+def deleteNaNValues(data):
+    print("\nDelete NaN Values")
+    print(f"Length of dataset (before NaN removal): {len(data)}\n")
+    data = data.dropna(axis=0, how="any")
+    print(f"Length of dataset (after NaN removal): {len(data)}\n")
+    return data
+
     
 def detectAndRemoveOutliers(data, columns):
+    print("\nDetect and remove Outliers")
     total_outliers = 0
     for column in columns:
         Q1 = data[column].quantile(0.25)
@@ -67,15 +72,18 @@ def detectAndRemoveOutliers(data, columns):
     print(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
     return data
 
-def labelEncoded(data,feature):
+def labelEncoded(data,values):
+    print("\nLabel Encode")
     encoder = LabelEncoder()
-    data[feature] = encoder.fit_transform(data[feature])
+    data[values] = encoder.fit_transform(data[values])
     return data
 
 def oneHotEncoded(data, columns: list):
+    print("\nOneHotEncode")
     return pd.get_dummies(data, columns=columns)
 
 def normalizeData(data, selected_features: list):
+    print("\nNormalize Data")
     scaler = MinMaxScaler()
     data[selected_features] = scaler.fit_transform(data[selected_features])
     return data
@@ -87,12 +95,12 @@ def preprocessing(
         labelEncodingFeatures: list = None,
         oneHotEncodingFeatures: list = None,
         normalizeFeatures: list = None,
-        bprintNullValues = True,
-        bprintData = True,
+        bPrintNanValues = True,
+        bDeleteNanValues = False,
         bShowBoxplot = False
         ):
 
-    print(f"Start preprocessing of file {filepath}")
+    print(f"\nStart preprocessing of file {filepath}")
 
 
     data = loadData(filepath)
@@ -112,11 +120,11 @@ def preprocessing(
     if normalizeFeatures:
         data = normalizeData(data, normalizeFeatures)
 
-    if bprintNullValues:
-        data = printNullValues(data)
-    
-    if bprintData:
-        print(data)
+    if bPrintNanValues:
+        data = printNaNValues(data)
+
+    if bDeleteNanValues:
+        data = deleteNaNValues(data)
 
     if bShowBoxplot:
         showBoxplot()
@@ -129,6 +137,7 @@ def preprocessing(
 ######################### Other Stuff ######################### 
 
 def showBoxplot(data, boxplot_features):
+    print("\nShow Boxplot")
     data_long = pd.melt(data, value_vars=boxplot_features)
     sns.boxplot(x='variable', y='value', data=data_long)
     plt.xticks(rotation=45)
@@ -138,6 +147,12 @@ def getColumns(data) -> list:
     return data.columns.tolist()
 
 def removeColumns(columns: list, columnsToRemove: list) -> list:
+    print("\nRemove Columns")
     for r in columnsToRemove:
         columns.remove(r)
     return columns
+
+def printLengthAndColumns(data: pd.DataFrame):
+    print("\nPrint Datset Infos")
+    print(f"\nLength of Dataset: {len(data)}")
+    print(f"\nColumns of Dataset: {data.columns}")

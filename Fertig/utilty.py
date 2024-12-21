@@ -3,18 +3,15 @@ import pandas as pd
 import os
 
 def printAndWriteInFile(content, filename):
-    print(content)
+    print("\n"+content)
 
     directory = os.path.dirname(filename)
     if directory and not os.path.exists(directory):
         os.makedirs(directory)
-        print(f"Created directory: {directory}")
-
     try:
         with open(filename, 'a') as file:
             file.write(str(content) + '\n')
             file.write('\n')
-        print(f"The file '{filename}' was successfully updated.")
     except Exception as e:
         print(f"Error updating the file: {e}")
 
