@@ -12,17 +12,8 @@ def printAndWriteInFile(content, filename):
 
     try:
         with open(filename, 'a') as file:
-            if isinstance(content, list):
-                for element in content:
-                    file.write(str(element) + '\n')
-                file.write('\n')
-            elif isinstance(content, object):
-                for key, value in obj.__dict__.items():
-                    file.write("Key: " + key + " Value: " + value)
-                file.write('\n')
-            else:
-                file.write(str(content) + '\n')
-                file.write('\n')
+            file.write(str(content) + '\n')
+            file.write('\n')
         print(f"The file '{filename}' was successfully updated.")
     except Exception as e:
         print(f"Error updating the file: {e}")

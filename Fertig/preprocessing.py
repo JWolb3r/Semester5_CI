@@ -13,12 +13,22 @@ def removeDuplicates(data):
     return data
 
 def printNullValues(data):
-    printAndWriteFileWithDefinedFile("Null Werte Absolut:")
-    printAndWriteFileWithDefinedFile(data.isnull().sum())
-    printAndWriteFileWithDefinedFile("\nNull Werte Prozentual:")
-    printAndWriteFileWithDefinedFile(data.isnull().mean() * 100)
-    printAndWriteFileWithDefinedFile("\n")
-    return data.dropna(axis=0, how="any")
+    print("\n### Dataset Summary ###\n")
+    print(f"Length of dataset (before NaN removal): {len(data)}\n")
+
+    print("Null values (absolute):")
+    print(data.isnull().sum().to_string()) 
+    print("\n")
+
+    print("Null values (percentage):")
+    print(data.isnull().mean().mul(100).round(2).to_string()) 
+    print("\n")
+
+    data = data.dropna(axis=0, how="any")
+
+    print(f"Length of dataset (after NaN removal): {len(data)}\n")
+
+    return data
     
 def detectAndRemoveOutliers(data, columns):
     total_outliers = 0
@@ -43,18 +53,18 @@ def detectAndRemoveOutliers(data, columns):
         
         mean_value = data[column].mean()
         
-        printAndWriteFileWithDefinedFile(f"Spalte: {column}")
-        printAndWriteFileWithDefinedFile(f"Unterer Whisker: {lower_bound}")
-        printAndWriteFileWithDefinedFile(f"Oberer Whisker: {upper_bound}")
-        printAndWriteFileWithDefinedFile(f"Anzahl der Ausreißer in {column}: {outliers_count}")
-        printAndWriteFileWithDefinedFile(f"Größter Ausreißer in {column}: {largest_outlier}")
-        printAndWriteFileWithDefinedFile(f"Kleinster Ausreißer in {column}: {smallest_outlier}")
-        printAndWriteFileWithDefinedFile(f"Mittelwert von {column}: {mean_value}")
-        printAndWriteFileWithDefinedFile("-" * 50)
+        print(f"Spalte: {column}")
+        print(f"Unterer Whisker: {lower_bound}")
+        print(f"Oberer Whisker: {upper_bound}")
+        print(f"Anzahl der Ausreißer in {column}: {outliers_count}")
+        print(f"Größter Ausreißer in {column}: {largest_outlier}")
+        print(f"Kleinster Ausreißer in {column}: {smallest_outlier}")
+        print(f"Mittelwert von {column}: {mean_value}")
+        print("-" * 50)
 
         data = data[(data[column] >= lower_bound) & (data[column] <= upper_bound)]
     
-    printAndWriteFileWithDefinedFile(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
+    print(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
     return data
 
 def labelEncoded(data,feature):
@@ -82,7 +92,7 @@ def preprocessing(
         bShowBoxplot = False
         ):
 
-    printAndWriteFileWithDefinedFile(f"Start preprocessing of file {filepath}")
+    print(f"Start preprocessing of file {filepath}")
 
 
     data = loadData(filepath)
@@ -106,13 +116,13 @@ def preprocessing(
         data = printNullValues(data)
     
     if bprintData:
-        printAndWriteFileWithDefinedFile(data)
+        print(data)
 
     if bShowBoxplot:
         showBoxplot()
 
 
-    printAndWriteFileWithDefinedFile("Finished Preprocessing")
+    print("Finished Preprocessing")
     return data
 
 
@@ -131,6 +141,3 @@ def removeColumns(columns: list, columnsToRemove: list) -> list:
     for r in columnsToRemove:
         columns.remove(r)
     return columns
-
-def printAndWriteFileWithDefinedFile(content):
-    printAndWriteInFile(content, "Logs//Preprocessing.txt")

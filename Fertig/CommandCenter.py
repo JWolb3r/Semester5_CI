@@ -4,18 +4,17 @@ from NN import trainAndTestMLP
 from preprocessing import getColumns, preprocessing, removeColumns
 from kNN import trainAndTestKNN
 from SVM import trainAndTestSVM
-from utilty import printAndWriteInFile, combineFiles
+from utilty import printAndWriteInFile
 
 class PreprocessedData:
-    def __init__(self, data, features, label):
+    def __init__(self, data: object, feature: list, label: str):
         self.data = data
-        self.features = features
+        self.feature = feature
         self.label = label
 
 #################### Cardio_Data ####################
 def preprocessCardioData():
-
-    printAndWriteFileWithDefinedDestination("Preprocess Cardio Data")
+    print("Preprocess Cardio Data")
 
     filepath = "DataSets\\cardio_data_processed.csv"
     label = "cardio"
@@ -29,13 +28,13 @@ def preprocessCardioData():
     removableColumns = ["id", "age_years", "bp_category_encoded", label]
     features = removeColumns(getColumns(data),  removableColumns)
 
-    bestFeatures = ffs(data, features, label, maxIter=1000)
+    bestFeatures = ffs("CardioData",data, features, label, maxIter=1000)
     bestFeatures = ["age", "ap_hi", "ap_lo", "cholesterol"]
 
-    printAndWriteFileWithDefinedDestination(f"Best features: {bestFeatures}")
+    print(f"Best features: {bestFeatures}")
 
     return PreprocessedData(data, bestFeatures, label)
-    # printAndWriteFileWithDefinedDestination(trainAndTestMLP(data[bestFeatures], label))
+    # print(trainAndTestMLP(data[bestFeatures], label))
 
     # evolve(data[bestFeatures], label)
 
@@ -43,7 +42,7 @@ def preprocessCardioData():
 #################### Iris ####################
 def preprocessIris():
 
-    printAndWriteFileWithDefinedDestination("Preprocess Iris")
+    print("Preprocess Iris")
 
     filepath = "DataSets\\Iris.csv"
     label = 'Species'
@@ -61,16 +60,16 @@ def preprocessIris():
     removableColumns = ["id"] + label_columns
     features = removeColumns(features,  removableColumns)
 
-    bestFeatures = ffs(data, features, label_columns , maxIter=1000)
+    bestFeatures = ffs("Iris",data, features, label_columns , maxIter=1000)
 
-    printAndWriteFileWithDefinedDestination(f"Best features: {bestFeatures}")
+    print(f"Best features: {bestFeatures}")
 
     return PreprocessedData(data, bestFeatures, label_columns)
 
 
 #################### Titanic ####################
 def preprocessTitanic():
-    printAndWriteFileWithDefinedDestination("Preprocess Titanic Data")
+    print("Preprocess Titanic Data")
     data = "DataSets\\titanic_combined.csv"
     label = 'Survived'
 
@@ -86,15 +85,16 @@ def preprocessTitanic():
 
     features = removeColumns(getColumns(data), removableColumns)
     data = data[features]
-    bestFeatures = ffs(data, features, label, maxIter=1000)
+    bestFeatures = ffs("Titanic", data, features, label, maxIter=1000)
 
-    printAndWriteFileWithDefinedDestination(f"Best Features for Titanic: {bestFeatures}")
+    print(f"Best Features for Titanic: {bestFeatures}")
+
     return PreprocessedData(data, bestFeatures, label)
 
 
 #################### FetalHealth ####################
 def preprocessFetalHealth():
-    printAndWriteFileWithDefinedDestination("Preprocess Fetal Health Data")
+    print("Preprocess Fetal Health Data")
     filepath = "DataSets\\fetal_health.csv"
     label = 'fetal_health'
 
@@ -113,15 +113,16 @@ def preprocessFetalHealth():
         normalizeFeatures=normalizeFeatures,
     )
     
-    bestFeatures = ffs(data, normalizeFeatures, label, maxIter=1000)
+    bestFeatures = ffs("FetalHealth",data, normalizeFeatures, label, maxIter=1000)
 
-    printAndWriteFileWithDefinedDestination(f"Best Features for Fetal Health: {bestFeatures}")
+    print(f"Best Features for Fetal Health: {bestFeatures}")
+    
     return PreprocessedData(data, bestFeatures, label)
 
 
 
 def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange=10, dataSetName=None):
-    printAndWriteFileWithDefinedDestination(f"Start {dataSetName} knn")
+    print(f"Start {dataSetName} knn")
 
     # uniform = neighbors have same weight, distance = neighbors got calculated distance
     sumAccUniform = 0
@@ -130,7 +131,7 @@ def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange
 
     # Cross-validation
     for neighbors in range(1, neighborsRange):
-        printAndWriteFileWithDefinedDestination(f"Current neighbors: {neighbors}")
+        print(f"Current neighbors: {neighbors}")
 
         sumAccUniform = 0
         sumAccDistance = 0
@@ -141,19 +142,19 @@ def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange
 
         averageUniformAcc = sumAccUniform / trainRange
         averageDistanceAcc = sumAccDistance / trainRange
-        printAndWriteFileWithDefinedDestination(f"Average Acc Uniform: {averageUniformAcc}")
-        printAndWriteFileWithDefinedDestination(f"Average Acc Distance: {averageDistanceAcc}")
+        print(f"Average Acc Uniform: {averageUniformAcc}")
+        print(f"Average Acc Distance: {averageDistanceAcc}")
 
         if bestKnnComb[1] < sumAccUniform:
             bestKnnComb = ['Uniform', averageUniformAcc]
         elif bestKnnComb[1] < sumAccDistance:
             bestKnnComb = ['Distance', averageDistanceAcc]
 
-    printAndWriteFileWithDefinedDestination(f"Best neighbors: {bestKnnComb}")
+    print(f"Best neighbors: {bestKnnComb}")
 
 
 def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=None): 
-    printAndWriteFileWithDefinedDestination(f"Start {datasetName} SVM")
+    print(f"Start {datasetName} SVM")
 
     bestSvmComb = ['', 0] 
 
@@ -161,7 +162,7 @@ def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=No
 
     # Cross-validation
     for kernel in kernelFunctions:
-        printAndWriteFileWithDefinedDestination(f"Current kernel: {kernel}")
+        print(f"Current kernel: {kernel}")
 
         sumAcc = 0
 
@@ -170,16 +171,16 @@ def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=No
 
         averageAcc = sumAcc / trainRange
 
-        printAndWriteFileWithDefinedDestination(f"Average Acc for {kernel}: {averageAcc}")
+        print(f"Average Acc for {kernel}: {averageAcc}")
 
         if averageAcc > bestSvmComb[1]:
             bestSvmComb = [kernel, averageAcc]
 
-    printAndWriteFileWithDefinedDestination(f"Best SVM kernel: {bestSvmComb}")
+    print(f"Best SVM kernel: {bestSvmComb}")
 
 
 def startNNAverageCreation(data, features, label, trainRange=10, datasetName=None): 
-    printAndWriteFileWithDefinedDestination(f"Start {datasetName} default-NN")
+    print(f"Start {datasetName} default-NN")
 
     # Cross-validation
     sumAcc = 0
@@ -189,20 +190,25 @@ def startNNAverageCreation(data, features, label, trainRange=10, datasetName=Non
 
     averageAcc = sumAcc / trainRange
 
-    printAndWriteFileWithDefinedDestination(f"Average Acc: {averageAcc}")
+    print(f"Average Acc: {averageAcc}")
 
-
-def printAndWriteFileWithDefinedDestination(content):
-    printAndWriteInFile(content, "Logs//BestFeatures.txt")
-
+def printAndWriteInFileBestFeatures(content):
+    printAndWriteInFile(content, "Logs/BestFeatures.txt")
 
 if __name__ == "__main__":
-    printAndWriteFileWithDefinedDestination(preprocessFetalHealth())
-    printAndWriteFileWithDefinedDestination(preprocessFetalHealth())
-    printAndWriteFileWithDefinedDestination(preprocessTitanic())
-    printAndWriteFileWithDefinedDestination(preprocessTitanic())
-    printAndWriteFileWithDefinedDestination(preprocessCardioData())
-    printAndWriteFileWithDefinedDestination(preprocessCardioData())
-    printAndWriteFileWithDefinedDestination(preprocessIris())
-    printAndWriteFileWithDefinedDestination(preprocessIris())
+    printAndWriteInFileBestFeatures("#######FetalHealth#######")
+    printAndWriteInFileBestFeatures(preprocessFetalHealth().feature)
+    printAndWriteInFileBestFeatures(preprocessFetalHealth().feature)
+
+    printAndWriteInFileBestFeatures("#######Titanic#######")
+    printAndWriteInFileBestFeatures(preprocessTitanic().feature)
+    printAndWriteInFileBestFeatures(preprocessTitanic().feature)
+
+    printAndWriteInFileBestFeatures("#######Cardio#######")
+    printAndWriteInFileBestFeatures(preprocessCardioData().feature)
+    printAndWriteInFileBestFeatures(preprocessCardioData().feature)
+
+    printAndWriteInFileBestFeatures("#######Iris#######")
+    printAndWriteInFileBestFeatures(preprocessIris().feature)
+    printAndWriteInFileBestFeatures(preprocessIris().feature)
 
