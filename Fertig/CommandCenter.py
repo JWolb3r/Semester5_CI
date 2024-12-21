@@ -4,77 +4,99 @@ from NN import trainAndTestMLP
 from preprocessing import getColumns, preprocessing, removeColumns
 from kNN import trainAndTestKNN
 from SVM import trainAndTestSVM
+from utilty import printAndWriteInFile, combineFiles
 
+class PreprocessedData:
+    def __init__(self, data, features, label):
+        self.data = data
+        self.features = features
+        self.label = label
 
 #################### Cardio_Data ####################
 def preprocessCardioData():
-    print("Preprocess Cardio Data")
 
-    cardioFilepath = "DataSets\\cardio_data_processed.csv"
-    cardioLabel = "cardio"
-    cardioData = preprocessing(cardioFilepath, oneHotEncodingFeatures=["bp_category"], normalizeFeatures=["age", "height", "weight", "ap_hi", "ap_lo", "bmi"])
+    printAndWriteFileWithDefinedDestination("Preprocess Cardio Data")
 
-    columns = removeColumns(getColumns(cardioData), ["id", "age_years", "bp_category_encoded", cardioLabel] )
+    filepath = "DataSets\\cardio_data_processed.csv"
+    label = "cardio"
 
-    bestFeatures = ffs(cardioData, columns, cardioLabel, maxIter=1000)
+    normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
+
+    data = preprocessing(filepath, 
+                        oneHotEncodingFeatures=["bp_category"], 
+                        normalizeFeatures=normalizeFeatures)
+
+    removableColumns = ["id", "age_years", "bp_category_encoded", label]
+    features = removeColumns(getColumns(data),  removableColumns)
+
+    bestFeatures = ffs(data, features, label, maxIter=1000)
     bestFeatures = ["age", "ap_hi", "ap_lo", "cholesterol"]
-    bestFeatures.append(cardioLabel)
 
-    print(f"Beste features: {bestFeatures}")
+    printAndWriteFileWithDefinedDestination(f"Best features: {bestFeatures}")
 
+    return PreprocessedData(data, bestFeatures, label)
+    # printAndWriteFileWithDefinedDestination(trainAndTestMLP(data[bestFeatures], label))
 
-    return bestFeatures
-    # print(trainAndTestMLP(cardioData[bestFeatures], cardioLabel))
-
-    # evolve(cardioData[bestFeatures], cardioLabel)
+    # evolve(data[bestFeatures], label)
 
 
 #################### Iris ####################
 def preprocessIris():
-    print("Preprocess Iris")
-    irisFilepath = "DataSets\\Iris.csv"
-    irisLabel = 'Species'
 
-    irisData = preprocessing(filepath=irisFilepath, oneHotEncoded=[irisLabel], normalizeFeatures=['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm'])
-    label_columns = [col for col in columns.columns if col.startswith(irisLabel)]
-    columns = removeColumns(getColumns(irisData), ["id", label_columns] )
+    printAndWriteFileWithDefinedDestination("Preprocess Iris")
 
-    bestFeatures = ffs(irisData, columns, label_columns , maxIter=1000)
-    bestFeatures.append(label_columns)
+    filepath = "DataSets\\Iris.csv"
+    label = 'Species'
 
-    print(f"Beste features: {bestFeatures}")
+    normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
 
-    return bestFeatures
+    data = preprocessing(
+        filepath=filepath, 
+        oneHotEncodingFeatures=[label], 
+        normalizeFeatures=normalizeFeatures)
+
+    # Get onehotencoded feature
+    features = getColumns(data)
+    label_columns = [col for col in features if col.startswith(label)]  
+    removableColumns = ["id"] + label_columns
+    features = removeColumns(features,  removableColumns)
+
+    bestFeatures = ffs(data, features, label_columns , maxIter=1000)
+
+    printAndWriteFileWithDefinedDestination(f"Best features: {bestFeatures}")
+
+    return PreprocessedData(data, bestFeatures, label_columns)
 
 
 #################### Titanic ####################
 def preprocessTitanic():
-    print("Preprocess Titanic Data")
-    titanicData = "DataSets\\titanic_combined.csv"
-    titanicLabel = 'Survived'
+    printAndWriteFileWithDefinedDestination("Preprocess Titanic Data")
+    data = "DataSets\\titanic_combined.csv"
+    label = 'Survived'
 
     normalizeFeatures = ['Age', 'Fare']  
     
-    titanicData = preprocessing(
-        filepath=titanicData, 
+    data = preprocessing(
+        filepath=data, 
         oneHotEncodingFeatures=['Sex', 'Embarked'],  
         normalizeFeatures=normalizeFeatures  
     )
 
-    columns = removeColumns(getColumns(titanicData), ['PassengerId', 'Name', 'Ticket', 'Cabin'])
-    bestFeatures = ffs(titanicData, columns, titanicLabel, maxIter=1000)
-    bestFeatures.append(titanicLabel)
+    removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
 
+    features = removeColumns(getColumns(data), removableColumns)
+    data = data[features]
+    bestFeatures = ffs(data, features, label, maxIter=1000)
 
-    print(f"Beste Features für Titanic: {bestFeatures}")
-    return bestFeatures
+    printAndWriteFileWithDefinedDestination(f"Best Features for Titanic: {bestFeatures}")
+    return PreprocessedData(data, bestFeatures, label)
 
 
 #################### FetalHealth ####################
 def preprocessFetalHealth():
-    print("Preprocess Fetal Health Data")
-    fetalHealthFilepath = "DataSets\\fetal_health.csv"
-    fetalHealthLabel = 'fetal_health'
+    printAndWriteFileWithDefinedDestination("Preprocess Fetal Health Data")
+    filepath = "DataSets\\fetal_health.csv"
+    label = 'fetal_health'
 
     normalizeFeatures = [
         'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
@@ -86,81 +108,101 @@ def preprocessFetalHealth():
         'histogram_variance', 'histogram_tendency'
     ]
     
-    fetalHealthData = preprocessing(
-        filepath=fetalHealthFilepath,   
+    data = preprocessing(
+        filepath=filepath,   
         normalizeFeatures=normalizeFeatures,
     )
     
-    bestFeatures = ffs(fetalHealthData, normalizeFeatures, fetalHealthLabel, maxIter=1000)
-    bestFeatures.append(fetalHealthLabel)
+    bestFeatures = ffs(data, normalizeFeatures, label, maxIter=1000)
 
-
-    print(f"Beste Features für Fetal Health: {bestFeatures}")
-    return bestFeatures
+    printAndWriteFileWithDefinedDestination(f"Best Features for Fetal Health: {bestFeatures}")
+    return PreprocessedData(data, bestFeatures, label)
 
 
 
 def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange=10, dataSetName=None):
-    print(f"Start {dataSetName} knn")
+    printAndWriteFileWithDefinedDestination(f"Start {dataSetName} knn")
 
-    # uniform = neighbors have same weight, distance = neighbors got calculed distance
+    # uniform = neighbors have same weight, distance = neighbors got calculated distance
     sumAccUniform = 0
     sumAccDistance = 0
     bestKnnComb = ['',0]
-    # Cross validation
-    for neighbors in range(1,neighborsRange):
-        print(f"Current neighbors: {neighbors}")
+
+    # Cross-validation
+    for neighbors in range(1, neighborsRange):
+        printAndWriteFileWithDefinedDestination(f"Current neighbors: {neighbors}")
 
         sumAccUniform = 0
         sumAccDistance = 0
 
         for i in range(trainRange):
-            sumAccUniform += trainAndTestKNN(data[features], label, neighbors=neighbors, randomState=42+i, knnWeight='uniform')
-            sumAccDistance += trainAndTestKNN(data[features], label, neighbors=neighbors, knnWeight='distance')
+            sumAccUniform += trainAndTestKNN(data[features], data[label], neighbors=neighbors, randomState=42+i, knnWeight='uniform')
+            sumAccDistance += trainAndTestKNN(data[features], data[label], neighbors=neighbors, knnWeight='distance')
 
-        averageUniformAcc = sumAccUniform/trainRange
-        averageDistanceAcc = sumAccDistance/trainRange
-        print(f"Average Ac Uniform: {averageUniformAcc}")
-        print(f"Average Ac Distance: {averageDistanceAcc}")
+        averageUniformAcc = sumAccUniform / trainRange
+        averageDistanceAcc = sumAccDistance / trainRange
+        printAndWriteFileWithDefinedDestination(f"Average Acc Uniform: {averageUniformAcc}")
+        printAndWriteFileWithDefinedDestination(f"Average Acc Distance: {averageDistanceAcc}")
 
         if bestKnnComb[1] < sumAccUniform:
             bestKnnComb = ['Uniform', averageUniformAcc]
         elif bestKnnComb[1] < sumAccDistance:
             bestKnnComb = ['Distance', averageDistanceAcc]
 
-    print(f"Best neighbors: {bestKnnComb}")
+    printAndWriteFileWithDefinedDestination(f"Best neighbors: {bestKnnComb}")
 
 
-def startSVMAverageCreation(data, features, label,trainRange=10, datasetName=None): 
-    # Die Logik hier
-    print(f"Start {datasetName} SVM")
-
+def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=None): 
+    printAndWriteFileWithDefinedDestination(f"Start {datasetName} SVM")
 
     bestSvmComb = ['', 0] 
 
     kernelFunctions = ['linear', 'rbf', 'poly', 'sigmoid']
 
-    # Cross validation
+    # Cross-validation
     for kernel in kernelFunctions:
-        print(f"Current kernel: {kernel}")
+        printAndWriteFileWithDefinedDestination(f"Current kernel: {kernel}")
 
-        sumAccKernel = 0
+        sumAcc = 0
 
         for i in range(trainRange):
-            sumAccKernel += trainAndTestSVM(data[features], label, kernelFunction=kernel)
+            sumAcc += trainAndTestSVM(data[features], data[label], kernelFunction=kernel)
 
-        averageKernelAcc = sumAccKernel / trainRange
+        averageAcc = sumAcc / trainRange
 
-        print(f"Average Acc for {kernel}: {averageKernelAcc}")
+        printAndWriteFileWithDefinedDestination(f"Average Acc for {kernel}: {averageAcc}")
 
-        if averageKernelAcc > bestSvmComb[1]:
-            bestSvmComb = [kernel, averageKernelAcc]
+        if averageAcc > bestSvmComb[1]:
+            bestSvmComb = [kernel, averageAcc]
 
-    print(f"Best SVM kernel: {bestSvmComb}")
+    printAndWriteFileWithDefinedDestination(f"Best SVM kernel: {bestSvmComb}")
+
+
+def startNNAverageCreation(data, features, label, trainRange=10, datasetName=None): 
+    printAndWriteFileWithDefinedDestination(f"Start {datasetName} default-NN")
+
+    # Cross-validation
+    sumAcc = 0
+
+    for i in range(trainRange):
+        sumAcc += trainAndTestMLP(data[features], data[label])
+
+    averageAcc = sumAcc / trainRange
+
+    printAndWriteFileWithDefinedDestination(f"Average Acc: {averageAcc}")
+
+
+def printAndWriteFileWithDefinedDestination(content):
+    printAndWriteInFile(content, "Logs//BestFeatures.txt")
+
 
 if __name__ == "__main__":
-    preprocessCardioData()
-    preprocessFetalHealth()
-    preprocessIris()
-    preprocessTitanic()
+    printAndWriteFileWithDefinedDestination(preprocessFetalHealth())
+    printAndWriteFileWithDefinedDestination(preprocessFetalHealth())
+    printAndWriteFileWithDefinedDestination(preprocessTitanic())
+    printAndWriteFileWithDefinedDestination(preprocessTitanic())
+    printAndWriteFileWithDefinedDestination(preprocessCardioData())
+    printAndWriteFileWithDefinedDestination(preprocessCardioData())
+    printAndWriteFileWithDefinedDestination(preprocessIris())
+    printAndWriteFileWithDefinedDestination(preprocessIris())
 

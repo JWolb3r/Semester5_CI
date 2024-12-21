@@ -1,6 +1,7 @@
 import pandas as pd 
 import seaborn as sns # type: ignore
 import matplotlib.pyplot as plt # type: ignore
+from utilty import printAndWriteInFile
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler # type: ignore
 
 
@@ -12,11 +13,12 @@ def removeDuplicates(data):
     return data
 
 def printNullValues(data):
-    print("Null Werte Absolut:")
-    print(data.isnull().sum())
-    print("\nNull Werte Prozentual:")
-    print(data.isnull().mean() * 100)
-    print("\n")
+    printAndWriteFileWithDefinedFile("Null Werte Absolut:")
+    printAndWriteFileWithDefinedFile(data.isnull().sum())
+    printAndWriteFileWithDefinedFile("\nNull Werte Prozentual:")
+    printAndWriteFileWithDefinedFile(data.isnull().mean() * 100)
+    printAndWriteFileWithDefinedFile("\n")
+    return data.dropna(axis=0, how="any")
     
 def detectAndRemoveOutliers(data, columns):
     total_outliers = 0
@@ -41,18 +43,18 @@ def detectAndRemoveOutliers(data, columns):
         
         mean_value = data[column].mean()
         
-        print(f"Spalte: {column}")
-        print(f"Unterer Whisker: {lower_bound}")
-        print(f"Oberer Whisker: {upper_bound}")
-        print(f"Anzahl der Ausreißer in {column}: {outliers_count}")
-        print(f"Größter Ausreißer in {column}: {largest_outlier}")
-        print(f"Kleinster Ausreißer in {column}: {smallest_outlier}")
-        print(f"Mittelwert von {column}: {mean_value}")
-        print("-" * 50)
+        printAndWriteFileWithDefinedFile(f"Spalte: {column}")
+        printAndWriteFileWithDefinedFile(f"Unterer Whisker: {lower_bound}")
+        printAndWriteFileWithDefinedFile(f"Oberer Whisker: {upper_bound}")
+        printAndWriteFileWithDefinedFile(f"Anzahl der Ausreißer in {column}: {outliers_count}")
+        printAndWriteFileWithDefinedFile(f"Größter Ausreißer in {column}: {largest_outlier}")
+        printAndWriteFileWithDefinedFile(f"Kleinster Ausreißer in {column}: {smallest_outlier}")
+        printAndWriteFileWithDefinedFile(f"Mittelwert von {column}: {mean_value}")
+        printAndWriteFileWithDefinedFile("-" * 50)
 
         data = data[(data[column] >= lower_bound) & (data[column] <= upper_bound)]
     
-    print(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
+    printAndWriteFileWithDefinedFile(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
     return data
 
 def labelEncoded(data,feature):
@@ -75,14 +77,15 @@ def preprocessing(
         labelEncodingFeatures: list = None,
         oneHotEncodingFeatures: list = None,
         normalizeFeatures: list = None,
-        bPrintNullValues = True,
+        bprintNullValues = True,
+        bprintData = True,
+        bShowBoxplot = False
         ):
 
-    print("Start preprocessing")
+    printAndWriteFileWithDefinedFile(f"Start preprocessing of file {filepath}")
+
+
     data = loadData(filepath)
-    
-    # boxplot_features = ['age_years', 'height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'bmi']
-    # plot_boxplot(data)
 
     if bRemoveDuplicates:
         data = removeDuplicates(data)
@@ -99,17 +102,23 @@ def preprocessing(
     if normalizeFeatures:
         data = normalizeData(data, normalizeFeatures)
 
-    if bPrintNullValues:
-        printNullValues(data)
+    if bprintNullValues:
+        data = printNullValues(data)
+    
+    if bprintData:
+        printAndWriteFileWithDefinedFile(data)
+
+    if bShowBoxplot:
+        showBoxplot()
 
 
-    print("Finished Preprocessing")
+    printAndWriteFileWithDefinedFile("Finished Preprocessing")
     return data
 
 
 ######################### Other Stuff ######################### 
 
-def plot_boxplot(data, boxplot_features):
+def showBoxplot(data, boxplot_features):
     data_long = pd.melt(data, value_vars=boxplot_features)
     sns.boxplot(x='variable', y='value', data=data_long)
     plt.xticks(rotation=45)
@@ -122,3 +131,6 @@ def removeColumns(columns: list, columnsToRemove: list) -> list:
     for r in columnsToRemove:
         columns.remove(r)
     return columns
+
+def printAndWriteFileWithDefinedFile(content):
+    printAndWriteInFile(content, "Logs//Preprocessing.txt")

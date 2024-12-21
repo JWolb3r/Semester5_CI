@@ -23,9 +23,7 @@ def testMLP(model, testDataX, testDataY, uniqueLabelValues: list = None, printVa
 
         return acScore
 
-def trainAndTestMLP(data, label, maxIter=4000, hiddenLayerSizes=(4,8,4), randomState=42, uniqueLabelValues: list = None, printValues = False, activationFunction="relu"):
-    dataY = data[label]
-    dataX = data.drop(label, axis=1)
+def trainAndTestMLP(dataX, dataY, maxIter=4000, hiddenLayerSizes=(4,8,4), randomState=42, uniqueLabelValues: list = None, printValues = False, activationFunction="relu"):
     # Random State for comparison reasons
     trainDataX, testDataX, trainDataY, testDataY = train_test_split(dataX, dataY, test_size=0.25, random_state=randomState)
     model = trainMLP(trainDataX, trainDataY, hiddenLayerSizes, maxIter=maxIter, randomState=randomState, activation=activationFunction)
