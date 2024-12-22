@@ -47,14 +47,14 @@ def preprocessIris():
 
     data = preprocessing(
         filepath=filepath, 
-        oneHotEncodingFeatures=[label], 
+        labelEncodingFeatures=[label], 
         normalizeFeatures=normalizeFeatures,
         bDeleteNanValues=True)
 
     # remove columns manuel, because we just know all labels after onehotencoding species label
     features = getColumns(data)
-    label = [col for col in features if col.startswith(label)]  
-    removableColumns = ["Id"] + label
+    # label = [col for col in features if col.startswith(label)]  
+    removableColumns = ["Id"] + [label]
     features = removeColumns(features,  removableColumns)
 
     return PreprocessedData(data, features, label)
@@ -165,8 +165,8 @@ def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange
         elif bestKnnComb[2] < averageDistanceAcc:
             bestKnnComb = ['Distance', neighbors, averageDistanceAcc]
 
-    printAndWriteInFileAcc(f"Best neighbors: {bestKnnComb}")
-    printAndWriteInFileAvgAcc(f"Best neighbors: {bestKnnComb}")
+    printAndWriteInFileBestComb(f"DataSet: {dataSetName} with trainrange: {trainRange} and neighborsrange: {neighborsRange}")
+    printAndWriteInFileBestComb(f"Best KNN comb: {bestKnnComb}")
 
 
 
@@ -185,7 +185,7 @@ def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=No
         sumAcc = 0
 
         for i in range(trainRange):
-            acc = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel)
+            acc = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel, randomState=42+i)
             printAndWriteInFileAcc(acc)
             sumAcc += acc
 
@@ -195,8 +195,8 @@ def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=No
         if averageAcc > bestSvmComb[1]:
             bestSvmComb = [kernel, averageAcc]
 
-    printAndWriteInFileAcc(f"Best SVM kernel: {bestSvmComb}")
-    printAndWriteInFileAvgAcc(f"Best SVM kernel: {bestSvmComb}")
+    printAndWriteInFileBestComb(f"DataSet: {datasetName} with trainrange: {trainRange}")
+    printAndWriteInFileBestComb(f"Best SVM kernel: {bestSvmComb}")
 
 
 
@@ -208,7 +208,7 @@ def startNNAverageCreation(data, features, label, trainRange=10, datasetName=Non
     sumAcc = 0
 
     for i in range(trainRange):
-        acc = trainAndTestMLP(data=data, features=features, label=label)
+        acc = trainAndTestMLP(data=data, features=features, label=label, randomState=42+i)
         printAndWriteInFileAcc(acc)
         sumAcc += acc
 
@@ -224,6 +224,9 @@ def printAndWriteInFileAcc(content):
 
 def printAndWriteInFileAvgAcc(content):
     printAndWriteInFile(content, "Logs/AvgAcssOfAlgs.txt")
+
+def printAndWriteInFileBestComb(content):
+    printAndWriteInFile(content, "Logs/BestComb.txt")
 
 def doFFS(datasetName, data, features, label):
     bestFeatures = ffs(datasetName, data, features, label, maxIter=1000)
@@ -266,7 +269,7 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
         if bFFS:
             printAndWriteInFileBestFeatures(doFFS(dataset["name"], preprocessed.data, preprocessed.feature, label))
         if bKNN:
-            startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=100, trainRange=20)
+            startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=30, trainRange=20)
         if bNN:
             startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=20)
         if bSVM:
@@ -278,4 +281,4 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
     
 
 if __name__ == "__main__":
-    titanic_cardio_iris__fetal_analysis(bKNN=True, bNN=True, bSVM=True)
+    titanic_cardio_iris__fetal_analysis(bKNN=True, bSVM=True)

@@ -74,8 +74,9 @@ def detectAndRemoveOutliers(data, columns):
 
 def labelEncoded(data,values):
     print("\nLabel Encode")
-    encoder = LabelEncoder()
-    data[values] = encoder.fit_transform(data[values])
+    for a in values:
+        encoder = LabelEncoder()
+        data[a] = encoder.fit_transform(data[a])
     return data
 
 def oneHotEncoded(data, columns: list):
