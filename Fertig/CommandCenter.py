@@ -20,16 +20,23 @@ def preprocessCardioData():
     filepath = "DataSets\\cardio_data_processed.csv"
     label = "cardio"
 
-    normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
+    # Good preprocessing
 
+    # normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
+    # data = preprocessing(filepath, 
+    #                     oneHotEncodingFeatures=["bp_category"], 
+    #                     normalizeFeatures=normalizeFeatures,
+    #                     bDeleteNanValues=True              
+    #                     )
+    # removableColumns = ["id", "age_years", "bp_category_encoded", label]
+
+    # Bad preprocessing
     data = preprocessing(filepath, 
-                        oneHotEncodingFeatures=["bp_category"], 
-                        normalizeFeatures=normalizeFeatures,
-                        bDeleteNanValues=True              
+                        oneHotEncodingFeatures=["bp_category"],              
                         )
-
-
-    removableColumns = ["id", "age_years", "bp_category_encoded", label]
+    
+    # Necessary operation
+    removableColumns = ["age_years", "bp_category_encoded",label]
     features = removeColumns(getColumns(data),  removableColumns)
 
     return PreprocessedData(data, features, label)
@@ -43,18 +50,29 @@ def preprocessIris():
     filepath = "DataSets\\Iris.csv"
     label = 'Species'
 
-    normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
+    # Good preprocessing
+    # normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
+    # data = preprocessing(
+    #     filepath=filepath, 
+    #     labelEncodingFeatures=[label], 
+    #     normalizeFeatures=normalizeFeatures,
+    #     bDeleteNanValues=True
+    #     )
 
+    # For onehotencoded label
+    # features = getColumns(data)
+    # label = [col for col in features if col.startswith(label)]  
+    # removableColumns = ["Id"] + [label]
+
+    # Bad preprocessing
     data = preprocessing(
         filepath=filepath, 
-        labelEncodingFeatures=[label], 
-        normalizeFeatures=normalizeFeatures,
-        bDeleteNanValues=True)
+        labelEncodingFeatures=[label]
+        )
+    
 
-    # remove columns manuel, because we just know all labels after onehotencoding species label
-    features = getColumns(data)
-    # label = [col for col in features if col.startswith(label)]  
-    removableColumns = ["Id"] + [label]
+    # Necessary operation: remove columns manuel, because we just know all labels after onehotencoding species label
+    removableColumns = [label]
     features = removeColumns(features,  removableColumns)
 
     return PreprocessedData(data, features, label)
@@ -66,17 +84,29 @@ def preprocessTitanic():
     data = "DataSets\\titanic_combined.csv"
     label = 'Survived'
 
-    normalizeFeatures = ['Age', 'Fare']  
-    oneHotEncodingFeatures = ['Sex', 'Embarked']
+    # Good preprocessing
+    # normalizeFeatures = ['Age', 'Fare']  
+    # oneHotEncodingFeatures = ['Sex', 'Embarked']
     
+    # data = preprocessing(
+    #     filepath=data, 
+    #     oneHotEncodingFeatures=oneHotEncodingFeatures,  
+    #     normalizeFeatures=normalizeFeatures,
+    #     bPrintInfo=False  
+    # )
+    # removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
+
+    # Bad preprocessing
+    oneHotEncodingFeatures = ['Sex', 'Embarked']
     data = preprocessing(
         filepath=data, 
         oneHotEncodingFeatures=oneHotEncodingFeatures,  
-        normalizeFeatures=normalizeFeatures,
         bPrintInfo=False  
     )
+    removableColumns = ["Name", "Ticket" ,"Cabin"]
 
-    removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
+
+    # Necessary operations:
     necessaryValues = removeColumns(getColumns(data), removableColumns)
     data = data[necessaryValues]
 
@@ -96,27 +126,36 @@ def preprocessFetalHealth():
     filepath = "DataSets\\fetal_health.csv"
     label = 'fetal_health'
 
-    normalizeFeatures = [
-        'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
-        'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
-        'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
-        'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
-        'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
-        'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
-        'histogram_variance', 'histogram_tendency'
-    ]
+    # Good preprocessing
+    # normalizeFeatures = [
+    #     'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
+    #     'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
+    #     'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
+    #     'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
+    #     'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
+    #     'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
+    #     'histogram_variance', 'histogram_tendency'
+    # ]
     
+    # data = preprocessing(
+    #     filepath=filepath,   
+    #     normalizeFeatures=normalizeFeatures,
+    #     bDeleteNanValues=True
+    # )
+
+    # Bad preprocessing
     data = preprocessing(
-        filepath=filepath,   
-        normalizeFeatures=normalizeFeatures,
-        bDeleteNanValues=True
+        filepath=filepath
     )
+    removableColumns = [label]
+    normalizeFeatures = removeColumns(getColumns(data), removableColumns)
+    
     
     return PreprocessedData(data, normalizeFeatures, label)
 
 
 
-def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange=10, dataSetName=None):
+def findBestKNNComb(data, features, label, trainRange=10, neighborsRange=10, dataSetName=None ):
     printAndWriteInFileAcc(f"Start {dataSetName} knn")
     printAndWriteInFileAvgAcc(f"Start {dataSetName} knn")
 
@@ -168,9 +207,21 @@ def startKNNAverageCreation(data, features, label, trainRange=10, neighborsRange
     printAndWriteInFileBestComb(f"DataSet: {dataSetName} with trainrange: {trainRange} and neighborsrange: {neighborsRange}")
     printAndWriteInFileBestComb(f"Best KNN comb: {bestKnnComb}")
 
+def startKNNAverageCreation(data, features, label,weights, trainRange=10, neighborsRange=10, dataSetName=None):
+    printAndWriteInFileAcc(f"Start {dataSetName} knn")
+    printAndWriteInFileAvgAcc(f"Start {dataSetName} knn")
+    sumAcc = 0
+    for i in range(trainRange):
+            acc = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighborsRange, randomState=42+i, knnWeight=weights)
 
+            printAndWriteInFileAcc(acc)
 
-def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=None): 
+            sumAcc += acc
+
+    averageDistanceAcc = sumAcc / trainRange
+    printAndWriteInFileAvgAcc(f"Average Acc Distance: {averageDistanceAcc}")
+
+def findBestSVMComb(data, features, label, trainRange=10, datasetName=None): 
     printAndWriteInFileAcc(f"Start {datasetName} SVM")
     printAndWriteInFileAvgAcc(f"Start {datasetName} SVM")
 
@@ -198,6 +249,18 @@ def startSVMAverageCreation(data, features, label, trainRange=10, datasetName=No
     printAndWriteInFileBestComb(f"DataSet: {datasetName} with trainrange: {trainRange}")
     printAndWriteInFileBestComb(f"Best SVM kernel: {bestSvmComb}")
 
+def startSVMAverageCreation(data, features, label,kernel, trainRange=10, datasetName=None): 
+    printAndWriteInFileAcc(f"Start {datasetName} SVM")
+    printAndWriteInFileAvgAcc(f"Start {datasetName} SVM")
+
+    sumAcc = 0
+    for i in range(trainRange):
+        acc = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel, randomState=42+i)
+        printAndWriteInFileAcc(acc)
+        sumAcc += acc
+
+    averageAcc = sumAcc / trainRange
+    printAndWriteInFileAvgAcc(f"Average Acc for {kernel}: {averageAcc}")
 
 
 def startNNAverageCreation(data, features, label, trainRange=10, datasetName=None): 
@@ -236,28 +299,40 @@ def doFFS(datasetName, data, features, label):
     return bestFeatures
 
     
-def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=False):
+def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=False, bfindComb = True, bCreateAccs = False, trainRange = 20):
     datasets = [
-        {
-            "name": "Titanic",
-            "preprocess": preprocessTitanic,
-            "features": ['Age', 'Parch', 'Sex_female', 'Sex_male']
-        },
+        # {
+        #     "name": "Titanic",
+        #     "preprocess": preprocessTitanic,
+        #     "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
+        #     "knn": {"neighbors": 15,
+        #             "weights": "uniform"},
+        #     "svmKernel": "rbf" 
+        # },
         {
             "name": "Cardio",
             "preprocess": preprocessCardioData,
-            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+            "knn": {"neighbors": 28,
+                    "weights": "uniform"},
+            "svmKernel": "rbf" 
         },
-        {
-            "name": "Iris",
-            "preprocess": preprocessIris,
-            "features": None
-        },
-        {
-            "name": "FetalHealth",
-            "preprocess": preprocessFetalHealth,
-            "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median']
-        }
+        # {
+        #     "name": "Iris",
+        #     "preprocess": preprocessIris,
+        #     "features": None,
+        #     "knn": {"neighbors": 6,
+        #             "weights": "uniform"},
+        #     "svmKernel": "rbf" 
+        # },
+        # {
+        #     "name": "FetalHealth",
+        #     "preprocess": preprocessFetalHealth,
+        #     "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
+        #     "knn": {"neighbors": 18,
+        #             "weights": "uniform"},
+        #     "svmKernel": "poly" 
+        # }
     ]
 
     for dataset in datasets:
@@ -268,12 +343,20 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
 
         if bFFS:
             printAndWriteInFileBestFeatures(doFFS(dataset["name"], preprocessed.data, preprocessed.feature, label))
-        if bKNN:
-            startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=30, trainRange=20)
         if bNN:
-            startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=20)
-        if bSVM:
-            startSVMAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=20)
+            startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
+
+        if bfindComb:
+            if bKNN:
+                findBestKNNComb(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=30, trainRange=trainRange)
+            if bSVM:
+                findBestSVMComb(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
+
+        if bCreateAccs:
+            if bKNN:
+                startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=dataset["knn"]["neighbors"], weights=dataset["knn"]["weights"], trainRange=trainRange)
+            if bSVM:
+                startSVMAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"],kernel=dataset["svmKernel"], trainRange=100)
 
     
     
@@ -281,4 +364,4 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
     
 
 if __name__ == "__main__":
-    titanic_cardio_iris__fetal_analysis(bKNN=True, bSVM=True)
+    titanic_cardio_iris__fetal_analysis(bKNN=True, bSVM=True, bNN=True , bCreateAccs=True, bfindComb=False, trainRange = 500)

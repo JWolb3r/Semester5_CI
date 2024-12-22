@@ -1,0 +1,23 @@
+Start Titanic default-NN
+Average Acc: 0.7757206703910621
+Start Titanic knn
+Average Acc Distance: 0.7798547486033527
+Start Titanic SVM
+Average Acc for rbf: 0.7857765363128502
+Start Cardio default-NN
+Average Acc: 0.7149386582219096
+Start Cardio knn
+Average Acc Distance: 0.7232246070842128
+Start Cardio SVM
+Start Iris default-NN
+Average Acc: 0.8809473684210547
+Start Iris knn
+Average Acc Distance: 0.9626842105263189
+Start Iris SVM
+Average Acc for rbf: 0.9603684210526344
+Start FetalHealth default-NN
+Average Acc: 0.855398865784499
+Start FetalHealth knn
+Average Acc Distance: 0.8690586011342163
+Start FetalHealth SVM
+Average Acc for poly: 0.8370888468809072
