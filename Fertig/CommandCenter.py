@@ -34,9 +34,9 @@ def preprocessCardioData():
     data = preprocessing(filepath, 
                         oneHotEncodingFeatures=["bp_category"],              
                         )
-    
-    # Necessary operation
     removableColumns = ["age_years", "bp_category_encoded",label]
+
+    # Necessary operation
     features = removeColumns(getColumns(data),  removableColumns)
 
     return PreprocessedData(data, features, label)
@@ -72,6 +72,7 @@ def preprocessIris():
     
 
     # Necessary operation: remove columns manuel, because we just know all labels after onehotencoding species label
+    features = getColumns(data)
     removableColumns = [label]
     features = removeColumns(features,  removableColumns)
 
@@ -204,8 +205,9 @@ def findBestKNNComb(data, features, label, trainRange=10, neighborsRange=10, dat
         elif bestKnnComb[2] < averageDistanceAcc:
             bestKnnComb = ['Distance', neighbors, averageDistanceAcc]
 
+    printAndWriteInFileBestComb("KNN")
     printAndWriteInFileBestComb(f"DataSet: {dataSetName} with trainrange: {trainRange} and neighborsrange: {neighborsRange}")
-    printAndWriteInFileBestComb(f"Best KNN comb: {bestKnnComb}")
+    printAndWriteInFileBestComb(f"Best comb: {bestKnnComb}")
 
 def startKNNAverageCreation(data, features, label,weights, trainRange=10, neighborsRange=10, dataSetName=None):
     printAndWriteInFileAcc(f"Start {dataSetName} knn")
@@ -218,8 +220,8 @@ def startKNNAverageCreation(data, features, label,weights, trainRange=10, neighb
 
             sumAcc += acc
 
-    averageDistanceAcc = sumAcc / trainRange
-    printAndWriteInFileAvgAcc(f"Average Acc Distance: {averageDistanceAcc}")
+    avgAcc = sumAcc / trainRange
+    printAndWriteInFileAvgAcc(f"Average Acc with neighbors {neighborsRange} and weight {weights}: {avgAcc}")
 
 def findBestSVMComb(data, features, label, trainRange=10, datasetName=None): 
     printAndWriteInFileAcc(f"Start {datasetName} SVM")
@@ -245,9 +247,9 @@ def findBestSVMComb(data, features, label, trainRange=10, datasetName=None):
 
         if averageAcc > bestSvmComb[1]:
             bestSvmComb = [kernel, averageAcc]
-
+    printAndWriteInFileBestComb("SVM:")
     printAndWriteInFileBestComb(f"DataSet: {datasetName} with trainrange: {trainRange}")
-    printAndWriteInFileBestComb(f"Best SVM kernel: {bestSvmComb}")
+    printAndWriteInFileBestComb(f"Best  kernel: {bestSvmComb}")
 
 def startSVMAverageCreation(data, features, label,kernel, trainRange=10, datasetName=None): 
     printAndWriteInFileAcc(f"Start {datasetName} SVM")
@@ -266,7 +268,7 @@ def startSVMAverageCreation(data, features, label,kernel, trainRange=10, dataset
 def startNNAverageCreation(data, features, label, trainRange=10, datasetName=None): 
     printAndWriteInFileAcc(f"Start {datasetName} default-NN")
     printAndWriteInFileAvgAcc(f"Start {datasetName} default-NN")
-
+    printAndWriteInFileAvgAcc(f"Features: {features}, label: {label}")
     # Cross-validation
     sumAcc = 0
 
@@ -301,44 +303,44 @@ def doFFS(datasetName, data, features, label):
     
 def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=False, bfindComb = True, bCreateAccs = False, trainRange = 20):
     datasets = [
+        {
+            "name": "Titanic",
+            "preprocess": preprocessTitanic,
+            # "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
+            "knn": {"neighbors": 19,
+                    "weights": "uniform"},
+            "svmKernel": "linear" 
+        },
         # {
-        #     "name": "Titanic",
-        #     "preprocess": preprocessTitanic,
-        #     "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
-        #     "knn": {"neighbors": 15,
+        #     "name": "Cardio",
+        #     "preprocess": preprocessCardioData,
+        #     # "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+        #     "knn": {"neighbors": 29,
         #             "weights": "uniform"},
         #     "svmKernel": "rbf" 
         # },
         {
-            "name": "Cardio",
-            "preprocess": preprocessCardioData,
-            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-            "knn": {"neighbors": 28,
+            "name": "Iris",
+            "preprocess": preprocessIris,
+            # "features": None,
+            "knn": {"neighbors": 1,
                     "weights": "uniform"},
-            "svmKernel": "rbf" 
+            "svmKernel": "linear" 
         },
-        # {
-        #     "name": "Iris",
-        #     "preprocess": preprocessIris,
-        #     "features": None,
-        #     "knn": {"neighbors": 6,
-        #             "weights": "uniform"},
-        #     "svmKernel": "rbf" 
-        # },
-        # {
-        #     "name": "FetalHealth",
-        #     "preprocess": preprocessFetalHealth,
-        #     "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
-        #     "knn": {"neighbors": 18,
-        #             "weights": "uniform"},
-        #     "svmKernel": "poly" 
-        # }
+        {
+            "name": "FetalHealth",
+            "preprocess": preprocessFetalHealth,
+            # "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
+            "knn": {"neighbors": 4,
+                    "weights": "distance"},
+            "svmKernel": "linear" 
+        }
     ]
 
     for dataset in datasets:
-        printAndWriteInFileBestFeatures(f"#######{dataset['name']}#######")
+        printAndWriteInFileAvgAcc(f"#######{dataset['name']}#######")
         preprocessed = dataset["preprocess"]()
-        features = dataset["features"] or preprocessed.feature
+        features = dataset["features"] if "features" in dataset and dataset["features"] else preprocessed.feature
         label = preprocessed.label
 
         if bFFS:
@@ -347,20 +349,26 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
             startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
 
         if bfindComb:
+            printAndWriteInFileBestComb(f"#######{dataset['name']}#######")
+            printAndWriteInFileBestComb(f"Features: {features}")
+            printAndWriteInFileBestComb(f"Label: {label}")
+            printAndWriteInFileBestComb(f"Length: {len(preprocessed.data)}")
+
             if bKNN:
                 findBestKNNComb(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=30, trainRange=trainRange)
             if bSVM:
                 findBestSVMComb(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
 
         if bCreateAccs:
+            printAndWriteInFileAvgAcc(f"#######{dataset['name']}#######")
+            printAndWriteInFileAvgAcc(f"Features: {features}")
+            printAndWriteInFileAvgAcc(f"Label: {label}")
+            printAndWriteInFileAvgAcc(f"Length: {len(preprocessed.data)}")
+
             if bKNN:
                 startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=dataset["knn"]["neighbors"], weights=dataset["knn"]["weights"], trainRange=trainRange)
             if bSVM:
-                startSVMAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"],kernel=dataset["svmKernel"], trainRange=100)
-
-    
-    
-    
+                startSVMAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], kernel=dataset["svmKernel"], trainRange=100)
     
 
 if __name__ == "__main__":

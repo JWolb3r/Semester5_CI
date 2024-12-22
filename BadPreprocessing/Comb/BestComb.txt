@@ -1,0 +1,37 @@
+#######Titanic#######
+Features: ['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_female', 'Sex_male', 'Embarked_C', 'Embarked_Q', 'Embarked_S']
+Label: Survived
+Length: 714
+KNN
+DataSet: Titanic with trainrange: 20 and neighborsrange: 30
+Best comb: ['Uniform', 19, 0.675977653631285]
+SVM:
+DataSet: Titanic with trainrange: 20
+Best  kernel: ['linear', 0.7854748603351955]
+#######Cardio#######
+Features: ['id', 'age', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'bmi', 'bp_category_Elevated', 'bp_category_Hypertension Stage 1', 'bp_category_Hypertension Stage 2', 'bp_category_Normal']
+Label: cardio
+Length: 68205
+KNN
+DataSet: Cardio with trainrange: 20 and neighborsrange: 30
+Best comb: ['Uniform', 29, 0.5798440065681445]
+#######Iris#######
+Features: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+Label: Species
+Length: 150
+KNN
+DataSet: Iris with trainrange: 20 and neighborsrange: 30
+Best comb: ['Uniform', 1, 0.9986842105263157]
+SVM:
+DataSet: Iris with trainrange: 20
+Best  kernel: ['linear', 0.9986842105263157]
+#######FetalHealth#######
+Features: ['baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions', 'light_decelerations', 'severe_decelerations', 'prolongued_decelerations', 'abnormal_short_term_variability', 'mean_value_of_short_term_variability', 'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability', 'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks', 'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median', 'histogram_variance', 'histogram_tendency']
+Label: fetal_health
+Length: 2113
+KNN
+DataSet: FetalHealth with trainrange: 20 and neighborsrange: 30
+Best comb: ['Distance', 4, 0.9072778827977318]
+SVM:
+DataSet: FetalHealth with trainrange: 20
+Best  kernel: ['linear', 0.8838374291115313]

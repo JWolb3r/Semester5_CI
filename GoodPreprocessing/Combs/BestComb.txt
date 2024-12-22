@@ -1,0 +1,41 @@
+#######Titanic#######
+Features: ['Age', 'Parch', 'Sex_female', 'Sex_male']
+Label: Survived
+Length: 714
+KNN
+DataSet: Titanic with trainrange: 20 and neighborsrange: 30
+Best comb: ['Uniform', 15, 0.788826815642458]
+SVM:
+DataSet: Titanic with trainrange: 20
+Best  kernel: ['rbf', 0.7913407821229049]
+#######Cardio#######
+Features: ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+Label: cardio
+Length: 68205
+KNN
+DataSet: Cardio with trainrange: 20 and neighborsrange: 30
+Best comb: ['Uniform', 28, 0.7228184377199154]
+SVM:
+DataSet: Cardio with trainrange: 20
+Best  kernel: ['rbf', 0.7276771053248888]
+#######Iris#######
+Features: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+Label: Species
+Length: 150
+KNN
+DataSet: Iris with trainrange: 20 and neighborsrange: 30
+Best comb: ['Uniform', 1, 0.9907894736842104]
+SVM:
+DataSet: Iris with trainrange: 20
+Best  kernel: ['linear', 0.9907894736842104]
+#######FetalHealth#######
+Features: ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median']
+Label: fetal_health
+Length: 2113
+KNN
+DataSet: FetalHealth with trainrange: 20 and neighborsrange: 30
+Best comb: ['Uniform', 18, 0.8775047258979205]
+SVM:
+DataSet: FetalHealth with trainrange: 20
+Best  kernel: ['poly', 0.8408317580340265]
+

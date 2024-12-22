@@ -1,3 +1,4 @@
+#######Titanic#######
 Start Titanic knn
 Current neighbors: 1
 Distance:
@@ -153,6 +154,7 @@ Current kernel: poly
 Average Acc for poly: 0.7893854748603351
 Current kernel: sigmoid
 Average Acc for sigmoid: 0.721508379888268
+#######Cardio#######
 Start Cardio knn
 Current neighbors: 1
 Distance:
@@ -308,161 +310,163 @@ Current kernel: poly
 Average Acc for poly: 0.7172589725545391
 Current kernel: sigmoid
 Average Acc for sigmoid: 0.3634910860896083
+#######Iris#######
 Start Iris knn
 Current neighbors: 1
 Distance:
-Average Acc Distance: 0.9473684210526312
+Average Acc Distance: 0.9907894736842104
 Uniform
-Average Acc Uniform: 0.9473684210526312
+Average Acc Uniform: 0.9907894736842104
 Current neighbors: 2
 Distance:
-Average Acc Distance: 0.9473684210526312
+Average Acc Distance: 0.9907894736842104
 Uniform
-Average Acc Uniform: 0.9499999999999998
+Average Acc Uniform: 0.9776315789473683
 Current neighbors: 3
 Distance:
-Average Acc Distance: 0.9486842105263156
+Average Acc Distance: 0.9894736842105264
 Uniform
-Average Acc Uniform: 0.9486842105263156
+Average Acc Uniform: 0.9868421052631579
 Current neighbors: 4
 Distance:
-Average Acc Distance: 0.9499999999999996
+Average Acc Distance: 0.9894736842105264
 Uniform
-Average Acc Uniform: 0.9578947368421049
+Average Acc Uniform: 0.976315789473684
 Current neighbors: 5
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9868421052631579
 Uniform
-Average Acc Uniform: 0.9552631578947365
+Average Acc Uniform: 0.9855263157894736
 Current neighbors: 6
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9894736842105264
 Uniform
-Average Acc Uniform: 0.9605263157894732
+Average Acc Uniform: 0.9736842105263157
 Current neighbors: 7
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9828947368421053
 Uniform
-Average Acc Uniform: 0.9578947368421049
+Average Acc Uniform: 0.9802631578947368
 Current neighbors: 8
 Distance:
-Average Acc Distance: 0.9513157894736839
+Average Acc Distance: 0.9894736842105264
 Uniform
-Average Acc Uniform: 0.9578947368421049
+Average Acc Uniform: 0.9723684210526313
 Current neighbors: 9
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9828947368421053
 Uniform
-Average Acc Uniform: 0.9552631578947366
+Average Acc Uniform: 0.9776315789473685
 Current neighbors: 10
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9881578947368421
 Uniform
-Average Acc Uniform: 0.9605263157894732
+Average Acc Uniform: 0.9776315789473683
 Current neighbors: 11
 Distance:
-Average Acc Distance: 0.9552631578947365
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9565789473684208
+Average Acc Uniform: 0.9815789473684209
 Current neighbors: 12
 Distance:
-Average Acc Distance: 0.9552631578947365
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9605263157894732
+Average Acc Uniform: 0.9776315789473683
 Current neighbors: 13
 Distance:
-Average Acc Distance: 0.9552631578947365
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9592105263157891
+Average Acc Uniform: 0.9802631578947368
 Current neighbors: 14
 Distance:
-Average Acc Distance: 0.9578947368421048
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9565789473684205
+Average Acc Uniform: 0.9815789473684209
 Current neighbors: 15
 Distance:
-Average Acc Distance: 0.9565789473684208
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9565789473684208
+Average Acc Uniform: 0.9815789473684211
 Current neighbors: 16
 Distance:
-Average Acc Distance: 0.9578947368421049
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9565789473684208
+Average Acc Uniform: 0.9802631578947366
 Current neighbors: 17
 Distance:
-Average Acc Distance: 0.9578947368421049
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9605263157894732
+Average Acc Uniform: 0.9842105263157894
 Current neighbors: 18
 Distance:
-Average Acc Distance: 0.9552631578947365
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9526315789473682
+Average Acc Uniform: 0.9749999999999999
 Current neighbors: 19
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9842105263157894
 Uniform
-Average Acc Uniform: 0.9499999999999998
+Average Acc Uniform: 0.9842105263157894
 Current neighbors: 20
 Distance:
-Average Acc Distance: 0.9539473684210524
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9486842105263156
+Average Acc Uniform: 0.9789473684210523
 Current neighbors: 21
 Distance:
-Average Acc Distance: 0.9539473684210524
+Average Acc Distance: 0.9842105263157894
 Uniform
-Average Acc Uniform: 0.9473684210526313
+Average Acc Uniform: 0.9815789473684209
 Current neighbors: 22
 Distance:
-Average Acc Distance: 0.9539473684210522
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9473684210526313
+Average Acc Uniform: 0.976315789473684
 Current neighbors: 23
 Distance:
-Average Acc Distance: 0.9539473684210524
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.946052631578947
+Average Acc Uniform: 0.9815789473684209
 Current neighbors: 24
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9434210526315787
+Average Acc Uniform: 0.9749999999999999
 Current neighbors: 25
 Distance:
-Average Acc Distance: 0.9552631578947366
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9473684210526313
+Average Acc Uniform: 0.9789473684210523
 Current neighbors: 26
 Distance:
-Average Acc Distance: 0.9552631578947365
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9539473684210524
+Average Acc Uniform: 0.9710526315789473
 Current neighbors: 27
 Distance:
-Average Acc Distance: 0.9539473684210524
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9499999999999998
+Average Acc Uniform: 0.9763157894736839
 Current neighbors: 28
 Distance:
-Average Acc Distance: 0.9526315789473682
+Average Acc Distance: 0.9842105263157895
 Uniform
-Average Acc Uniform: 0.9473684210526315
+Average Acc Uniform: 0.9710526315789473
 Current neighbors: 29
 Distance:
-Average Acc Distance: 0.9539473684210524
+Average Acc Distance: 0.9855263157894736
 Uniform
-Average Acc Uniform: 0.9486842105263156
+Average Acc Uniform: 0.976315789473684
 Start Iris SVM
 Current kernel: linear
-Average Acc for linear: 0.9565789473684208
+Average Acc for linear: 0.9907894736842104
 Current kernel: rbf
-Average Acc for rbf: 0.9592105263157894
+Average Acc for rbf: 0.9776315789473683
 Current kernel: poly
-Average Acc for poly: 0.9526315789473682
+Average Acc for poly: 0.9513157894736842
 Current kernel: sigmoid
-Average Acc for sigmoid: 0.3578947368421052
+Average Acc for sigmoid: 0.2460526315789473
+#######FetalHealth#######
 Start FetalHealth knn
 Current neighbors: 1
 Distance:

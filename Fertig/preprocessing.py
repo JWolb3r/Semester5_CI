@@ -158,7 +158,7 @@ def removeColumns(columns: list, columnsToRemove: list) -> list:
         columns.remove(r)
     return columns
 
-def printLengthAndColumns(data: pd.DataFrame):
+def printLengthAndColumns(data: pd.DataFrame, ):
     print("\nPrint Datset Infos")
     print(f"\nLength of Dataset: {len(data)}")
     print(f"\nColumns of Dataset: {data.columns}")

@@ -1,19 +1,36 @@
+#######Titanic#######
 Start Titanic default-NN
-Average Acc: 0.7205810055865931
+Features: ['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_female', 'Sex_male', 'Embarked_C', 'Embarked_Q', 'Embarked_S'], label: Survived
+Average Acc: 0.6712178770949713
+#######Titanic#######
+Features: ['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_female', 'Sex_male', 'Embarked_C', 'Embarked_Q', 'Embarked_S']
+Label: Survived
+Length: 714
 Start Titanic knn
-Average Acc Distance: 0.7291843575419003
+Average Acc with neighbors 19 and weight uniform: 0.6613184357541894
 Start Titanic SVM
-Average Acc for rbf: 0.6098100558659215
+Average Acc for linear: 0.7815642458100559
+#######Iris#######
 Start Iris default-NN
+Features: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm'], label: Species
 Average Acc: 0.845631578947369
+#######Iris#######
+Features: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+Label: Species
+Length: 150
 Start Iris knn
-Average Acc Distance: 0.9882105263157899
+Average Acc with neighbors 1 and weight uniform: 0.9992105263157894
 Start Iris SVM
-Average Acc for rbf: 0.9797368421052636
+Average Acc for linear: 0.9992105263157894
+#######FetalHealth#######
 Start FetalHealth default-NN
-Average Acc: 0.7901814744801502
+Features: ['baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions', 'light_decelerations', 'severe_decelerations', 'prolongued_decelerations', 'abnormal_short_term_variability', 'mean_value_of_short_term_variability', 'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability', 'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks', 'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median', 'histogram_variance', 'histogram_tendency'], label: fetal_health
+Average Acc: 0.8381776937618157
+#######FetalHealth#######
+Features: ['baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions', 'light_decelerations', 'severe_decelerations', 'prolongued_decelerations', 'abnormal_short_term_variability', 'mean_value_of_short_term_variability', 'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability', 'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks', 'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median', 'histogram_variance', 'histogram_tendency']
+Label: fetal_health
+Length: 2113
 Start FetalHealth knn
-Average Acc Distance: 0.8299697542533079
+Average Acc with neighbors 4 and weight distance: 0.9039621928166351
 Start FetalHealth SVM
-Average Acc for poly: 0.7792551984877125
-Start Cardio default-NN
+Average Acc for linear: 0.8825330812854442
