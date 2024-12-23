@@ -22,19 +22,19 @@ def preprocessCardioData():
 
     # Good preprocessing
 
-    # normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
-    # data = preprocessing(filepath, 
-    #                     oneHotEncodingFeatures=["bp_category"], 
-    #                     normalizeFeatures=normalizeFeatures,
-    #                     bDeleteNanValues=True              
-    #                     )
-    # removableColumns = ["id", "age_years", "bp_category_encoded", label]
+    normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
+    data = preprocessing(filepath, 
+                        oneHotEncodingFeatures=["bp_category"], 
+                        normalizeFeatures=normalizeFeatures,
+                        bDeleteNanValues=True              
+                        )
+    removableColumns = ["id", "age_years", "bp_category_encoded", label]
 
     # Bad preprocessing
-    data = preprocessing(filepath, 
-                        oneHotEncodingFeatures=["bp_category"],              
-                        )
-    removableColumns = ["age_years", "bp_category_encoded",label]
+    # data = preprocessing(filepath, 
+    #                     oneHotEncodingFeatures=["bp_category"],              
+    #                     )
+    # removableColumns = ["age_years", "bp_category_encoded",label]
 
     # Necessary operation
     features = removeColumns(getColumns(data),  removableColumns)
@@ -51,13 +51,13 @@ def preprocessIris():
     label = 'Species'
 
     # Good preprocessing
-    # normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
-    # data = preprocessing(
-    #     filepath=filepath, 
-    #     labelEncodingFeatures=[label], 
-    #     normalizeFeatures=normalizeFeatures,
-    #     bDeleteNanValues=True
-    #     )
+    normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
+    data = preprocessing(
+        filepath=filepath, 
+        labelEncodingFeatures=[label], 
+        normalizeFeatures=normalizeFeatures,
+        bDeleteNanValues=True
+        )
 
     # For onehotencoded label
     # features = getColumns(data)
@@ -65,10 +65,10 @@ def preprocessIris():
     # removableColumns = ["Id"] + [label]
 
     # Bad preprocessing
-    data = preprocessing(
-        filepath=filepath, 
-        labelEncodingFeatures=[label]
-        )
+    # data = preprocessing(
+    #     filepath=filepath, 
+    #     labelEncodingFeatures=[label]
+    #     )
     
 
     # Necessary operation: remove columns manuel, because we just know all labels after onehotencoding species label
@@ -86,25 +86,25 @@ def preprocessTitanic():
     label = 'Survived'
 
     # Good preprocessing
-    # normalizeFeatures = ['Age', 'Fare']  
-    # oneHotEncodingFeatures = ['Sex', 'Embarked']
-    
-    # data = preprocessing(
-    #     filepath=data, 
-    #     oneHotEncodingFeatures=oneHotEncodingFeatures,  
-    #     normalizeFeatures=normalizeFeatures,
-    #     bPrintInfo=False  
-    # )
-    # removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
-
-    # Bad preprocessing
+    normalizeFeatures = ['Age', 'Fare']  
     oneHotEncodingFeatures = ['Sex', 'Embarked']
+    
     data = preprocessing(
         filepath=data, 
         oneHotEncodingFeatures=oneHotEncodingFeatures,  
+        normalizeFeatures=normalizeFeatures,
         bPrintInfo=False  
     )
-    removableColumns = ["Name", "Ticket" ,"Cabin"]
+    removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
+
+    # Bad preprocessing
+    # oneHotEncodingFeatures = ['Sex', 'Embarked']
+    # data = preprocessing(
+    #     filepath=data, 
+    #     oneHotEncodingFeatures=oneHotEncodingFeatures,  
+    #     bPrintInfo=False  
+    # )
+    # removableColumns = ["Name", "Ticket" ,"Cabin"]
 
 
     # Necessary operations:
@@ -128,28 +128,28 @@ def preprocessFetalHealth():
     label = 'fetal_health'
 
     # Good preprocessing
-    # normalizeFeatures = [
-    #     'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
-    #     'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
-    #     'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
-    #     'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
-    #     'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
-    #     'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
-    #     'histogram_variance', 'histogram_tendency'
-    # ]
+    normalizeFeatures = [
+        'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
+        'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
+        'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
+        'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
+        'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
+        'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
+        'histogram_variance', 'histogram_tendency'
+    ]
     
-    # data = preprocessing(
-    #     filepath=filepath,   
-    #     normalizeFeatures=normalizeFeatures,
-    #     bDeleteNanValues=True
-    # )
+    data = preprocessing(
+        filepath=filepath,   
+        normalizeFeatures=normalizeFeatures,
+        bDeleteNanValues=True
+    )
 
     # Bad preprocessing
-    data = preprocessing(
-        filepath=filepath
-    )
-    removableColumns = [label]
-    normalizeFeatures = removeColumns(getColumns(data), removableColumns)
+    # data = preprocessing(
+    #     filepath=filepath
+    # )
+    # removableColumns = [label]
+    # normalizeFeatures = removeColumns(getColumns(data), removableColumns)
     
     
     return PreprocessedData(data, normalizeFeatures, label)
@@ -306,23 +306,23 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
         {
             "name": "Titanic",
             "preprocess": preprocessTitanic,
-            # "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
+            "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
             "knn": {"neighbors": 19,
                     "weights": "uniform"},
             "svmKernel": "linear" 
         },
-        # {
-        #     "name": "Cardio",
-        #     "preprocess": preprocessCardioData,
-        #     # "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-        #     "knn": {"neighbors": 29,
-        #             "weights": "uniform"},
-        #     "svmKernel": "rbf" 
-        # },
+        {
+            "name": "Cardio",
+            "preprocess": preprocessCardioData,
+            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+            "knn": {"neighbors": 29,
+                    "weights": "uniform"},
+            "svmKernel": "rbf" 
+        },
         {
             "name": "Iris",
             "preprocess": preprocessIris,
-            # "features": None,
+            "features": None,
             "knn": {"neighbors": 1,
                     "weights": "uniform"},
             "svmKernel": "linear" 
@@ -330,7 +330,7 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
         {
             "name": "FetalHealth",
             "preprocess": preprocessFetalHealth,
-            # "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
+            "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
             "knn": {"neighbors": 4,
                     "weights": "distance"},
             "svmKernel": "linear" 

@@ -1,0 +1,48 @@
+#######Titanic#######
+Start Titanic default-NN
+Features: ['Age', 'Parch', 'Sex_female', 'Sex_male'], label: Survived
+Average Acc: 0.7757206703910621
+#######Titanic#######
+Features: ['Age', 'Parch', 'Sex_female', 'Sex_male']
+Label: Survived
+Length: 714
+Start Titanic knn
+Average Acc with neighbors 19 and weight uniform: 0.7788044692737434
+Start Titanic SVM
+Average Acc for linear: 0.7821787709497208
+#######Cardio#######
+Start Cardio default-NN
+Features: ['age', 'ap_hi', 'ap_lo', 'cholesterol'], label: cardio
+Average Acc: 0.7149386582219096
+#######Cardio#######
+Features: ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+Label: cardio
+Length: 68205
+Start Cardio knn
+Average Acc with neighbors 29 and weight uniform: 0.7231321839080465
+Start Cardio SVM
+Average Acc for rbf: 0.727902885292048
+#######Iris#######
+Start Iris default-NN
+Features: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm'], label: Species
+Average Acc: 0.7993157894736844
+#######Iris#######
+Features: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+Label: Species
+Length: 150
+Start Iris knn
+Average Acc with neighbors 1 and weight uniform: 0.99378947368421
+Start Iris SVM
+Average Acc for linear: 0.9936842105263156
+#######FetalHealth#######
+Start FetalHealth default-NN
+Features: ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'], label: fetal_health
+Average Acc: 0.855398865784499
+#######FetalHealth#######
+Features: ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median']
+Label: fetal_health
+Length: 2113
+Start FetalHealth knn
+Average Acc with neighbors 4 and weight distance: 0.8583062381852551
+Start FetalHealth SVM
+Average Acc for linear: 0.8143289224952737
