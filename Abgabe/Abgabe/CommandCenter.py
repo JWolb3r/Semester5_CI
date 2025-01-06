@@ -1,4 +1,4 @@
-from Abgabe.RandomForest import trainAndTestRF
+from RandomForest import trainAndTestRF
 from EvolutionaryAlgorithm import evolve
 from FeatureSelection import ffs
 from NN import trainAndTestMLP
@@ -23,19 +23,19 @@ def preprocessCardioData():
 
     # Good preprocessing
 
-    normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
-    data = preprocessing(filepath, 
-                        oneHotEncodingFeatures=["bp_category"], 
-                        normalizeFeatures=normalizeFeatures,
-                        bDeleteNanValues=True              
-                        )
-    removableColumns = ["id", "age_years", "bp_category_encoded", label]
+    # normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
+    # data = preprocessing(filepath, 
+    #                     oneHotEncodingFeatures=["bp_category"], 
+    #                     normalizeFeatures=normalizeFeatures,
+    #                     bDeleteNanValues=True              
+    #                     )
+    # removableColumns = ["id", "age_years", "bp_category_encoded", label]
 
     # Bad preprocessing
-    # data = preprocessing(filepath, 
-    #                     oneHotEncodingFeatures=["bp_category"],              
-    #                     )
-    # removableColumns = ["age_years", "bp_category_encoded",label]
+    data = preprocessing(filepath, 
+                        oneHotEncodingFeatures=["bp_category"],              
+                        )
+    removableColumns = ["age_years", "bp_category_encoded",label]
 
     # Necessary operation
     features = removeColumns(getColumns(data),  removableColumns)
@@ -52,13 +52,13 @@ def preprocessIris():
     label = 'Species'
 
     # Good preprocessing
-    normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
-    data = preprocessing(
-        filepath=filepath, 
-        labelEncodingFeatures=[label], 
-        normalizeFeatures=normalizeFeatures,
-        bDeleteNanValues=True
-        )
+    # normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
+    # data = preprocessing(
+    #     filepath=filepath, 
+    #     labelEncodingFeatures=[label], 
+    #     normalizeFeatures=normalizeFeatures,
+    #     bDeleteNanValues=True
+    #     )
 
     # For onehotencoded label
     # features = getColumns(data)
@@ -66,10 +66,10 @@ def preprocessIris():
     # removableColumns = ["Id"] + [label]
 
     # Bad preprocessing
-    # data = preprocessing(
-    #     filepath=filepath, 
-    #     labelEncodingFeatures=[label]
-    #     )
+    data = preprocessing(
+        filepath=filepath, 
+        labelEncodingFeatures=[label]
+        )
     
 
     # Necessary operation: remove columns manuel, because we just know all labels after onehotencoding species label
@@ -87,25 +87,25 @@ def preprocessTitanic():
     label = 'Survived'
 
     # Good preprocessing
-    normalizeFeatures = ['Age', 'Fare']  
-    oneHotEncodingFeatures = ['Sex', 'Embarked']
-    
-    data = preprocessing(
-        filepath=data, 
-        oneHotEncodingFeatures=oneHotEncodingFeatures,  
-        normalizeFeatures=normalizeFeatures,
-        bPrintInfo=False  
-    )
-    removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
-
-    # Bad preprocessing
+    # normalizeFeatures = ['Age', 'Fare']  
     # oneHotEncodingFeatures = ['Sex', 'Embarked']
+    
     # data = preprocessing(
     #     filepath=data, 
     #     oneHotEncodingFeatures=oneHotEncodingFeatures,  
+    #     normalizeFeatures=normalizeFeatures,
     #     bPrintInfo=False  
     # )
-    # removableColumns = ["Name", "Ticket" ,"Cabin"]
+    # removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
+
+    # Bad preprocessing
+    oneHotEncodingFeatures = ['Sex', 'Embarked']
+    data = preprocessing(
+        filepath=data, 
+        oneHotEncodingFeatures=oneHotEncodingFeatures,  
+        bPrintInfo=False  
+    )
+    removableColumns = ["Name", "Ticket" ,"Cabin"]
 
 
     # Necessary operations:
@@ -129,237 +129,55 @@ def preprocessFetalHealth():
     label = 'fetal_health'
 
     # Good preprocessing
-    normalizeFeatures = [
-        'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
-        'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
-        'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
-        'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
-        'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
-        'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
-        'histogram_variance', 'histogram_tendency'
-    ]
+    # normalizeFeatures = [
+    #     'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
+    #     'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
+    #     'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
+    #     'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
+    #     'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
+    #     'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
+    #     'histogram_variance', 'histogram_tendency'
+    # ]
     
-    data = preprocessing(
-        filepath=filepath,   
-        normalizeFeatures=normalizeFeatures,
-        bDeleteNanValues=True
-    )
+    # data = preprocessing(
+    #     filepath=filepath,   
+    #     normalizeFeatures=normalizeFeatures,
+    #     bDeleteNanValues=True
+    # )
 
     # Bad preprocessing
-    # data = preprocessing(
-    #     filepath=filepath
-    # )
-    # removableColumns = [label]
-    # normalizeFeatures = removeColumns(getColumns(data), removableColumns)
+    data = preprocessing(
+        filepath=filepath
+    )
+    removableColumns = [label]
+    normalizeFeatures = removeColumns(getColumns(data), removableColumns)
     
     
     return PreprocessedData(data, normalizeFeatures, label)
 
+def startRFAvgCreation(data, features, label,trainRange=10, dataSetName=None):
+    printAndWriteInFileAcc(f"Start {dataSetName} rf")
+    printAndWriteInFileAvgAcc(f"Start {dataSetName} rf")
+    sumAcc = 0
+    for i in range(trainRange):
+        acc = trainAndTestRF(data, features=features, label=label, randomState=42+i)
 
-def cardioNN():
-    filepath = "dataset\\cardio_data_processed.csv"
+        printAndWriteInFileAcc(acc)
 
-    data = preprocessing(filepath, oneHotEncodingFeatures=["bp_category"], labelEncodingFeatures=[], normalizeFeatures=["age", "gender","height","weight","ap_hi","ap_lo","cholesterol","bmi"], dropNAFromFeatures=[])
-    label = "cardio"
-    columns = removeColumns(getColumns(data), ["id", "bp_category_encoded", "age_years", label] )
-    
-    # bestFeatures = ffs(data, columns, label, maxIter=500)
-    bestFeatures = ["age", "ap_hi", "ap_lo", "cholesterol"]
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
+        sumAcc += acc
 
-    print(trainAndTestMLP(data[bestFeatures], label))
+    avgAcc = sumAcc / trainRange
+    printAndWriteInFileAvgAcc(f"RF Average Acc: {avgAcc}")
 
-    evolve(data[bestFeatures], label, maxIter=200)
+def startEA(data, features, label, maxIter):
+    evolve(data=data[features], label=label, maxIter=maxIter)
 
-
-def titanicNN():
-    filepath = "dataset\\titanic_train.csv"
-    # printNullValues(loadData(filepath))
-
-    data = preprocessing(filepath, oneHotEncodingFeatures=[], labelEncodingFeatures=["Sex","Pclass", "Embarked"], normalizeFeatures=["Age"], dropNAFromFeatures=["Sex", "Age"])
-    label = "Survived"
-    columns = removeColumns(getColumns(data), ["PassengerId", "Name", "Ticket", "Fare" ,"Cabin", label] )
-    
-    bestFeatures = ffs(data, columns, label, maxIter=1000)
-    # bestFeatures = ['Pclass', 'Sex', 'SibSp', 'Parch']
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
-
-    print(trainAndTestMLP(data[bestFeatures], label))
-
-    evolve(data[bestFeatures], label, maxIter=1000)
-
-def irisNN():
-    filepath = "dataset\\Iris.csv"
-
-    data = preprocessing(filepath,
-                         oneHotEncodingFeatures=[],
-                         labelEncodingFeatures=["Species"],
-                         normalizeFeatures=["PetalWidthCm", "PetalLengthCm", "SepalWidthCm", "SepalLengthCm"],
-                         dropNAFromFeatures=[])
-    label = "Species"
-    columns = removeColumns(getColumns(data), ["Id", label])
-    
-    bestFeatures = ffs(data, columns, label, maxIter=4000, returnFeatures=3)
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
-
-    print(trainAndTestMLP(data[bestFeatures], label, maxIter=4000))
-
-    evolve(data[bestFeatures], label, maxIter=4000)
-
-def fetalHealthNN():
-    filepath = "dataset\\fetal_health.csv"
-
-    data = preprocessing(filepath,
-                         oneHotEncodingFeatures=[],
-                         labelEncodingFeatures=[],
-                         normalizeFeatures=[
-                             "baseline value",
-                             "accelerations",
-                             "fetal_movement",
-                             "uterine_contractions",
-                             "light_decelerations",
-                             "severe_decelerations",
-                             "prolongued_decelerations",
-                             "abnormal_short_term_variability",
-                             "mean_value_of_short_term_variability",
-                             "percentage_of_time_with_abnormal_long_term_variability",
-                             "mean_value_of_long_term_variability",
-                             "histogram_width",
-                             "histogram_min","histogram_max",
-                             "histogram_number_of_peaks",
-                             "histogram_number_of_zeroes",
-                             "histogram_mode",
-                             "histogram_mean",
-                             "histogram_median",
-                             "histogram_variance",
-                             "histogram_tendency"
-                         ],
-                         dropNAFromFeatures=[])
-    label = "fetal_health"
-    columns = removeColumns(getColumns(data), [label])
-    
-    bestFeatures = ffs(data, columns, label, maxIter=4000, returnFeatures=4)
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
-
-    print(trainAndTestMLP(data[bestFeatures], label, maxIter=4000))
-
-    evolve(data[bestFeatures], label, maxIter=4000)
-
-############################################# Random Forest #############################################
-
-def cardioRF():
-    filepath = "dataset\\cardio_data_processed.csv"
-
-    data = preprocessing(filepath, oneHotEncodingFeatures=["bp_category"], labelEncodingFeatures=[], normalizeFeatures=["age", "gender","height","weight","ap_hi","ap_lo","cholesterol","bmi"], dropNAFromFeatures=[])
-    label = "cardio"
-    columns = removeColumns(getColumns(data), ["id", "bp_category_encoded", "age_years", label] )
-    
-    # bestFeatures = ffs(data, columns, label, maxIter=500)
-    bestFeatures = ["age", "ap_hi", "ap_lo", "cholesterol"]
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
-
-    count = 0
-    iters = 500
-    for i in range(iters):
-        count += trainAndTestRF(data[bestFeatures], label, n_estimators=100, randomState=i)
-    print(f"Average accuracy for {iters} iterations: {count / iters}")
-
-def titanicRF():
-    filepath = "dataset\\titanic_train.csv"
-    # printNullValues(loadData(filepath))
-
-    data = preprocessing(filepath, oneHotEncodingFeatures=[], labelEncodingFeatures=["Sex","Pclass", "Embarked"], normalizeFeatures=["Age"], dropNAFromFeatures=["Sex", "Age"])
-    label = "Survived"
-    columns = removeColumns(getColumns(data), ["PassengerId", "Name", "Ticket", "Fare" ,"Cabin", label] )
-    
-    bestFeatures = ffs(data, columns, label, maxIter=1000)
-    # bestFeatures = ['Pclass', 'Sex', 'SibSp', 'Parch']
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
-
-    count = 0
-    iters = 500
-    for i in range(iters):
-        count += trainAndTestRF(data[bestFeatures], label, n_estimators=100, randomState=i)
-    print(f"Average accuracy for {iters} iterations: {count / iters}")
-
-def irisRF():
-    filepath = "dataset\\Iris.csv"
-
-    data = preprocessing(filepath,
-                         oneHotEncodingFeatures=[],
-                         labelEncodingFeatures=["Species"],
-                         normalizeFeatures=["PetalWidthCm", "PetalLengthCm", "SepalWidthCm", "SepalLengthCm"],
-                         dropNAFromFeatures=[])
-    label = "Species"
-    columns = removeColumns(getColumns(data), ["Id", label])
-    
-    # bestFeatures = ffs(data, columns, label, maxIter=4000, returnFeatures=3)
-    bestFeatures=["PetalWidthCm", "PetalLengthCm", "SepalWidthCm", "SepalLengthCm"]
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
-
-    count = 0
-    iters = 500
-    for i in range(iters):
-        count += trainAndTestRF(data[bestFeatures], label, n_estimators=100, randomState=i)
-    print(f"Average accuracy for {iters} iterations: {count / iters}")
-
-def fetalHealthRF():
-    filepath = "dataset\\fetal_health.csv"
-
-    data = preprocessing(filepath,
-                         oneHotEncodingFeatures=[],
-                         labelEncodingFeatures=[],
-                         normalizeFeatures=[
-                             "baseline value",
-                             "accelerations",
-                             "fetal_movement",
-                             "uterine_contractions",
-                             "light_decelerations",
-                             "severe_decelerations",
-                             "prolongued_decelerations",
-                             "abnormal_short_term_variability",
-                             "mean_value_of_short_term_variability",
-                             "percentage_of_time_with_abnormal_long_term_variability",
-                             "mean_value_of_long_term_variability",
-                             "histogram_width",
-                             "histogram_min","histogram_max",
-                             "histogram_number_of_peaks",
-                             "histogram_number_of_zeroes",
-                             "histogram_mode",
-                             "histogram_mean",
-                             "histogram_median",
-                             "histogram_variance",
-                             "histogram_tendency"
-                         ],
-                         dropNAFromFeatures=[])
-    label = "fetal_health"
-    columns = removeColumns(getColumns(data), [label])
-    
-    # bestFeatures = ffs(data, columns, label, maxIter=4000, returnFeatures=4)
-    bestFeatures = ["severe_decelerations", "prolongued_decelerations", "mean_value_of_short_term_variability", "histogram_median"]
-    print(f"Best features {bestFeatures}")
-    bestFeatures.append(label)
-
-    count = 0
-    iters = 500
-    for i in range(iters):
-        count += trainAndTestRF(data[bestFeatures], label, n_estimators=100, randomState=i)
-    print(f"Average accuracy for {iters} iterations: {count / iters}")
-
+# EA Test
 def fitness(genome: [], *_args, **_kwargs):
     return sum(genome)
 
 def testEA():
     evolve(None,"",maxIterations=2000,popSize=500,fitness=fitness)
-
-
 
 
 def findBestKNNComb(data, features, label, trainRange=10, neighborsRange=10, dataSetName=None ):
@@ -507,7 +325,7 @@ def doFFS(datasetName, data, features, label):
     return bestFeatures
 
     
-def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=False, bfindComb = True, bCreateAccs = False, trainRange = 20):
+def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False, bfindComb = True, bCreateAccs = False, trainRange = 20):
     datasets = [
         {
             "name": "Titanic",
@@ -544,15 +362,21 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
     ]
 
     for dataset in datasets:
-        printAndWriteInFileAvgAcc(f"#######{dataset['name']}#######")
         preprocessed = dataset["preprocess"]()
         features = dataset["features"] if "features" in dataset and dataset["features"] else preprocessed.feature
         label = preprocessed.label
 
+        printAndWriteInFileAvgAcc(f"#######{dataset['name']}#######")
+        printAndWriteInFileAvgAcc(f"Features: {features}")
+        printAndWriteInFileAvgAcc(f"Label: {label}")
+        printAndWriteInFileAvgAcc(f"Length: {len(preprocessed.data)}")
+
         if bFFS:
             printAndWriteInFileBestFeatures(doFFS(dataset["name"], preprocessed.data, preprocessed.feature, label))
-        if bNN:
-            startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
+        
+        
+        if bEA:
+                startEA(data=preprocessed.data, features=features, label=label, maxIter=1000)
 
         if bfindComb:
             printAndWriteInFileBestComb(f"#######{dataset['name']}#######")
@@ -566,16 +390,17 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
                 findBestSVMComb(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
 
         if bCreateAccs:
-            printAndWriteInFileAvgAcc(f"#######{dataset['name']}#######")
-            printAndWriteInFileAvgAcc(f"Features: {features}")
-            printAndWriteInFileAvgAcc(f"Label: {label}")
-            printAndWriteInFileAvgAcc(f"Length: {len(preprocessed.data)}")
-
             if bKNN:
                 startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=dataset["knn"]["neighbors"], weights=dataset["knn"]["weights"], trainRange=trainRange)
             if bSVM:
                 startSVMAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], kernel=dataset["svmKernel"], trainRange=100)
-    
+            if bNN:
+                startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
+            if bRF:
+                startRFAvgCreation(data=preprocessed.data, features=features, label=label, trainRange=100, dataSetName=dataset["name"])
+            
+
+                
 
 if __name__ == "__main__":
-    titanic_cardio_iris__fetal_analysis(bKNN=True, bSVM=True, bNN=True , bCreateAccs=True, bfindComb=False, trainRange = 500)
+    titanic_cardio_iris__fetal_analysis(bRF=True, bCreateAccs=True, bfindComb=False, trainRange = 500)

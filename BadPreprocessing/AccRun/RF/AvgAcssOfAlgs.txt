@@ -1,0 +1,24 @@
+#######Titanic#######
+Features: ['Age', 'Parch', 'Sex_female', 'Sex_male']
+Label: Survived
+Length: 714
+Start Titanic rf
+RF Average Acc: 0.7526256983240225
+#######Cardio#######
+Features: ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+Label: cardio
+Length: 68205
+Start Cardio rf
+RF Average Acc: 0.6503688716866054
+#######Iris#######
+Features: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+Label: Species
+Length: 150
+Start Iris rf
+RF Average Acc: 0.998157894736842
+#######FetalHealth#######
+Features: ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median']
+Label: fetal_health
+Length: 2113
+Start FetalHealth rf
+RF Average Acc: 0.8585066162570887

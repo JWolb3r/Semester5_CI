@@ -23,9 +23,9 @@ def testRF(model, testDataX, testDataY, uniqueLabelValues: list = None, printVal
 
         return acScore
 
-def trainAndTestRF(data, label, n_estimators=100, randomState=42, uniqueLabelValues: list = None, printValues = False):
+def trainAndTestRF(data,features, label, n_estimators=100, randomState=42, uniqueLabelValues: list = None, printValues = False):
     dataY = data[label]
-    dataX = data.drop(label, axis=1)
+    dataX = data[features]
     # Random State for comparison reasons
     trainDataX, testDataX, trainDataY, testDataY = train_test_split(dataX, dataY, test_size=0.25, random_state=randomState)
     model = trainRF(trainDataX, trainDataY, n_estimators=n_estimators, randomState=randomState)

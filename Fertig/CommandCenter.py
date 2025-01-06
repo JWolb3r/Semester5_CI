@@ -1,7 +1,7 @@
 from EvolutionaryAlgorithm import evolve
 from FeatureSelection import ffs
 from NN import trainAndTestMLP
-from preprocessing import getColumns, preprocessing, removeColumns, deleteNaNValues, printLengthAndColumns
+from preprocessing import getColumns, preprocessing, removeColumns, deleteNaNValues, printLengthAndColumns, loadData, printNaNValues
 from kNN import trainAndTestKNN
 from SVM import trainAndTestSVM
 from utilty import printAndWriteInFile
@@ -372,4 +372,6 @@ def titanic_cardio_iris__fetal_analysis(bKNN=False, bNN=False, bSVM=False, bFFS=
     
 
 if __name__ == "__main__":
-    titanic_cardio_iris__fetal_analysis(bKNN=True, bSVM=True, bNN=True , bCreateAccs=True, bfindComb=False, trainRange = 500)
+    # titanic_cardio_iris__fetal_analysis(bKNN=True, bSVM=True, bNN=True , bCreateAccs=True, bfindComb=False, trainRange = 500)
+    printNaNValues(loadData("DataSets\\titanic_combined.csv"))
+    printLengthAndColumns(loadData("DataSets\\cardio_data_processed.csv"))
