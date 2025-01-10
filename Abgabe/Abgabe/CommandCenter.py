@@ -14,146 +14,135 @@ class PreprocessedData:
         self.feature = feature
         self.label = label
 
-#################### Cardio_Data ####################
 def preprocessCardioData():
     print("Preprocess Cardio Data")
 
-    filepath = "DataSets\\cardio_data_processed.csv"
-    label = "cardio"
+    def goodPreprocessingCardio():
+        filepath = "DataSets\\cardio_data_processed.csv"
+        label = "cardio"
+        normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
+        data = preprocessing(
+            filepath,
+            oneHotEncodingFeatures=["bp_category"],
+            normalizeFeatures=normalizeFeatures,
+            bDeleteNanValues=True
+        )
+        removableColumns = ["id", "age_years", "bp_category_encoded", label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
 
-    # Good preprocessing
+    def badPreprocessingCardio():
+        filepath = "DataSets\\cardio_data_processed.csv"
+        label = "cardio"
+        data = preprocessing(filepath, oneHotEncodingFeatures=["bp_category"])
+        removableColumns = ["age_years", "bp_category_encoded", label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
 
-    normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
-    data = preprocessing(filepath, 
-                        oneHotEncodingFeatures=["bp_category"], 
-                        normalizeFeatures=normalizeFeatures,
-                        bDeleteNanValues=True              
-                        )
-    removableColumns = ["id", "age_years", "bp_category_encoded", label]
-
-    # Bad preprocessing
-    # data = preprocessing(filepath, 
-    #                     oneHotEncodingFeatures=["bp_category"],              
-    #                     )
-    # removableColumns = ["age_years", "bp_category_encoded",label]
-
-    # Necessary operation
-    features = removeColumns(getColumns(data),  removableColumns)
-
-    return PreprocessedData(data, features, label)
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingCardio()
 
 
-#################### Iris ####################
 def preprocessIris():
-
     print("\nPreprocess Iris")
 
-    filepath = "DataSets\\Iris.csv"
-    label = 'Species'
-
-    # Good preprocessing
-    normalizeFeatures = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
-    data = preprocessing(
-        filepath=filepath, 
-        labelEncodingFeatures=[label], 
-        normalizeFeatures=normalizeFeatures,
-        bDeleteNanValues=True
+    def goodPreprocessingIris():
+        filepath = "DataSets\\Iris.csv"
+        label = 'Species'
+        normalizeFeatures = ['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+        data = preprocessing(
+            filepath=filepath,
+            labelEncodingFeatures=[label],
+            normalizeFeatures=normalizeFeatures,
+            bDeleteNanValues=True
         )
-    removableColumns = ["Id"] + [label]
+        removableColumns = ["Id"] + [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
 
-    # For onehotencoded label
-    # features = getColumns(data)
-    # label = [col for col in features if col.startswith(label)]  
+    def badPreprocessingIris():
+        filepath = "DataSets\\Iris.csv"
+        label = 'Species'
+        data = preprocessing(filepath=filepath, labelEncodingFeatures=[label])
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
 
-    # Bad preprocessing
-    # data = preprocessing(
-    #     filepath=filepath, 
-    #     labelEncodingFeatures=[label]
-    #     )
-    # removableColumns = [label]
-
-
-    # Necessary operation: remove columns manuel, because we just know all labels after onehotencoding species label
-    features = getColumns(data)
-    features = removeColumns(features,  removableColumns)
-
-    return PreprocessedData(data, features, label)
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingIris()
 
 
-#################### Titanic ####################
 def preprocessTitanic():
     print("Preprocess Titanic Data")
-    data = "DataSets\\titanic_combined.csv"
-    label = 'Survived'
 
-    # Good preprocessing
-    normalizeFeatures = ['Age', 'Fare']  
-    oneHotEncodingFeatures = ['Sex', 'Embarked']
-    
-    data = preprocessing(
-        filepath=data, 
-        oneHotEncodingFeatures=oneHotEncodingFeatures,  
-        normalizeFeatures=normalizeFeatures,
-        bPrintInfo=False  
-    )
-    removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
+    def goodPreprocessingTitanic():
+        data = "DataSets\\titanic_combined.csv"
+        label = 'Survived'
+        normalizeFeatures = ['Age', 'Fare']
+        oneHotEncodingFeatures = ['Sex', 'Embarked']
+        data = preprocessing(
+            filepath=data,
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            normalizeFeatures=normalizeFeatures,
+            bPrintInfo=False
+        )
+        removableColumns = ['PassengerId', 'Name', 'Ticket', 'Cabin']
+        necessaryValues = removeColumns(getColumns(data), removableColumns)
+        data = data[necessaryValues]
+        necessaryValues.remove(label)
+        data = deleteNaNValues(data)
+        printLengthAndColumns(data)
+        return PreprocessedData(data, necessaryValues, label)
 
-    # Bad preprocessing
-    # oneHotEncodingFeatures = ['Sex', 'Embarked']
-    # data = preprocessing(
-    #     filepath=data, 
-    #     oneHotEncodingFeatures=oneHotEncodingFeatures,  
-    #     bPrintInfo=False  
-    # )
-    # removableColumns = ["Name", "Ticket" ,"Cabin"]
+    def badPreprocessingTitanic():
+        data = "DataSets\\titanic_combined.csv"
+        label = 'Survived'
+        oneHotEncodingFeatures = ['Sex', 'Embarked']
+        data = preprocessing(
+            filepath=data,
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            bPrintInfo=False
+        )
+        removableColumns = ["Name", "Ticket", "Cabin"]
+        necessaryValues = removeColumns(getColumns(data), removableColumns)
+        data = deleteNaNValues(data)
+        return PreprocessedData(data, necessaryValues, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingTitanic()
 
 
-    # Necessary operations:
-    necessaryValues = removeColumns(getColumns(data), removableColumns)
-    data = data[necessaryValues]
-
-    necessaryValues.remove(label)
-
-    # Manuell Nan value removal, because titanic dataset would lose a lot of columns before unecessary columns are removed
-    data = deleteNaNValues(data)
-
-    printLengthAndColumns(data)
-
-    return PreprocessedData(data, necessaryValues, label)
-
-
-#################### FetalHealth ####################
 def preprocessFetalHealth():
     print("Preprocess Fetal Health Data")
-    filepath = "DataSets\\fetal_health.csv"
-    label = 'fetal_health'
 
-    # Good preprocessing
-    normalizeFeatures = [
-        'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
-        'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
-        'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
-        'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
-        'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
-        'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
-        'histogram_variance', 'histogram_tendency'
-    ]
-    
-    data = preprocessing(
-        filepath=filepath,   
-        normalizeFeatures=normalizeFeatures,
-        bDeleteNanValues=True
-    )
+    def goodPreprocessingFetalHealth():
+        filepath = "DataSets\\fetal_health.csv"
+        label = 'fetal_health'
+        normalizeFeatures = [
+            'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
+            'light_decelerations', 'severe_decelerations', 'prolongued_decelerations',
+            'abnormal_short_term_variability', 'mean_value_of_short_term_variability',
+            'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability',
+            'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
+            'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median',
+            'histogram_variance', 'histogram_tendency'
+        ]
+        data = preprocessing(
+            filepath=filepath,
+            normalizeFeatures=normalizeFeatures,
+            bDeleteNanValues=True
+        )
+        return PreprocessedData(data, normalizeFeatures, label)
 
-    # Bad preprocessing
-    # data = preprocessing(
-    #     filepath=filepath
-    # )
-    # removableColumns = [label]
-    # normalizeFeatures = removeColumns(getColumns(data), removableColumns)
-    
-    
-    return PreprocessedData(data, normalizeFeatures, label)
+    def badPreprocessingFetalHealth():
+        filepath = "DataSets\\fetal_health.csv"
+        label = 'fetal_health'
+        data = preprocessing(filepath=filepath)
+        normalizeFeatures = removeColumns(getColumns(data), [label])
+        return PreprocessedData(data, normalizeFeatures, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingFetalHealth()
 
 def startRFAvgCreation(data, features, label,trainRange=10, dataSetName=None):
     printAndWriteInFileAcc(f"Start {dataSetName} rf")
@@ -320,41 +309,51 @@ def doFFS(datasetName, data, features, label):
 def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False, bfindComb = False, bCreateAccs = False, trainRange = 20):
     """
     This method performs preprocessing, analysis, and evaluation on four datasets: Titanic, Cardio, Iris, and FetalHealth.
-    It supports various knn, svm, rf, default-nn, including feature selection, evolutionary algorithms and accuracy 
-    computations.
+    It supports various methods including KNN, SVM, RF, and default NN, as well as feature selection, evolutionary algorithms, 
+    and accuracy computations.
 
     Parameters:
-    - bEA (bool, default=False): If True, runs an evolutionary algorithm (EA) for the nn layer/neuron optimization. Results are printed 
-      to the console only.
+    - bEA (bool, default=False): If True, runs an evolutionary algorithm (EA) for the NN layer/neuron optimization. Results are 
+      printed to the console only.
     - bRF (bool, default=False): If True, computes average accuracies using Random Forest and logs the results to a text file 
       in the 'logs' directory.
     - bKNN (bool, default=False): If True, performs K-Nearest Neighbors (KNN) experiments (best combination search and 
       average accuracy computation). Outputs are logged to a text file.
-    - bNN (bool, default=False): If True, computes average accuracies using a default Neural Networks and logs the results to a text file.
+    - bNN (bool, default=False): If True, computes average accuracies using a default Neural Network and logs the results to a text file.
     - bSVM (bool, default=False): If True, runs Support Vector Machine (SVM) experiments (best combination search and 
       average accuracy computation). Outputs are logged to a text file.
     - bFFS (bool, default=False): If True, performs forward feature selection (FFS). Note: FFS is skipped for the Iris dataset 
-      because it only has 4 features and the ffs searches per default 4 best features.
-    - bfindComb (bool, default=False): If True, searches for the best knn and svm combinations. Results are printed in 
+      because it only has 4 features, which matches the default number of features selected.
+    - bfindComb (bool, default=False): If True, searches for the best KNN and SVM combinations. Results are printed in 
       the console and logged to a text file.
     - bCreateAccs (bool, default=False): If True, computes average accuracies for various methods (KNN, SVM, NN, RF). Results 
       are logged to text files.
-    - trainRange (int, default=20): Specifies the number of accuracy measurements used to calculate the average accuracy during model evaluation. 
+    - trainRange (int, default=20): Specifies the number of accuracy measurements used to calculate the average accuracy 
+      during model evaluation.
+
+    Dataset Array:
+    - The `datasets` array defines the configuration for each dataset. Each entry in the array contains:
+        - `name`: The name of the dataset.
+        - `preprocess`: The preprocessing function for the dataset.
+        - `features`: The feature set to be used. If not specified, all features from preprocessing are used by default. 
+        - `knn`: A dictionary to configure the K-Nearest Neighbors (KNN) model. Includes `neighbors` and `weights`.
+        - `svmKernel`: Specifies the kernel type for the Support Vector Machine (SVM).
 
     Workflow:
     1. Preprocesses the dataset using the appropriate preprocessing function.
     2. Prints dataset information (features, labels, and length) to the console.
     3. If `bFFS` is True, performs forward feature selection unless the dataset is Iris.
     4. If `bEA` is True, runs the evolutionary algorithm and prints the results to the console only.
-    5. If `bfindComb` is True, finds the best svm and knn combinations and logs the results to text files.
+    5. If `bfindComb` is True, finds the best SVM and KNN combinations and logs the results to text files.
     6. If `bCreateAccs` is True, computes average accuracies for KNN, SVM, NN, and RF and logs the results to text files.
 
     Notes:
     - All methods, except for the evolutionary algorithm (`bEA`), log their results to text files located in the 'logs' 
       directory. Some outputs may appear multiple times in the console if they are also written to the logs.
-    - Forward feature selection is not applicable to the Iris dataset because it only has 4 features, which matches the default 
-      number of features selected.
+    - Forward feature selection is not applicable to the Iris dataset because it only has 4 features, which matches the 
+      default number of features selected.
     """
+
     datasets = [
         {
             "name": "Titanic",
@@ -364,14 +363,14 @@ def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=Fa
                     "weights": "uniform"},
             "svmKernel": "linear" 
         },
-        {
-            "name": "Cardio",
-            "preprocess": preprocessCardioData,
-            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-            "knn": {"neighbors": 1,
-                    "weights": "uniform"},
-            "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "Cardio",
+        #     "preprocess": preprocessCardioData,
+        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+        #     "knn": {"neighbors": 1,
+        #             "weights": "uniform"},
+        #     "svmKernel": "linear" 
+        # },
         {
             "name": "Iris",
             "preprocess": preprocessIris,
@@ -406,7 +405,7 @@ def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=Fa
             doFFS(dataset["name"], preprocessed.data, preprocessed.feature, label)
         
         if bEA:
-            startEA(data=preprocessed.data, features=features, label=label)
+            startEA(data=preprocessed.data, features=features, label=label, maxIterEa=2)
 
         if bfindComb:
             printAndWriteInFileBestComb(f"#######{dataset['name']}#######")
@@ -442,4 +441,7 @@ def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=Fa
 
 if __name__ == "__main__":
     # Test call
-    titanic_cardio_iris__fetal_analysis(bEA=True, trainRange=10)
+    # titanic_cardio_iris__fetal_analysis(bCreateAccs=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
+    # titanic_cardio_iris__fetal_analysis(bfindComb=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
+    # titanic_cardio_iris__fetal_analysis(bEA=True, trainRange=2)
+    # titanic_cardio_iris__fetal_analysis(bFFS=True, trainRange=10)
