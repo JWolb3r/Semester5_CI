@@ -5,7 +5,7 @@ from NN import trainAndTestMLP
 ############## Determine Fitness ##############
 
 
-def fitness(genome: [], data, label: str, numOfIterations: int = 5, maxIter = 500) -> float:
+def fitness(genome: [], data, features, label: str, numOfIterations: int = 5, maxIter = 500) -> float:
     """Determines the accuracy of the genome for the given data
 
     Args:
@@ -19,12 +19,12 @@ def fitness(genome: [], data, label: str, numOfIterations: int = 5, maxIter = 50
     """
     score = 0
     for i in range(numOfIterations):
-        score += trainAndTestMLP(data, label, hiddenLayerSizes=genome, randomState=42 + i, maxIter=maxIter)
+        score += trainAndTestMLP(data, features, label, hiddenLayerSizes=genome, randomState=42 + i, maxIter=maxIter)
     return round(score / numOfIterations, 6)
 
 ############## Evolve ##############
 
-def evolve(data, label: str, maxIterations = 50, popSize = 20, fitnessIter = 2, maxIter = 500, fitness=fitness):
+def evolve(data,features, label: str, maxIterations = 50, popSize = 20, fitnessIter = 2, maxIter = 500, fitness=fitness):
     population = {}
     population["genomes"] = createRandomPopulation(popSize,
                                                    minLayers=2,
@@ -32,7 +32,7 @@ def evolve(data, label: str, maxIterations = 50, popSize = 20, fitnessIter = 2, 
                                                    minNeurons=4,
                                                    maxNeurons=128,
                                                    maxTotalNeurons=512)
-    # print(f"Population: {population}")
+    print(f"Population: {population}")
 
     iter = 0
     while maxIterations > iter:
@@ -43,6 +43,7 @@ def evolve(data, label: str, maxIterations = 50, popSize = 20, fitnessIter = 2, 
             population["fitness"] = list(executor.map(
             lambda genome: fitness(genome,
                                    data,
+                                   features,
                                    label,
                                    fitnessIter,
                                    maxIter=maxIter),
