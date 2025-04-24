@@ -21,7 +21,7 @@ def preprocessAbalone(bGoodPreprocessing: bool = True):
         printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\abalone.csv"
         label = "Rings"
-        normalizeFeatures = ["Length","Diameter","Height","Whole weight","Shucked weight","Viscera weight","Shell weight", label]
+        normalizeFeatures = ["Length","Diameter","Height","Whole weight","Shucked weight","Viscera weight","Shell weight"]
         data = preprocessing(
             filepath,
             oneHotEncodingFeatures=["Sex"],
@@ -164,7 +164,7 @@ def preprocessMuschrooms(bGoodPreprocessing: bool = True):
         data = preprocessing(
             filepath,
             oneHotEncodingFeatures=oneHotEncodingFeatures,
-            labelEncodingFeatures=label,
+            labelEncodingFeatures=[label],
             bDeleteNanValues=True
         )
         removableColumns = [label]
@@ -181,7 +181,7 @@ def preprocessMuschrooms(bGoodPreprocessing: bool = True):
         data = preprocessing(
             filepath,
             oneHotEncodingFeatures=oneHotEncodingFeatures,
-            labelEncodingFeatures=label,
+            labelEncodingFeatures=[label],
             bDeleteNanValues=True
         )
         removableColumns = [label]
@@ -633,14 +633,14 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
                     "weights": "uniform"},
             "svmKernel": "linear" 
         },
-        {
-            "name": "Iris",
-            "preprocess": preprocessIris,
-            "features": None,
-            "knn": {"neighbors": 1,
-                    "weights": "uniform"},
-            "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "Iris",
+        #     "preprocess": preprocessIris,
+        #     "features": None,
+        #     "knn": {"neighbors": 1,
+        #             "weights": "uniform"},
+        #     "svmKernel": "linear" 
+        # },
         {
             "name": "FetalHealth",
             "preprocess": preprocessFetalHealth,
@@ -759,6 +759,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
 
 if __name__ == "__main__":
     # Test call
+    analysis(bFFS=True)
     # titanic_cardio_iris__fetal_analysis(bCreateAccs=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
     # titanic_cardio_iris__fetal_analysis(bfindComb=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
     # titanic_cardio_iris__fetal_analysis(bEA=True, trainRange=2)

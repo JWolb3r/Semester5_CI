@@ -7,7 +7,14 @@ from sklearn.preprocessing import LabelEncoder, MinMaxScaler # type: ignore
 
 def loadData(filepath):
     printAndWriteInPreprocessingFile("\nLoad Data")
-    return pd.read_csv(filepath)
+    with open(filepath, 'r', encoding='utf-8') as file:
+        first_line = file.readline()
+        
+    if ';' in first_line:
+        separator = ';'
+    else:
+        separator = ','
+    return pd.read_csv(filepath, sep=separator)
 
 def removeDuplicates(data):
     printAndWriteInPreprocessingFile("\nRemove Duplicates")
