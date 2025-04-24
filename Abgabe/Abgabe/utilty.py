@@ -16,6 +16,9 @@ def printAndWriteInFile(content, filename):
         print(f"Error updating the file: {e}")
 
 
+def printAndWriteInPreprocessingFile(content):
+    printAndWriteInFile(content, "Logs/Preprocessing.txt")
+
 def combineFiles(trainPath, testPath, destinationPath):
     train_df = pd.read_csv(trainPath)
     test_df = pd.read_csv(testPath)

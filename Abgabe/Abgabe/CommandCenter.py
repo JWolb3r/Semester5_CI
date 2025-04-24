@@ -5,7 +5,7 @@ from NN import trainAndTestMLP
 from Preprocessing import getColumns, preprocessing, removeColumns, deleteNaNValues, printLengthAndColumns
 from kNN import trainAndTestKNN
 from SVM import trainAndTestSVM
-from utilty import printAndWriteInFile
+from utilty import printAndWriteInFile, printAndWriteInPreprocessingFile
 import pandas as pd
 
 class PreprocessedData:
@@ -14,10 +14,11 @@ class PreprocessedData:
         self.feature = feature
         self.label = label
 
-def preprocessAbalone():
-    print("Preprocess Abalone")
+def preprocessAbalone(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Abalone")
 
     def goodPreprocessingAbalone():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\abalone.csv"
         label = "Rings"
         normalizeFeatures = ["Length","Diameter","Height","Whole weight","Shucked weight","Viscera weight","Shell weight", label]
@@ -32,6 +33,7 @@ def preprocessAbalone():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingAbalone():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\abalone.csv"
         label = "Rings"
         data = preprocessing(
@@ -42,13 +44,14 @@ def preprocessAbalone():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingAbalone()
+    return goodPreprocessingAbalone() if bGoodPreprocessing else badPreprocessingAbalone()
 
-def preprocessDataDiagnosis():
-    print("Preprocess Abalone")
+
+def preprocessDataDiagnosis(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Diagnosis")
 
     def goodPreprocessingDataDiagnosis():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\data_diagnosis.csv"
         label = "diagnosis"
         normalizeFeatures = ["radius_mean","texture_mean","smoothness_mean","compactness_mean","concavity_mean","concave points_mean","symmetry_mean","fractal_dimension_mean"]
@@ -63,6 +66,7 @@ def preprocessDataDiagnosis():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingDataDiagnosis():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\data_diagnosis.csv"
         label = "diagnosis"
         data = preprocessing(
@@ -74,13 +78,14 @@ def preprocessDataDiagnosis():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingDataDiagnosis()
+    return goodPreprocessingDataDiagnosis() if bGoodPreprocessing else badPreprocessingDataDiagnosis()
 
-def preprocessDrug200():
-    print("Preprocess Drug200")
+
+def preprocessDrug200(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Drug200")
 
     def goodPreprocessingDrug200():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\drug200.csv"
         label = "Drug"
         normalizeFeatures = ["Age", "Na_to_K"]
@@ -97,6 +102,7 @@ def preprocessDrug200():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingDrug200():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\drug200.csv"
         label = "Drug"
         oneHotEncodingFeatures = ["Sex","BP","Cholesterol"]
@@ -110,13 +116,14 @@ def preprocessDrug200():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingDrug200()
+    return goodPreprocessingDrug200() if bGoodPreprocessing else badPreprocessingDrug200()
 
-def preprocessGlass():
-    print("Preprocess Glass")
+
+def preprocessGlass(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Glass")
 
     def goodPreprocessingGlass():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\glass.csv"
         label = "Type"
         normalizeFeatures = ["RI","Na","Mg","Al","Si","K","Ca","Ba","Fe"]
@@ -130,6 +137,7 @@ def preprocessGlass():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingGlass():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\glass.csv"
         label = "Type"
         data = preprocessing(
@@ -140,13 +148,14 @@ def preprocessGlass():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingGlass()
+    return goodPreprocessingGlass() if bGoodPreprocessing else badPreprocessingGlass()
 
-def preprocessMuschrooms():
-    print("Preprocess Muschrooms")
+
+def preprocessMuschrooms(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Mushrooms")
 
     def goodPreprocessingMuschrooms():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\mushrooms.csv"
         label = "class"
         oneHotEncodingFeatures = ["cap-shape","cap-surface","cap-color","bruises","odor","gill-attachment","gill-spacing"
@@ -163,6 +172,7 @@ def preprocessMuschrooms():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingMuschrooms():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\mushrooms.csv"
         label = "class"
         oneHotEncodingFeatures = ["cap-shape","cap-surface","cap-color","bruises","odor","gill-attachment","gill-spacing"
@@ -178,13 +188,14 @@ def preprocessMuschrooms():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingMuschrooms()
+    return goodPreprocessingMuschrooms() if bGoodPreprocessing else badPreprocessingMuschrooms()
 
-def preprocessPredictivemaintenance():
-    print("Preprocess Predictivemaintenance")
+
+def preprocessPredictivemaintenance(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Predictive Maintenance")
 
     def goodPreprocessingPredictivemaintenance():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\predictive_maintenance.csv"
         label = "Failure Type"
         normalizeFeatures = ["Air temperature [K]","Process temperature [K]","Rotational speed [rpm]","Torque [Nm]","Tool wear [min]"]
@@ -200,6 +211,7 @@ def preprocessPredictivemaintenance():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingPredictivemaintenance():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\predictive_maintenance.csv"
         label = "Failure Type"
         data = preprocessing(
@@ -212,13 +224,14 @@ def preprocessPredictivemaintenance():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingPredictivemaintenance()
+    return goodPreprocessingPredictivemaintenance() if bGoodPreprocessing else badPreprocessingPredictivemaintenance()
 
-def preprocessWeatherClassificationData():
-    print("Preprocess WeatherClassificationData")
+
+def preprocessWeatherClassificationData(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Weather Classification Data")
 
     def goodPreprocessingWeatherClassificationData():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\weather_classification_data.csv"
         label = "Weather Type"
         normalizeFeatures = ["Temperature","Humidity","Wind Speed","Precipitation (%)","Atmospheric Pressure","UV Index","Visibility (km)"]
@@ -235,6 +248,7 @@ def preprocessWeatherClassificationData():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingWeatherClassificationData():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\weather_classification_data.csv"
         label = "Weather Type"
         oneHotEncodingFeatures= ["Cloud Cover","Season", "Location"]
@@ -248,13 +262,14 @@ def preprocessWeatherClassificationData():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingWeatherClassificationData()
+    return goodPreprocessingWeatherClassificationData() if bGoodPreprocessing else badPreprocessingWeatherClassificationData()
 
-def preprocessCardioData():
-    print("Preprocess Cardio Data")
+
+def preprocessCardioData(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Cardio Data")
 
     def goodPreprocessingCardio():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\cardio_data_processed.csv"
         label = "cardio"
         normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
@@ -269,6 +284,7 @@ def preprocessCardioData():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingCardio():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\cardio_data_processed.csv"
         label = "cardio"
         data = preprocessing(
@@ -280,14 +296,14 @@ def preprocessCardioData():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingCardio()
+    return goodPreprocessingCardio() if bGoodPreprocessing else badPreprocessingCardio()
 
 
-def preprocessIris():
-    print("\nPreprocess Iris")
+def preprocessIris(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Iris")
 
     def goodPreprocessingIris():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Iris.csv"
         label = 'Species'
         normalizeFeatures = ['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
@@ -302,6 +318,7 @@ def preprocessIris():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingIris():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Iris.csv"
         label = 'Species'
         data = preprocessing(filepath=filepath, labelEncodingFeatures=[label])
@@ -309,14 +326,14 @@ def preprocessIris():
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
 
-    # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingIris()
+    return goodPreprocessingIris() if bGoodPreprocessing else badPreprocessingIris()
 
 
-def preprocessTitanic():
-    print("Preprocess Titanic Data")
+def preprocessTitanic(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Titanic Data")
 
     def goodPreprocessingTitanic():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         data = "DataSets\\Conference\\titanic_combined.csv"
         label = 'Survived'
         normalizeFeatures = ['Age', 'Fare']
@@ -335,6 +352,7 @@ def preprocessTitanic():
         return PreprocessedData(data, necessaryValues, label)
 
     def badPreprocessingTitanic():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         data = "DataSets\\Conference\\titanic_combined.csv"
         label = 'Survived'
         oneHotEncodingFeatures = ['Sex', 'Embarked']
@@ -351,13 +369,14 @@ def preprocessTitanic():
         return PreprocessedData(data, necessaryValues, label)
 
     # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingTitanic()
+    return goodPreprocessingTitanic() if bGoodPreprocessing else badPreprocessingTitanic()
 
 
-def preprocessFetalHealth():
-    print("Preprocess Fetal Health Data")
+def preprocessFetalHealth(bGoodPreprocessing: bool = True):
+    printAndWriteInPreprocessingFile("Preprocess Fetal Health Data")
 
     def goodPreprocessingFetalHealth():
+        printAndWriteInPreprocessingFile("Good preprocessing is used")
         filepath = "DataSets\\Conference\\fetal_health.csv"
         label = 'fetal_health'
         normalizeFeatures = [
@@ -377,6 +396,7 @@ def preprocessFetalHealth():
         return PreprocessedData(data, normalizeFeatures, label)
 
     def badPreprocessingFetalHealth():
+        printAndWriteInPreprocessingFile("Bad preprocessing is used")
         filepath = "DataSets\\Conference\\fetal_health.csv"
         label = 'fetal_health'
         data = preprocessing(filepath=filepath)
@@ -384,7 +404,7 @@ def preprocessFetalHealth():
         return PreprocessedData(data, normalizeFeatures, label)
 
     # Call good or bad preprocessing here (good by default)
-    return goodPreprocessingFetalHealth()
+    return goodPreprocessingFetalHealth() if bGoodPreprocessing else badPreprocessingFetalHealth()
 
 def startRFAvgCreation(data, features, label,trainRange=10, dataSetName=None):
     printAndWriteInFileAcc(f"Start {dataSetName} rf")
@@ -548,7 +568,7 @@ def doFFS(datasetName, data, features, label):
     return bestFeatures
 
     
-def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False, bfindComb = False, bCreateAccs = False, trainRange = 20):
+def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False, bfindComb = False, bCreateAccs = False, trainRange = 20):
     """
     This method performs preprocessing, analysis, and evaluation on four datasets: Titanic, Cardio, Iris, and FetalHealth.
     It supports various methods including KNN, SVM, RF, and default NN, as well as feature selection, evolutionary algorithms, 
@@ -605,14 +625,14 @@ def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=Fa
                     "weights": "uniform"},
             "svmKernel": "linear" 
         },
-        # {
-        #     "name": "Cardio",
-        #     "preprocess": preprocessCardioData,
-        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-        #     "knn": {"neighbors": 1,
-        #             "weights": "uniform"},
-        #     "svmKernel": "linear" 
-        # },
+        {
+            "name": "Cardio",
+            "preprocess": preprocessCardioData,
+            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+            "knn": {"neighbors": 1,
+                    "weights": "uniform"},
+            "svmKernel": "linear" 
+        },
         {
             "name": "Iris",
             "preprocess": preprocessIris,
@@ -628,7 +648,63 @@ def titanic_cardio_iris__fetal_analysis(bEA=False, bRF=False, bKNN=False, bNN=Fa
             "knn": {"neighbors": 1,
                     "weights": "distance"},
             "svmKernel": "linear" 
-        }
+        },
+        {
+            "name": "Drug200",
+            "preprocess": preprocessDrug200,
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "Abalone",
+            "preprocess": preprocessAbalone,
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "DataDiagnosis",
+            "preprocess": preprocessDataDiagnosis,
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "Glass",
+            "preprocess": preprocessGlass,
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "Mushrooms",
+            "preprocess": preprocessMuschrooms,
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "PredictiveMaintenance",
+            "preprocess": preprocessPredictivemaintenance,
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "WeatherClassificationData",
+            "preprocess": preprocessWeatherClassificationData,
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
     ]
 
     for dataset in datasets:

@@ -1,41 +1,41 @@
 import pandas as pd 
 import seaborn as sns # type: ignore
 import matplotlib.pyplot as plt # type: ignore
-from utilty import printAndWriteInFile
+from utilty import printAndWriteInFile, printAndWriteInPreprocessingFile
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler # type: ignore
 
 
 def loadData(filepath):
-    print("\nLoad Data")
+    printAndWriteInPreprocessingFile("\nLoad Data")
     return pd.read_csv(filepath)
 
 def removeDuplicates(data):
-    print("\nRemove Duplicates")
+    printAndWriteInPreprocessingFile("\nRemove Duplicates")
     data.drop_duplicates(inplace=True)
     return data
 
 def printNaNValues(data):
-    print("\nPrint NaN Values")
-    print("NaN values (absolute):")
-    print(data.isna().sum().to_string()) 
-    print("\n")
+    printAndWriteInPreprocessingFile("\nPrint NaN Values")
+    printAndWriteInPreprocessingFile("NaN values (absolute):")
+    printAndWriteInPreprocessingFile(data.isna().sum().to_string()) 
+    printAndWriteInPreprocessingFile("\n")
 
-    print("NaN values (percentage):")
-    print(data.isna().mean().mul(100).round(2).to_string()) 
-    print("\n")
+    printAndWriteInPreprocessingFile("NaN values (percentage):")
+    printAndWriteInPreprocessingFile(data.isna().mean().mul(100).round(2).to_string()) 
+    printAndWriteInPreprocessingFile("\n")
 
     return data
 
 def deleteNaNValues(data):
-    print("\nDelete NaN Values")
-    print(f"Length of dataset (before NaN removal): {len(data)}\n")
+    printAndWriteInPreprocessingFile("\nDelete NaN Values")
+    printAndWriteInPreprocessingFile(f"Length of dataset (before NaN removal): {len(data)}\n")
     data = data.dropna(axis=0, how="any")
-    print(f"Length of dataset (after NaN removal): {len(data)}\n")
+    printAndWriteInPreprocessingFile(f"Length of dataset (after NaN removal): {len(data)}\n")
     return data
 
     
 def detectAndRemoveOutliers(data, columns):
-    print("\nDetect and remove Outliers")
+    printAndWriteInPreprocessingFile("\nDetect and remove Outliers")
     total_outliers = 0
     for column in columns:
         Q1 = data[column].quantile(0.25)
@@ -58,33 +58,33 @@ def detectAndRemoveOutliers(data, columns):
         
         mean_value = data[column].mean()
         
-        print(f"Spalte: {column}")
-        print(f"Unterer Whisker: {lower_bound}")
-        print(f"Oberer Whisker: {upper_bound}")
-        print(f"Anzahl der Ausreißer in {column}: {outliers_count}")
-        print(f"Größter Ausreißer in {column}: {largest_outlier}")
-        print(f"Kleinster Ausreißer in {column}: {smallest_outlier}")
-        print(f"Mittelwert von {column}: {mean_value}")
-        print("-" * 50)
+        printAndWriteInPreprocessingFile(f"Spalte: {column}")
+        printAndWriteInPreprocessingFile(f"Unterer Whisker: {lower_bound}")
+        printAndWriteInPreprocessingFile(f"Oberer Whisker: {upper_bound}")
+        printAndWriteInPreprocessingFile(f"Anzahl der Ausreißer in {column}: {outliers_count}")
+        printAndWriteInPreprocessingFile(f"Größter Ausreißer in {column}: {largest_outlier}")
+        printAndWriteInPreprocessingFile(f"Kleinster Ausreißer in {column}: {smallest_outlier}")
+        printAndWriteInPreprocessingFile(f"Mittelwert von {column}: {mean_value}")
+        printAndWriteInPreprocessingFile("-" * 50)
 
         data = data[(data[column] >= lower_bound) & (data[column] <= upper_bound)]
     
-    print(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
+    printAndWriteInPreprocessingFile(f"Gesamtzahl der Ausreißer über alle Spalten: {total_outliers}")
     return data
 
 def labelEncoded(data,values):
-    print("\nLabel Encode")
+    printAndWriteInPreprocessingFile("\nLabel Encode")
     for a in values:
         encoder = LabelEncoder()
         data[a] = encoder.fit_transform(data[a])
     return data
 
 def oneHotEncoded(data, columns: list):
-    print("\nOneHotEncode")
+    printAndWriteInPreprocessingFile("\nOneHotEncode")
     return pd.get_dummies(data, columns=columns)
 
 def normalizeData(data, selected_features: list):
-    print("\nNormalize Data")
+    printAndWriteInPreprocessingFile("\nNormalize Data")
     scaler = MinMaxScaler()
     data[selected_features] = scaler.fit_transform(data[selected_features])
     return data
@@ -102,7 +102,7 @@ def preprocessing(
         bPrintInfo = True
         ):
 
-    print(f"\nStart preprocessing of file {filepath}")
+    printAndWriteInPreprocessingFile(f"\nStart preprocessing of file {filepath}")
 
 
     data = loadData(filepath)
@@ -136,14 +136,14 @@ def preprocessing(
 
 
 
-    print("Finished Preprocessing")
+    printAndWriteInPreprocessingFile("Finished Preprocessing")
     return data
 
 
 ######################### Other Stuff ######################### 
 
 def showBoxplot(data, boxplot_features):
-    print("\nShow Boxplot")
+    printAndWriteInPreprocessingFile("\nShow Boxplot")
     data_long = pd.melt(data, value_vars=boxplot_features)
     sns.boxplot(x='variable', y='value', data=data_long)
     plt.xticks(rotation=45)
@@ -153,12 +153,12 @@ def getColumns(data) -> list:
     return data.columns.tolist()
 
 def removeColumns(columns: list, columnsToRemove: list) -> list:
-    print("\nRemove Columns")
+    printAndWriteInPreprocessingFile("\nRemove Columns")
     for r in columnsToRemove:
         columns.remove(r)
     return columns
 
 def printLengthAndColumns(data: pd.DataFrame, ):
-    print("\nPrint Datset Infos")
-    print(f"\nLength of Dataset: {len(data)}")
-    print(f"\nColumns of Dataset: {data.columns}")
+    printAndWriteInPreprocessingFile("\nPrint Datset Infos")
+    printAndWriteInPreprocessingFile(f"\nLength of Dataset: {len(data)}")
+    printAndWriteInPreprocessingFile(f"\nColumns of Dataset: {data.columns}")
