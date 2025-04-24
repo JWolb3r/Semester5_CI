@@ -14,11 +14,248 @@ class PreprocessedData:
         self.feature = feature
         self.label = label
 
+def preprocessAbalone():
+    print("Preprocess Abalone")
+
+    def goodPreprocessingAbalone():
+        filepath = "DataSets\\Conference\\abalone.csv"
+        label = "Rings"
+        normalizeFeatures = ["Length","Diameter","Height","Whole weight","Shucked weight","Viscera weight","Shell weight", label]
+        data = preprocessing(
+            filepath,
+            oneHotEncodingFeatures=["Sex"],
+            normalizeFeatures=normalizeFeatures,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    def badPreprocessingAbalone():
+        filepath = "DataSets\\Conference\\abalone.csv"
+        label = "Rings"
+        data = preprocessing(
+            filepath, 
+            oneHotEncodingFeatures=["Sex"]
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingAbalone()
+
+def preprocessDataDiagnosis():
+    print("Preprocess Abalone")
+
+    def goodPreprocessingDataDiagnosis():
+        filepath = "DataSets\\Conference\\data_diagnosis.csv"
+        label = "diagnosis"
+        normalizeFeatures = ["radius_mean","texture_mean","smoothness_mean","compactness_mean","concavity_mean","concave points_mean","symmetry_mean","fractal_dimension_mean"]
+        data = preprocessing(
+            filepath,
+            labelEncodingFeatures=[label],
+            normalizeFeatures=normalizeFeatures,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    def badPreprocessingDataDiagnosis():
+        filepath = "DataSets\\Conference\\data_diagnosis.csv"
+        label = "diagnosis"
+        data = preprocessing(
+            filepath,
+            labelEncodingFeatures=[label],
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingDataDiagnosis()
+
+def preprocessDrug200():
+    print("Preprocess Drug200")
+
+    def goodPreprocessingDrug200():
+        filepath = "DataSets\\Conference\\drug200.csv"
+        label = "Drug"
+        normalizeFeatures = ["Age", "Na_to_K"]
+        oneHotEncodingFeatures = ["Sex","BP","Cholesterol"]
+        data = preprocessing(
+            filepath,
+            labelEncodingFeatures=[label],
+            normalizeFeatures=normalizeFeatures,
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    def badPreprocessingDrug200():
+        filepath = "DataSets\\Conference\\drug200.csv"
+        label = "Drug"
+        oneHotEncodingFeatures = ["Sex","BP","Cholesterol"]
+        data = preprocessing(
+            filepath,
+            labelEncodingFeatures=[label],
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingDrug200()
+
+def preprocessGlass():
+    print("Preprocess Glass")
+
+    def goodPreprocessingGlass():
+        filepath = "DataSets\\Conference\\glass.csv"
+        label = "Type"
+        normalizeFeatures = ["RI","Na","Mg","Al","Si","K","Ca","Ba","Fe"]
+        data = preprocessing(
+            filepath,
+            normalizeFeatures=normalizeFeatures,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    def badPreprocessingGlass():
+        filepath = "DataSets\\Conference\\glass.csv"
+        label = "Type"
+        data = preprocessing(
+            filepath,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingGlass()
+
+def preprocessMuschrooms():
+    print("Preprocess Muschrooms")
+
+    def goodPreprocessingMuschrooms():
+        filepath = "DataSets\\Conference\\mushrooms.csv"
+        label = "class"
+        oneHotEncodingFeatures = ["cap-shape","cap-surface","cap-color","bruises","odor","gill-attachment","gill-spacing"
+                                  ,"gill-size","gill-color","stalk-shape","stalk-root","stalk-surface-above-ring","stalk-surface-below-ring","stalk-color-above-ring",
+                                  "stalk-color-below-ring","veil-type","veil-color","ring-number","ring-type","spore-print-color","population","habitat"]
+        data = preprocessing(
+            filepath,
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            labelEncodingFeatures=label,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    def badPreprocessingMuschrooms():
+        filepath = "DataSets\\Conference\\mushrooms.csv"
+        label = "class"
+        oneHotEncodingFeatures = ["cap-shape","cap-surface","cap-color","bruises","odor","gill-attachment","gill-spacing"
+                                  ,"gill-size","gill-color","stalk-shape","stalk-root","stalk-surface-above-ring","stalk-surface-below-ring","stalk-color-above-ring",
+                                  "stalk-color-below-ring","veil-type","veil-color","ring-number","ring-type","spore-print-color","population","habitat"]
+        data = preprocessing(
+            filepath,
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            labelEncodingFeatures=label,
+            bDeleteNanValues=True
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingMuschrooms()
+
+def preprocessPredictivemaintenance():
+    print("Preprocess Predictivemaintenance")
+
+    def goodPreprocessingPredictivemaintenance():
+        filepath = "DataSets\\Conference\\predictive_maintenance.csv"
+        label = "Failure Type"
+        normalizeFeatures = ["Air temperature [K]","Process temperature [K]","Rotational speed [rpm]","Torque [Nm]","Tool wear [min]"]
+        data = preprocessing(
+            filepath,
+            bDeleteNanValues=True,
+            normalizeFeatures=normalizeFeatures,
+            oneHotEncodingFeatures=["Type"],
+            labelEncodingFeatures=[label]
+        )
+        removableColumns = ["UDI","Product ID", label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    def badPreprocessingPredictivemaintenance():
+        filepath = "DataSets\\Conference\\predictive_maintenance.csv"
+        label = "Failure Type"
+        data = preprocessing(
+            filepath,
+            bDeleteNanValues=True,
+            oneHotEncodingFeatures=["Type"],
+            labelEncodingFeatures=[label]
+        )
+        removableColumns = ["Product ID", label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingPredictivemaintenance()
+
+def preprocessWeatherClassificationData():
+    print("Preprocess WeatherClassificationData")
+
+    def goodPreprocessingWeatherClassificationData():
+        filepath = "DataSets\\Conference\\weather_classification_data.csv"
+        label = "Weather Type"
+        normalizeFeatures = ["Temperature","Humidity","Wind Speed","Precipitation (%)","Atmospheric Pressure","UV Index","Visibility (km)"]
+        oneHotEncodingFeatures= ["Cloud Cover","Season", "Location"]
+        data = preprocessing(
+            filepath,
+            bDeleteNanValues=True,
+            normalizeFeatures=normalizeFeatures,
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            labelEncodingFeatures=[label]
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    def badPreprocessingWeatherClassificationData():
+        filepath = "DataSets\\Conference\\weather_classification_data.csv"
+        label = "Weather Type"
+        oneHotEncodingFeatures= ["Cloud Cover","Season", "Location"]
+        data = preprocessing(
+            filepath,
+            bDeleteNanValues=True,
+            oneHotEncodingFeatures=oneHotEncodingFeatures,
+            labelEncodingFeatures=[label]
+        )
+        removableColumns = [label]
+        features = removeColumns(getColumns(data), removableColumns)
+        return PreprocessedData(data, features, label)
+
+    # Call good or bad preprocessing here (good by default)
+    return goodPreprocessingWeatherClassificationData()
+
 def preprocessCardioData():
     print("Preprocess Cardio Data")
 
     def goodPreprocessingCardio():
-        filepath = "DataSets\\cardio_data_processed.csv"
+        filepath = "DataSets\\Conference\\cardio_data_processed.csv"
         label = "cardio"
         normalizeFeatures = ["age", "height", "weight", "ap_hi", "ap_lo", "bmi"]
         data = preprocessing(
@@ -32,9 +269,13 @@ def preprocessCardioData():
         return PreprocessedData(data, features, label)
 
     def badPreprocessingCardio():
-        filepath = "DataSets\\cardio_data_processed.csv"
+        filepath = "DataSets\\Conference\\cardio_data_processed.csv"
         label = "cardio"
-        data = preprocessing(filepath, oneHotEncodingFeatures=["bp_category"])
+        data = preprocessing(
+            filepath, 
+            oneHotEncodingFeatures=["bp_category"],
+            bDeleteNanValues=True
+            )
         removableColumns = ["age_years", "bp_category_encoded", label]
         features = removeColumns(getColumns(data), removableColumns)
         return PreprocessedData(data, features, label)
@@ -76,7 +317,7 @@ def preprocessTitanic():
     print("Preprocess Titanic Data")
 
     def goodPreprocessingTitanic():
-        data = "DataSets\\titanic_combined.csv"
+        data = "DataSets\\Conference\\titanic_combined.csv"
         label = 'Survived'
         normalizeFeatures = ['Age', 'Fare']
         oneHotEncodingFeatures = ['Sex', 'Embarked']
@@ -91,11 +332,10 @@ def preprocessTitanic():
         data = data[necessaryValues]
         necessaryValues.remove(label)
         data = deleteNaNValues(data)
-        printLengthAndColumns(data)
         return PreprocessedData(data, necessaryValues, label)
 
     def badPreprocessingTitanic():
-        data = "DataSets\\titanic_combined.csv"
+        data = "DataSets\\Conference\\titanic_combined.csv"
         label = 'Survived'
         oneHotEncodingFeatures = ['Sex', 'Embarked']
         data = preprocessing(
@@ -103,8 +343,10 @@ def preprocessTitanic():
             oneHotEncodingFeatures=oneHotEncodingFeatures,
             bPrintInfo=False
         )
-        removableColumns = ["Name", "Ticket", "Cabin"]
+        removableColumns = ['Name', 'Ticket', 'Cabin']
         necessaryValues = removeColumns(getColumns(data), removableColumns)
+        data = data[necessaryValues]
+        necessaryValues.remove(label)
         data = deleteNaNValues(data)
         return PreprocessedData(data, necessaryValues, label)
 
@@ -116,7 +358,7 @@ def preprocessFetalHealth():
     print("Preprocess Fetal Health Data")
 
     def goodPreprocessingFetalHealth():
-        filepath = "DataSets\\fetal_health.csv"
+        filepath = "DataSets\\Conference\\fetal_health.csv"
         label = 'fetal_health'
         normalizeFeatures = [
             'baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions',
@@ -135,7 +377,7 @@ def preprocessFetalHealth():
         return PreprocessedData(data, normalizeFeatures, label)
 
     def badPreprocessingFetalHealth():
-        filepath = "DataSets\\fetal_health.csv"
+        filepath = "DataSets\\Conference\\fetal_health.csv"
         label = 'fetal_health'
         data = preprocessing(filepath=filepath)
         normalizeFeatures = removeColumns(getColumns(data), [label])
