@@ -1,0 +1,849 @@
+Preprocess Titanic Data
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\titanic_combined.csv
+
+Load Data
+
+Remove Duplicates
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+PassengerId       0
+Survived        418
+Pclass            0
+Name              0
+Age             263
+SibSp             0
+Parch             0
+Ticket            0
+Fare              1
+Cabin          1014
+Sex_female        0
+Sex_male          0
+Embarked_C        0
+Embarked_Q        0
+Embarked_S        0
+
+
+NaN values (percentage):
+PassengerId     0.00
+Survived       31.93
+Pclass          0.00
+Name            0.00
+Age            20.09
+SibSp           0.00
+Parch           0.00
+Ticket          0.00
+Fare            0.08
+Cabin          77.46
+Sex_female      0.00
+Sex_male        0.00
+Embarked_C      0.00
+Embarked_Q      0.00
+Embarked_S      0.00
+
+
+Finished Preprocessing
+
+Remove Columns
+
+Delete NaN Values
+Length of dataset (before NaN removal): 1309
+
+Length of dataset (after NaN removal): 714
+
+Preprocess Cardio Data
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\cardio_data_processed.csv
+
+Load Data
+
+Remove Duplicates
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+id                                  0
+age                                 0
+gender                              0
+height                              0
+weight                              0
+ap_hi                               0
+ap_lo                               0
+cholesterol                         0
+gluc                                0
+smoke                               0
+alco                                0
+active                              0
+cardio                              0
+age_years                           0
+bmi                                 0
+bp_category_encoded                 0
+bp_category_Elevated                0
+bp_category_Hypertension Stage 1    0
+bp_category_Hypertension Stage 2    0
+bp_category_Normal                  0
+
+
+NaN values (percentage):
+id                                  0.0
+age                                 0.0
+gender                              0.0
+height                              0.0
+weight                              0.0
+ap_hi                               0.0
+ap_lo                               0.0
+cholesterol                         0.0
+gluc                                0.0
+smoke                               0.0
+alco                                0.0
+active                              0.0
+cardio                              0.0
+age_years                           0.0
+bmi                                 0.0
+bp_category_encoded                 0.0
+bp_category_Elevated                0.0
+bp_category_Hypertension Stage 1    0.0
+bp_category_Hypertension Stage 2    0.0
+bp_category_Normal                  0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 68205
+
+Length of dataset (after NaN removal): 68205
+
+
+Print Datset Infos
+
+Length of Dataset: 68205
+
+Columns of Dataset: Index(['id', 'age', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo',
+       'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio', 'age_years',
+       'bmi', 'bp_category_encoded', 'bp_category_Elevated',
+       'bp_category_Hypertension Stage 1', 'bp_category_Hypertension Stage 2',
+       'bp_category_Normal'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Fetal Health Data
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\fetal_health.csv
+
+Load Data
+
+Remove Duplicates
+
+Print NaN Values
+NaN values (absolute):
+baseline value                                            0
+accelerations                                             0
+fetal_movement                                            0
+uterine_contractions                                      0
+light_decelerations                                       0
+severe_decelerations                                      0
+prolongued_decelerations                                  0
+abnormal_short_term_variability                           0
+mean_value_of_short_term_variability                      0
+percentage_of_time_with_abnormal_long_term_variability    0
+mean_value_of_long_term_variability                       0
+histogram_width                                           0
+histogram_min                                             0
+histogram_max                                             0
+histogram_number_of_peaks                                 0
+histogram_number_of_zeroes                                0
+histogram_mode                                            0
+histogram_mean                                            0
+histogram_median                                          0
+histogram_variance                                        0
+histogram_tendency                                        0
+fetal_health                                              0
+
+
+NaN values (percentage):
+baseline value                                            0.0
+accelerations                                             0.0
+fetal_movement                                            0.0
+uterine_contractions                                      0.0
+light_decelerations                                       0.0
+severe_decelerations                                      0.0
+prolongued_decelerations                                  0.0
+abnormal_short_term_variability                           0.0
+mean_value_of_short_term_variability                      0.0
+percentage_of_time_with_abnormal_long_term_variability    0.0
+mean_value_of_long_term_variability                       0.0
+histogram_width                                           0.0
+histogram_min                                             0.0
+histogram_max                                             0.0
+histogram_number_of_peaks                                 0.0
+histogram_number_of_zeroes                                0.0
+histogram_mode                                            0.0
+histogram_mean                                            0.0
+histogram_median                                          0.0
+histogram_variance                                        0.0
+histogram_tendency                                        0.0
+fetal_health                                              0.0
+
+
+
+Print Datset Infos
+
+Length of Dataset: 2113
+
+Columns of Dataset: Index(['baseline value', 'accelerations', 'fetal_movement',
+       'uterine_contractions', 'light_decelerations', 'severe_decelerations',
+       'prolongued_decelerations', 'abnormal_short_term_variability',
+       'mean_value_of_short_term_variability',
+       'percentage_of_time_with_abnormal_long_term_variability',
+       'mean_value_of_long_term_variability', 'histogram_width',
+       'histogram_min', 'histogram_max', 'histogram_number_of_peaks',
+       'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean',
+       'histogram_median', 'histogram_variance', 'histogram_tendency',
+       'fetal_health'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Drug200
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\drug200.csv
+
+Load Data
+
+Remove Duplicates
+
+Label Encode
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+Age                   0
+Na_to_K               0
+Drug                  0
+Sex_F                 0
+Sex_M                 0
+BP_HIGH               0
+BP_LOW                0
+BP_NORMAL             0
+Cholesterol_HIGH      0
+Cholesterol_NORMAL    0
+
+
+NaN values (percentage):
+Age                   0.0
+Na_to_K               0.0
+Drug                  0.0
+Sex_F                 0.0
+Sex_M                 0.0
+BP_HIGH               0.0
+BP_LOW                0.0
+BP_NORMAL             0.0
+Cholesterol_HIGH      0.0
+Cholesterol_NORMAL    0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 200
+
+Length of dataset (after NaN removal): 200
+
+
+Print Datset Infos
+
+Length of Dataset: 200
+
+Columns of Dataset: Index(['Age', 'Na_to_K', 'Drug', 'Sex_F', 'Sex_M', 'BP_HIGH', 'BP_LOW',
+       'BP_NORMAL', 'Cholesterol_HIGH', 'Cholesterol_NORMAL'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Abalone
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\abalone.csv
+
+Load Data
+
+Remove Duplicates
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+Length            0
+Diameter          0
+Height            0
+Whole weight      0
+Shucked weight    0
+Viscera weight    0
+Shell weight      0
+Rings             0
+Sex_F             0
+Sex_I             0
+Sex_M             0
+
+
+NaN values (percentage):
+Length            0.0
+Diameter          0.0
+Height            0.0
+Whole weight      0.0
+Shucked weight    0.0
+Viscera weight    0.0
+Shell weight      0.0
+Rings             0.0
+Sex_F             0.0
+Sex_I             0.0
+Sex_M             0.0
+
+
+
+Print Datset Infos
+
+Length of Dataset: 4177
+
+Columns of Dataset: Index(['Length', 'Diameter', 'Height', 'Whole weight', 'Shucked weight',
+       'Viscera weight', 'Shell weight', 'Rings', 'Sex_F', 'Sex_I', 'Sex_M'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Diagnosis
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\data_diagnosis.csv
+
+Load Data
+
+Remove Duplicates
+
+Label Encode
+
+Print NaN Values
+NaN values (absolute):
+diagnosis                 0
+radius_mean               0
+texture_mean              0
+smoothness_mean           0
+compactness_mean          0
+concavity_mean            0
+concave points_mean       0
+symmetry_mean             0
+fractal_dimension_mean    0
+
+
+NaN values (percentage):
+diagnosis                 0.0
+radius_mean               0.0
+texture_mean              0.0
+smoothness_mean           0.0
+compactness_mean          0.0
+concavity_mean            0.0
+concave points_mean       0.0
+symmetry_mean             0.0
+fractal_dimension_mean    0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 569
+
+Length of dataset (after NaN removal): 569
+
+
+Print Datset Infos
+
+Length of Dataset: 569
+
+Columns of Dataset: Index(['diagnosis', 'radius_mean', 'texture_mean', 'smoothness_mean',
+       'compactness_mean', 'concavity_mean', 'concave points_mean',
+       'symmetry_mean', 'fractal_dimension_mean'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Glass
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\glass.csv
+
+Load Data
+
+Remove Duplicates
+
+Print NaN Values
+NaN values (absolute):
+RI      0
+Na      0
+Mg      0
+Al      0
+Si      0
+K       0
+Ca      0
+Ba      0
+Fe      0
+Type    0
+
+
+NaN values (percentage):
+RI      0.0
+Na      0.0
+Mg      0.0
+Al      0.0
+Si      0.0
+K       0.0
+Ca      0.0
+Ba      0.0
+Fe      0.0
+Type    0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 213
+
+Length of dataset (after NaN removal): 213
+
+
+Print Datset Infos
+
+Length of Dataset: 213
+
+Columns of Dataset: Index(['RI', 'Na', 'Mg', 'Al', 'Si', 'K', 'Ca', 'Ba', 'Fe', 'Type'], dtype='object')
+Finished Preprocessing
+
+Remove Columns
+
+
+
+Preprocess Mushrooms
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\mushrooms.csv
+
+Load Data
+
+Remove Duplicates
+
+Label Encode
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+class                         0
+cap-shape_b                   0
+cap-shape_c                   0
+cap-shape_f                   0
+cap-shape_k                   0
+cap-shape_s                   0
+cap-shape_x                   0
+cap-surface_f                 0
+cap-surface_g                 0
+cap-surface_s                 0
+cap-surface_y                 0
+cap-color_b                   0
+cap-color_c                   0
+cap-color_e                   0
+cap-color_g                   0
+cap-color_n                   0
+cap-color_p                   0
+cap-color_r                   0
+cap-color_u                   0
+cap-color_w                   0
+cap-color_y                   0
+bruises_f                     0
+bruises_t                     0
+odor_a                        0
+odor_c                        0
+odor_f                        0
+odor_l                        0
+odor_m                        0
+odor_n                        0
+odor_p                        0
+odor_s                        0
+odor_y                        0
+gill-attachment_a             0
+gill-attachment_f             0
+gill-spacing_c                0
+gill-spacing_w                0
+gill-size_b                   0
+gill-size_n                   0
+gill-color_b                  0
+gill-color_e                  0
+gill-color_g                  0
+gill-color_h                  0
+gill-color_k                  0
+gill-color_n                  0
+gill-color_o                  0
+gill-color_p                  0
+gill-color_r                  0
+gill-color_u                  0
+gill-color_w                  0
+gill-color_y                  0
+stalk-shape_e                 0
+stalk-shape_t                 0
+stalk-root_?                  0
+stalk-root_b                  0
+stalk-root_c                  0
+stalk-root_e                  0
+stalk-root_r                  0
+stalk-surface-above-ring_f    0
+stalk-surface-above-ring_k    0
+stalk-surface-above-ring_s    0
+stalk-surface-above-ring_y    0
+stalk-surface-below-ring_f    0
+stalk-surface-below-ring_k    0
+stalk-surface-below-ring_s    0
+stalk-surface-below-ring_y    0
+stalk-color-above-ring_b      0
+stalk-color-above-ring_c      0
+stalk-color-above-ring_e      0
+stalk-color-above-ring_g      0
+stalk-color-above-ring_n      0
+stalk-color-above-ring_o      0
+stalk-color-above-ring_p      0
+stalk-color-above-ring_w      0
+stalk-color-above-ring_y      0
+stalk-color-below-ring_b      0
+stalk-color-below-ring_c      0
+stalk-color-below-ring_e      0
+stalk-color-below-ring_g      0
+stalk-color-below-ring_n      0
+stalk-color-below-ring_o      0
+stalk-color-below-ring_p      0
+stalk-color-below-ring_w      0
+stalk-color-below-ring_y      0
+veil-type_p                   0
+veil-color_n                  0
+veil-color_o                  0
+veil-color_w                  0
+veil-color_y                  0
+ring-number_n                 0
+ring-number_o                 0
+ring-number_t                 0
+ring-type_e                   0
+ring-type_f                   0
+ring-type_l                   0
+ring-type_n                   0
+ring-type_p                   0
+spore-print-color_b           0
+spore-print-color_h           0
+spore-print-color_k           0
+spore-print-color_n           0
+spore-print-color_o           0
+spore-print-color_r           0
+spore-print-color_u           0
+spore-print-color_w           0
+spore-print-color_y           0
+population_a                  0
+population_c                  0
+population_n                  0
+population_s                  0
+population_v                  0
+population_y                  0
+habitat_d                     0
+habitat_g                     0
+habitat_l                     0
+habitat_m                     0
+habitat_p                     0
+habitat_u                     0
+habitat_w                     0
+
+
+NaN values (percentage):
+class                         0.0
+cap-shape_b                   0.0
+cap-shape_c                   0.0
+cap-shape_f                   0.0
+cap-shape_k                   0.0
+cap-shape_s                   0.0
+cap-shape_x                   0.0
+cap-surface_f                 0.0
+cap-surface_g                 0.0
+cap-surface_s                 0.0
+cap-surface_y                 0.0
+cap-color_b                   0.0
+cap-color_c                   0.0
+cap-color_e                   0.0
+cap-color_g                   0.0
+cap-color_n                   0.0
+cap-color_p                   0.0
+cap-color_r                   0.0
+cap-color_u                   0.0
+cap-color_w                   0.0
+cap-color_y                   0.0
+bruises_f                     0.0
+bruises_t                     0.0
+odor_a                        0.0
+odor_c                        0.0
+odor_f                        0.0
+odor_l                        0.0
+odor_m                        0.0
+odor_n                        0.0
+odor_p                        0.0
+odor_s                        0.0
+odor_y                        0.0
+gill-attachment_a             0.0
+gill-attachment_f             0.0
+gill-spacing_c                0.0
+gill-spacing_w                0.0
+gill-size_b                   0.0
+gill-size_n                   0.0
+gill-color_b                  0.0
+gill-color_e                  0.0
+gill-color_g                  0.0
+gill-color_h                  0.0
+gill-color_k                  0.0
+gill-color_n                  0.0
+gill-color_o                  0.0
+gill-color_p                  0.0
+gill-color_r                  0.0
+gill-color_u                  0.0
+gill-color_w                  0.0
+gill-color_y                  0.0
+stalk-shape_e                 0.0
+stalk-shape_t                 0.0
+stalk-root_?                  0.0
+stalk-root_b                  0.0
+stalk-root_c                  0.0
+stalk-root_e                  0.0
+stalk-root_r                  0.0
+stalk-surface-above-ring_f    0.0
+stalk-surface-above-ring_k    0.0
+stalk-surface-above-ring_s    0.0
+stalk-surface-above-ring_y    0.0
+stalk-surface-below-ring_f    0.0
+stalk-surface-below-ring_k    0.0
+stalk-surface-below-ring_s    0.0
+stalk-surface-below-ring_y    0.0
+stalk-color-above-ring_b      0.0
+stalk-color-above-ring_c      0.0
+stalk-color-above-ring_e      0.0
+stalk-color-above-ring_g      0.0
+stalk-color-above-ring_n      0.0
+stalk-color-above-ring_o      0.0
+stalk-color-above-ring_p      0.0
+stalk-color-above-ring_w      0.0
+stalk-color-above-ring_y      0.0
+stalk-color-below-ring_b      0.0
+stalk-color-below-ring_c      0.0
+stalk-color-below-ring_e      0.0
+stalk-color-below-ring_g      0.0
+stalk-color-below-ring_n      0.0
+stalk-color-below-ring_o      0.0
+stalk-color-below-ring_p      0.0
+stalk-color-below-ring_w      0.0
+stalk-color-below-ring_y      0.0
+veil-type_p                   0.0
+veil-color_n                  0.0
+veil-color_o                  0.0
+veil-color_w                  0.0
+veil-color_y                  0.0
+ring-number_n                 0.0
+ring-number_o                 0.0
+ring-number_t                 0.0
+ring-type_e                   0.0
+ring-type_f                   0.0
+ring-type_l                   0.0
+ring-type_n                   0.0
+ring-type_p                   0.0
+spore-print-color_b           0.0
+spore-print-color_h           0.0
+spore-print-color_k           0.0
+spore-print-color_n           0.0
+spore-print-color_o           0.0
+spore-print-color_r           0.0
+spore-print-color_u           0.0
+spore-print-color_w           0.0
+spore-print-color_y           0.0
+population_a                  0.0
+population_c                  0.0
+population_n                  0.0
+population_s                  0.0
+population_v                  0.0
+population_y                  0.0
+habitat_d                     0.0
+habitat_g                     0.0
+habitat_l                     0.0
+habitat_m                     0.0
+habitat_p                     0.0
+habitat_u                     0.0
+habitat_w                     0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 8124
+
+Length of dataset (after NaN removal): 8124
+
+
+Print Datset Infos
+
+Length of Dataset: 8124
+
+Columns of Dataset: Index(['class', 'cap-shape_b', 'cap-shape_c', 'cap-shape_f', 'cap-shape_k',
+       'cap-shape_s', 'cap-shape_x', 'cap-surface_f', 'cap-surface_g',
+       'cap-surface_s',
+       ...
+       'population_s', 'population_v', 'population_y', 'habitat_d',
+       'habitat_g', 'habitat_l', 'habitat_m', 'habitat_p', 'habitat_u',
+       'habitat_w'],
+      dtype='object', length=118)
+Finished Preprocessing
+
+Remove Columns
+Preprocess Predictive Maintenance
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\predictive_maintenance.csv
+
+Load Data
+
+Remove Duplicates
+
+Label Encode
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+UDI                        0
+Product ID                 0
+Air temperature [K]        0
+Process temperature [K]    0
+Rotational speed [rpm]     0
+Torque [Nm]                0
+Tool wear [min]            0
+Target                     0
+Failure Type               0
+Type_H                     0
+Type_L                     0
+Type_M                     0
+
+
+NaN values (percentage):
+UDI                        0.0
+Product ID                 0.0
+Air temperature [K]        0.0
+Process temperature [K]    0.0
+Rotational speed [rpm]     0.0
+Torque [Nm]                0.0
+Tool wear [min]            0.0
+Target                     0.0
+Failure Type               0.0
+Type_H                     0.0
+Type_L                     0.0
+Type_M                     0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 10000
+
+Length of dataset (after NaN removal): 10000
+
+
+Print Datset Infos
+
+Length of Dataset: 10000
+
+Columns of Dataset: Index(['UDI', 'Product ID', 'Air temperature [K]', 'Process temperature [K]',
+       'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]', 'Target',
+       'Failure Type', 'Type_H', 'Type_L', 'Type_M'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Weather Classification Data
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\weather_classification_data.csv
+
+Load Data
+
+Remove Duplicates
+
+Label Encode
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+Temperature                  0
+Humidity                     0
+Wind Speed                   0
+Precipitation (%)            0
+Atmospheric Pressure         0
+UV Index                     0
+Visibility (km)              0
+Weather Type                 0
+Cloud Cover_clear            0
+Cloud Cover_cloudy           0
+Cloud Cover_overcast         0
+Cloud Cover_partly cloudy    0
+Season_Autumn                0
+Season_Spring                0
+Season_Summer                0
+Season_Winter                0
+Location_coastal             0
+Location_inland              0
+Location_mountain            0
+
+
+NaN values (percentage):
+Temperature                  0.0
+Humidity                     0.0
+Wind Speed                   0.0
+Precipitation (%)            0.0
+Atmospheric Pressure         0.0
+UV Index                     0.0
+Visibility (km)              0.0
+Weather Type                 0.0
+Cloud Cover_clear            0.0
+Cloud Cover_cloudy           0.0
+Cloud Cover_overcast         0.0
+Cloud Cover_partly cloudy    0.0
+Season_Autumn                0.0
+Season_Spring                0.0
+Season_Summer                0.0
+Season_Winter                0.0
+Location_coastal             0.0
+Location_inland              0.0
+Location_mountain            0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 13200
+
+Length of dataset (after NaN removal): 13200
+
+
+Print Datset Infos
+
+Length of Dataset: 13200
+
+Columns of Dataset: Index(['Temperature', 'Humidity', 'Wind Speed', 'Precipitation (%)',
+       'Atmospheric Pressure', 'UV Index', 'Visibility (km)', 'Weather Type',
+       'Cloud Cover_clear', 'Cloud Cover_cloudy', 'Cloud Cover_overcast',
+       'Cloud Cover_partly cloudy', 'Season_Autumn', 'Season_Spring',
+       'Season_Summer', 'Season_Winter', 'Location_coastal', 'Location_inland',
+       'Location_mountain'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns

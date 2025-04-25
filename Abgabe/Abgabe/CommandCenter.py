@@ -617,73 +617,73 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
     """
 
     datasets = [
-        {
-            "name": "Titanic",
-            "preprocess": preprocessTitanic,
-            "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
-            "knn": {"neighbors": 1,
-                    "weights": "uniform"},
-            "svmKernel": "linear" 
-        },
-        {
-            "name": "Cardio",
-            "preprocess": preprocessCardioData,
-            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-            "knn": {"neighbors": 1,
-                    "weights": "uniform"},
-            "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "Titanic",
+        #     "preprocess": lambda: preprocessTitanic(False),
+        #     "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
+        #     "knn": {"neighbors": 1,
+        #             "weights": "uniform"},
+        #     "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Cardio",
+        #     "preprocess": lambda: preprocessCardioData(False),
+        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+        #     "knn": {"neighbors": 1,
+        #             "weights": "uniform"},
+        #     "svmKernel": "linear" 
+        # },
         # {
         #     "name": "Iris",
-        #     "preprocess": preprocessIris,
+            # "preprocess": lambda: preprocessTitanic(False)
         #     "features": None,
         #     "knn": {"neighbors": 1,
         #             "weights": "uniform"},
         #     "svmKernel": "linear" 
         # },
-        {
-            "name": "FetalHealth",
-            "preprocess": preprocessFetalHealth,
-            "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
-            "knn": {"neighbors": 1,
-                    "weights": "distance"},
-            "svmKernel": "linear" 
-        },
-        {
-            "name": "Drug200",
-            "preprocess": preprocessDrug200,
-            # "features": None,
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "Abalone",
-            "preprocess": preprocessAbalone,
-            # "features": None,
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "DataDiagnosis",
-            "preprocess": preprocessDataDiagnosis,
-            # "features": None,
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "Glass",
-            "preprocess": preprocessGlass,
-            # "features": None,
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "FetalHealth",
+        #     "preprocess": lambda: preprocessFetalHealth(False),
+        #     "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
+        #     "knn": {"neighbors": 1,
+        #             "weights": "distance"},
+        #     "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Drug200",
+        #     "preprocess": lambda: preprocessDrug200(False),
+        #     # "features": None,
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Abalone",
+        #     "preprocess": lambda: preprocessAbalone(False),
+        #     # "features": None,
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "DataDiagnosis",
+        #     "preprocess": lambda: preprocessDataDiagnosis(False),
+        #     # "features": None,
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Glass",
+        #     "preprocess": lambda: preprocessGlass(False),
+        #     # "features": None,
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
         {
             "name": "Mushrooms",
-            "preprocess": preprocessMuschrooms,
+            "preprocess": lambda: preprocessMuschrooms(False),
             # "features": None,
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
@@ -691,7 +691,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         },
         {
             "name": "PredictiveMaintenance",
-            "preprocess": preprocessPredictivemaintenance,
+            "preprocess": lambda: preprocessPredictivemaintenance(False),
             # "features": None,
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
@@ -699,7 +699,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         },
         {
             "name": "WeatherClassificationData",
-            "preprocess": preprocessWeatherClassificationData,
+            "preprocess": lambda: preprocessWeatherClassificationData(False),
             # "features": None,
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},

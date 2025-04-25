@@ -1,1 +1,0 @@
-Best Features for Titanic: ['Age', 'Parch', 'Sex_female', 'Sex_male']
