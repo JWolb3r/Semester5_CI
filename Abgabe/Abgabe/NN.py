@@ -12,7 +12,7 @@ def trainMLP(dataX, dataY, hiddenLayerSizes, maxIter=4000, randomState=42, activ
 def testMLP(model, testDataX, testDataY, uniqueLabelValues: list = None, printValues = False):
     yPred = model.predict(testDataX)
 
-    f1score=f1_score(y_true=testDataY, y_pred=yPred)
+    f1score=f1_score(y_true=testDataY, y_pred=yPred, average='macro')
 
     if uniqueLabelValues:
         report = classification_report(testDataY, yPred, output_dict=True)

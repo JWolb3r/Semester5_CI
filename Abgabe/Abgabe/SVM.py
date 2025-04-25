@@ -11,7 +11,7 @@ def trainSVM(dataX, dataY, kernelFunction='rbf'):
 def testSVM(model, testDataX, testDataY, printValues = False):
     yPred = model.predict(testDataX)
     
-    f1score=f1_score(y_true=testDataY, y_pred=yPred)
+    f1score=f1_score(y_true=testDataY, y_pred=yPred, average='macro')
 
     acScore = accuracy_score(testDataY, yPred)
     if printValues: print(acScore)

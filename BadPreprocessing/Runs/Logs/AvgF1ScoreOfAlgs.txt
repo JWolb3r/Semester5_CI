@@ -1,0 +1,117 @@
+#######Titanic#######
+Dataset Informations
+Features: ['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_female', 'Sex_male', 'Embarked_C', 'Embarked_Q', 'Embarked_S']
+Label: Survived
+Length: 714
+Start Titanic knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.5891448578540881
+Start Titanic SVM with kernel: rbf
+Average f1score: 0.5024174267137049
+Start Titanic default-NN with layers 100
+Average f1score: 0.7535585500872279
+Start Titanic rf
+Average f1score: 0.8002311976126678
+#######FetalHealth#######
+Dataset Informations
+Features: ['baseline value', 'accelerations', 'fetal_movement', 'uterine_contractions', 'light_decelerations', 'severe_decelerations', 'prolongued_decelerations', 'abnormal_short_term_variability', 'mean_value_of_short_term_variability', 'percentage_of_time_with_abnormal_long_term_variability', 'mean_value_of_long_term_variability', 'histogram_width', 'histogram_min', 'histogram_max', 'histogram_number_of_peaks', 'histogram_number_of_zeroes', 'histogram_mode', 'histogram_mean', 'histogram_median', 'histogram_variance', 'histogram_tendency']
+Label: fetal_health
+Length: 2113
+Start FetalHealth knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.7966728104040277
+Start FetalHealth SVM with kernel: rbf
+Average f1score: 0.68558561017321
+Start FetalHealth default-NN with layers 100
+Average f1score: 0.7500235374429239
+Start FetalHealth rf
+Average f1score: 0.8890675382368614
+#######Drug200#######
+Dataset Informations
+Features: ['Age', 'Na_to_K', 'Sex_F', 'Sex_M', 'BP_HIGH', 'BP_LOW', 'BP_NORMAL', 'Cholesterol_HIGH', 'Cholesterol_NORMAL']
+Label: Drug
+Length: 200
+Start Drug200 knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.47196493463453576
+Start Drug200 SVM with kernel: rbf
+Average f1score: 0.32054939652235204
+Start Drug200 default-NN with layers 100
+Average f1score: 0.8223375047454387
+Start Drug200 rf
+Average f1score: 0.9782379957212521
+#######Abalone#######
+Dataset Informations
+Features: ['Length', 'Diameter', 'Height', 'Whole weight', 'Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_F', 'Sex_I', 'Sex_M']
+Label: Rings
+Length: 4177
+Start Abalone knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.12149293786658441
+Start Abalone SVM with kernel: rbf
+Average f1score: 0.08689797877414053
+Start Abalone default-NN with layers 100
+Average f1score: 0.13539310427177584
+Start Abalone rf
+Average f1score: 0.1294137165648027
+#######DataDiagnosis#######
+Dataset Informations
+Features: ['radius_mean', 'texture_mean', 'smoothness_mean', 'compactness_mean', 'concavity_mean', 'concave points_mean', 'symmetry_mean', 'fractal_dimension_mean']
+Label: diagnosis
+Length: 569
+Start DataDiagnosis knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.8673076649643842
+Start DataDiagnosis SVM with kernel: rbf
+Average f1score: 0.8890957149736813
+Start DataDiagnosis default-NN with layers 100
+Average f1score: 0.9220713802483367
+Start DataDiagnosis rf
+Average f1score: 0.9376735096639847
+#######Glass#######
+Dataset Informations
+Features: ['RI', 'Na', 'Mg', 'Al', 'Si', 'K', 'Ca', 'Ba', 'Fe']
+Label: Type
+Length: 213
+Start Glass knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.5352482151743276
+Start Glass SVM with kernel: rbf
+Average f1score: 0.08607963841088241
+Start Glass default-NN with layers 100
+Average f1score: 0.4235045193798958
+Start Glass rf
+Average f1score: 0.7228005841554466
+#######Mushrooms#######
+Dataset Informations
+Features: ['cap-shape_b', 'cap-shape_c', 'cap-shape_f', 'cap-shape_k', 'cap-shape_s', 'cap-shape_x', 'cap-surface_f', 'cap-surface_g', 'cap-surface_s', 'cap-surface_y', 'cap-color_b', 'cap-color_c', 'cap-color_e', 'cap-color_g', 'cap-color_n', 'cap-color_p', 'cap-color_r', 'cap-color_u', 'cap-color_w', 'cap-color_y', 'bruises_f', 'bruises_t', 'odor_a', 'odor_c', 'odor_f', 'odor_l', 'odor_m', 'odor_n', 'odor_p', 'odor_s', 'odor_y', 'gill-attachment_a', 'gill-attachment_f', 'gill-spacing_c', 'gill-spacing_w', 'gill-size_b', 'gill-size_n', 'gill-color_b', 'gill-color_e', 'gill-color_g', 'gill-color_h', 'gill-color_k', 'gill-color_n', 'gill-color_o', 'gill-color_p', 'gill-color_r', 'gill-color_u', 'gill-color_w', 'gill-color_y', 'stalk-shape_e', 'stalk-shape_t', 'stalk-root_?', 'stalk-root_b', 'stalk-root_c', 'stalk-root_e', 'stalk-root_r', 'stalk-surface-above-ring_f', 'stalk-surface-above-ring_k', 'stalk-surface-above-ring_s', 'stalk-surface-above-ring_y', 'stalk-surface-below-ring_f', 'stalk-surface-below-ring_k', 'stalk-surface-below-ring_s', 'stalk-surface-below-ring_y', 'stalk-color-above-ring_b', 'stalk-color-above-ring_c', 'stalk-color-above-ring_e', 'stalk-color-above-ring_g', 'stalk-color-above-ring_n', 'stalk-color-above-ring_o', 'stalk-color-above-ring_p', 'stalk-color-above-ring_w', 'stalk-color-above-ring_y', 'stalk-color-below-ring_b', 'stalk-color-below-ring_c', 'stalk-color-below-ring_e', 'stalk-color-below-ring_g', 'stalk-color-below-ring_n', 'stalk-color-below-ring_o', 'stalk-color-below-ring_p', 'stalk-color-below-ring_w', 'stalk-color-below-ring_y', 'veil-type_p', 'veil-color_n', 'veil-color_o', 'veil-color_w', 'veil-color_y', 'ring-number_n', 'ring-number_o', 'ring-number_t', 'ring-type_e', 'ring-type_f', 'ring-type_l', 'ring-type_n', 'ring-type_p', 'spore-print-color_b', 'spore-print-color_h', 'spore-print-color_k', 'spore-print-color_n', 'spore-print-color_o', 'spore-print-color_r', 'spore-print-color_u', 'spore-print-color_w', 'spore-print-color_y', 'population_a', 'population_c', 'population_n', 'population_s', 'population_v', 'population_y', 'habitat_d', 'habitat_g', 'habitat_l', 'habitat_m', 'habitat_p', 'habitat_u', 'habitat_w']
+Label: class
+Length: 8124
+Start Mushrooms knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 1.0
+Start Mushrooms SVM with kernel: rbf
+Average f1score: 1.0
+Start Mushrooms default-NN with layers 100
+Average f1score: 1.0
+Start Mushrooms rf
+Average f1score: 1.0
+#######PredictiveMaintenance#######
+Dataset Informations
+Features: ['UDI', 'Air temperature [K]', 'Process temperature [K]', 'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]', 'Target', 'Type_H', 'Type_L', 'Type_M']
+Label: Failure Type
+Length: 10000
+Start PredictiveMaintenance knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.32583637710376956
+Start PredictiveMaintenance SVM with kernel: rbf
+Average f1score: 0.16434159867468331
+Start PredictiveMaintenance default-NN with layers 100
+Average f1score: 0.31131819770993313
+Start PredictiveMaintenance rf
+Average f1score: 0.776167416758759
+#######WeatherClassificationData#######
+Dataset Informations
+Features: ['Temperature', 'Humidity', 'Wind Speed', 'Precipitation (%)', 'Atmospheric Pressure', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear', 'Cloud Cover_cloudy', 'Cloud Cover_overcast', 'Cloud Cover_partly cloudy', 'Season_Autumn', 'Season_Spring', 'Season_Summer', 'Season_Winter', 'Location_coastal', 'Location_inland', 'Location_mountain']
+Label: Weather Type
+Length: 13200
+Start WeatherClassificationData knn with neighbors: 5 and weights: uniform
+Average f1score with neighbors 5 and weight uniform: 0.8876189520590883
+Start WeatherClassificationData SVM with kernel: rbf
+Average f1score: 0.8232491071760463
+Start WeatherClassificationData default-NN with layers 100
+Average f1score: 0.8667045882042287
+Start WeatherClassificationData rf
+Average f1score: 0.9142266759399861

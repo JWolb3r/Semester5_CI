@@ -691,14 +691,14 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
-        {
-            "name": "Cardio",
-            "preprocess": lambda: preprocessCardioData(False),
-            # "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "Cardio",
+        #     "preprocess": lambda: preprocessCardioData(False),
+        #     # "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
         # {
         #     "name": "Iris",
         #     "preprocess": lambda: preprocessTitanic(False)
@@ -718,7 +718,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         {
             "name": "Drug200",
             "preprocess": lambda: preprocessDrug200(False),
-            # "features": None,
+            # "features": ['Age', 'Na_to_K', 'Sex_M', 'BP_HIGH'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -726,7 +726,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         {
             "name": "Abalone",
             "preprocess": lambda: preprocessAbalone(False),
-            # "features": None,
+            # "features": ['Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_M'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -734,7 +734,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         {
             "name": "DataDiagnosis",
             "preprocess": lambda: preprocessDataDiagnosis(False),
-            # "features": None,
+            # "features": ['radius_mean', 'texture_mean', 'concave points_mean', 'fractal_dimension_mean'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -742,7 +742,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         {
             "name": "Glass",
             "preprocess": lambda: preprocessGlass(False),
-            # "features": None,
+            # "features": ['RI', 'Al', 'Ca', 'Ba'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -750,7 +750,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         {
             "name": "Mushrooms",
             "preprocess": lambda: preprocessMuschrooms(False),
-            # "features": None,
+            # "features": ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -758,7 +758,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         {
             "name": "PredictiveMaintenance",
             "preprocess": lambda: preprocessPredictivemaintenance(False),
-            # "features": None,
+            # "features": ['Air temperature [K]', 'Torque [Nm]', 'Tool wear [min]', 'Target'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -766,7 +766,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         {
             "name": "WeatherClassificationData",
             "preprocess": lambda: preprocessWeatherClassificationData(False),
-            # "features": None,
+            # "features": ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -811,13 +811,19 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
             printAndWriteInFileAvgAcc(f"Label: {label}")
             printAndWriteInFileAvgAcc(f"Length: {len(preprocessed.data)}")
 
+            printAndWriteInAvgFileF1Score(f"#######{dataset['name']}#######")
+            printAndWriteInAvgFileF1Score(f"Dataset Informations")
+            printAndWriteInAvgFileF1Score(f"Features: {features}")
+            printAndWriteInAvgFileF1Score(f"Label: {label}")
+            printAndWriteInAvgFileF1Score(f"Length: {len(preprocessed.data)}")
+            
             if bKNN:
                 kNNArgs = {
                     "data": preprocessed.data,
                     "features": features,
                     "label": label,
-                    "randomState": 42,
-                    "printValues": False,
+                    "trainRange": trainRange,
+                    "dataSetName": dataset["name"]
                 }
 
                 if "knn" in dataset:
@@ -826,8 +832,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
                     if "weights" in dataset["knn"]:
                         kNNArgs["knnWeight"] = dataset["knn"]["weights"]
 
-                # Methode aufrufen, nur mit vorhandenen Argumenten
-                trainAndTestKNN(**kNNArgs)
+                startKNNAverageCreation(**kNNArgs)
 
             if bSVM:
                 svmArgs = {
@@ -853,7 +858,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
 if __name__ == "__main__":
     # Test call
     # analysis(bFFS=True)
-    analysis(bRF=True, bKNN=True, bNN=True, bSVM=True, bCreateAccs=True, bfindComb=True, trainRange=50)
+    analysis(bKNN=True, bCreateAccs=True, bNN=True, bSVM=True, bRF=True, trainRange=50)
     # titanic_cardio_iris__fetal_analysis(bCreateAccs=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
     # titanic_cardio_iris__fetal_analysis(bfindComb=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
     # titanic_cardio_iris__fetal_analysis(bEA=True, trainRange=2)

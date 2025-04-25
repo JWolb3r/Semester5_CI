@@ -11,7 +11,7 @@ def trainRF(dataX, dataY, n_estimators=100, randomState=42):
 def testRF(model, testDataX, testDataY, uniqueLabelValues: list = None, printValues = False):
     yPred = model.predict(testDataX)
 
-    f1score=f1_score(y_true=testDataY, y_pred=yPred)
+    f1score=f1_score(y_true=testDataY, y_pred=yPred, average='macro')
 
     if uniqueLabelValues:
         report = classification_report(testDataY, yPred, output_dict=True)
