@@ -5,7 +5,7 @@ from NN import trainAndTestMLP
 from Preprocessing import getColumns, preprocessing, removeColumns, deleteNaNValues, printLengthAndColumns
 from kNN import trainAndTestKNN
 from SVM import trainAndTestSVM
-from utilty import printAndWriteInFile, printAndWriteInPreprocessingFile
+from utilty import MetricsContainer, printAndWriteInFile, printAndWriteInPreprocessingFile
 import pandas as pd
 
 class PreprocessedData:
@@ -409,16 +409,23 @@ def preprocessFetalHealth(bGoodPreprocessing: bool = True):
 def startRFAvgCreation(data, features, label,trainRange=10, dataSetName=None):
     printAndWriteInFileAcc(f"Start {dataSetName} rf")
     printAndWriteInFileAvgAcc(f"Start {dataSetName} rf")
+    printAndWriteInFileF1Score(f"Start {dataSetName} rf")
+    printAndWriteInAvgFileF1Score(f"Start {dataSetName} rf")
     sumAcc = 0
+    sumF1 = 0
     for i in range(trainRange):
-        acc = trainAndTestRF(data, features=features, label=label, randomState=42+i)
-
+        metricContainer = trainAndTestRF(data, features=features, label=label, randomState=42+i)
+        acc = metricContainer.acc
+        f1 = metricContainer.f1score
         printAndWriteInFileAcc(acc)
-
+        printAndWriteInFileF1Score(f1)
         sumAcc += acc
+        sumF1 += f1
 
-    avgAcc = sumAcc / trainRange
-    printAndWriteInFileAvgAcc(f"RF Average Acc: {avgAcc}")
+    averageAcc = sumAcc / trainRange
+    averageF1 = sumF1 / trainRange
+    printAndWriteInFileAvgAcc(f"Average Acc: {averageAcc}")
+    printAndWriteInAvgFileF1Score(f"Average f1score: {averageF1}")
 
 def startEA(data, features, label, maxIterationsMLP=1000, maxIterEa=10):
     evolve(data=data,features=features , label=label, maxIterations=maxIterEa, maxIter=maxIterationsMLP)
@@ -434,6 +441,8 @@ def testEA():
 def findBestKNNComb(data, features, label, trainRange=10, neighborsRange=10, dataSetName=None ):
     printAndWriteInFileAcc(f"Start {dataSetName} knn")
     printAndWriteInFileAvgAcc(f"Start {dataSetName} knn")
+    printAndWriteInFileF1Score(f"Start {dataSetName} knn")
+    printAndWriteInAvgFileF1Score(f"Start {dataSetName} knn")
 
     # uniform = neighbors have same weight, distance = neighbors got calculated distance
     sumAccUniform = 0
@@ -444,29 +453,43 @@ def findBestKNNComb(data, features, label, trainRange=10, neighborsRange=10, dat
     for neighbors in range(1, neighborsRange):
         printAndWriteInFileAcc(f"Current neighbors: {neighbors}")
         printAndWriteInFileAvgAcc(f"Current neighbors: {neighbors}")
+        printAndWriteInFileF1Score(f"Current neighbors: {neighbors}")
+        printAndWriteInAvgFileF1Score(f"Current neighbors: {neighbors}")
 
         sumAccUniform = 0
         sumAccDistance = 0
+        sumf1Uniform = 0
+        sumf1Distance = 0
 
         for i in range(trainRange):
-            distanceAcc = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighbors, randomState=42+i, knnWeight='distance')
-
-            printAndWriteInFileAcc(distanceAcc)
-
-            sumAccDistance += distanceAcc
+            metricsContainer = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighbors, randomState=42+i, knnWeight='distance')
+            acc = metricsContainer.acc
+            f1 = metricsContainer.f1score
+            printAndWriteInFileAcc(acc)
+            printAndWriteInFileF1Score(f1)
+            sumAccDistance += acc
+            sumf1Distance += f1
 
         averageDistanceAcc = sumAccDistance / trainRange
+        averageDistanceF1= sumf1Distance / trainRange
+
         printAndWriteInFileAvgAcc(f"Average Acc Distance: {averageDistanceAcc}")
+        printAndWriteInAvgFileF1Score(f"Average F1 Distance: {averageDistanceF1}")
 
         for i in range(trainRange):
-            uniformAcc = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighbors, randomState=42+i, knnWeight='uniform')
-
-            printAndWriteInFileAcc(uniformAcc)
-
-            sumAccUniform += uniformAcc
+            metricsContainer = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighbors, randomState=42+i, knnWeight='uniform')
+            acc = metricsContainer.acc
+            f1 = metricsContainer.f1score
+            printAndWriteInFileAcc(acc)
+            printAndWriteInFileF1Score(f1)
+            sumAccUniform += acc
+            sumf1Uniform += f1
 
         averageUniformAcc = sumAccUniform / trainRange
+        averageUniformF1= sumf1Uniform / trainRange
+
         printAndWriteInFileAvgAcc(f"Average Acc Uniform: {averageUniformAcc}")
+        printAndWriteInAvgFileF1Score(f"Average F1 Uniform: {averageUniformF1}")
 
         if bestKnnComb[2] < averageUniformAcc:
             bestKnnComb = ['Uniform', neighbors , averageUniformAcc]
@@ -477,23 +500,32 @@ def findBestKNNComb(data, features, label, trainRange=10, neighborsRange=10, dat
     printAndWriteInFileBestComb(f"DataSet: {dataSetName} with trainrange: {trainRange} and neighborsrange: {neighborsRange}")
     printAndWriteInFileBestComb(f"Best comb: {bestKnnComb}")
 
-def startKNNAverageCreation(data, features, label,weights, trainRange=10, neighborsRange=10, dataSetName=None):
+def startKNNAverageCreation(data, features, label,weights="uniform", trainRange=10, neighborsRange=5, dataSetName=None):
     printAndWriteInFileAcc(f"Start {dataSetName} knn with neighbors: {neighborsRange} and weights: {weights}")
-    printAndWriteInFileAvgAcc(f"Start {dataSetName} knn")
+    printAndWriteInFileAvgAcc(f"Start {dataSetName} knn with neighbors: {neighborsRange} and weights: {weights}")
+    printAndWriteInFileF1Score(f"Start {dataSetName} knn with neighbors: {neighborsRange} and weights: {weights}")
+    printAndWriteInAvgFileF1Score(f"Start {dataSetName} knn with neighbors: {neighborsRange} and weights: {weights}")
     sumAcc = 0
+    sumF1 = 0
     for i in range(trainRange):
-        acc = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighborsRange, randomState=42+i, knnWeight=weights)
-
+        metricContainer = trainAndTestKNN(data=data, features=features, label=label, neighbors=neighborsRange, randomState=42+i, knnWeight=weights)
+        acc = metricContainer.acc
+        f1 = metricContainer.f1score
         printAndWriteInFileAcc(acc)
-
+        printAndWriteInFileF1Score(f1)
         sumAcc += acc
+        sumF1 += f1
 
     avgAcc = sumAcc / trainRange
+    averageF1 = sumF1 / trainRange
     printAndWriteInFileAvgAcc(f"Average Acc with neighbors {neighborsRange} and weight {weights}: {avgAcc}")
+    printAndWriteInAvgFileF1Score(f"Average f1score with neighbors {neighborsRange} and weight {weights}: {averageF1}")
 
 def findBestSVMComb(data, features, label, trainRange=10, datasetName=None): 
     printAndWriteInFileAcc(f"Start {datasetName} SVM")
     printAndWriteInFileAvgAcc(f"Start {datasetName} SVM")
+    printAndWriteInFileF1Score(f"Start {datasetName} SVM")
+    printAndWriteInAvgFileF1Score(f"Start {datasetName} SVM")
 
     bestSvmComb = ['', 0] 
     kernelFunctions = ['linear', 'rbf', 'poly', 'sigmoid']
@@ -502,16 +534,25 @@ def findBestSVMComb(data, features, label, trainRange=10, datasetName=None):
     for kernel in kernelFunctions:
         printAndWriteInFileAcc(f"Current kernel: {kernel}")
         printAndWriteInFileAvgAcc(f"Current kernel: {kernel}")
+        printAndWriteInFileF1Score(f"Current kernel: {kernel}")
+        printAndWriteInAvgFileF1Score(f"Current kernel: {kernel}")
 
         sumAcc = 0
+        sumF1 = 0
 
         for i in range(trainRange):
-            acc = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel, randomState=42+i)
+            metricsContainer = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel, randomState=42+i)
+            acc = metricsContainer.acc
+            f1 = metricsContainer.f1score
             printAndWriteInFileAcc(acc)
+            printAndWriteInFileF1Score(f1)
             sumAcc += acc
+            sumF1 += f1
 
         averageAcc = sumAcc / trainRange
+        averageF1 = sumF1 / trainRange
         printAndWriteInFileAvgAcc(f"Average Acc for {kernel}: {averageAcc}")
+        printAndWriteInAvgFileF1Score(f"Average f1 for {kernel}: {averageF1}")
 
         if averageAcc > bestSvmComb[1]:
             bestSvmComb = [kernel, averageAcc]
@@ -519,33 +560,52 @@ def findBestSVMComb(data, features, label, trainRange=10, datasetName=None):
     printAndWriteInFileBestComb(f"DataSet: {datasetName} with trainrange: {trainRange}")
     printAndWriteInFileBestComb(f"Best  kernel: {bestSvmComb}")
 
-def startSVMAverageCreation(data, features, label,kernel, trainRange=10, datasetName=None): 
+def startSVMAverageCreation(data, features, label,kernel='rbf', trainRange=10, datasetName=None): 
     printAndWriteInFileAcc(f"Start {datasetName} SVM with kernel: {kernel}")
-    printAndWriteInFileAvgAcc(f"Start {datasetName} SVM")
+    printAndWriteInFileAvgAcc(f"Start {datasetName} SVM with kernel: {kernel}")
+    printAndWriteInFileF1Score(f"Start {datasetName} SVM with kernel: {kernel}")
+    printAndWriteInAvgFileF1Score(f"Start {datasetName} SVM with kernel: {kernel}")
 
     sumAcc = 0
+    sumF1 = 0
+
     for i in range(trainRange):
-        acc = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel, randomState=42+i)
+        metricsContainer = trainAndTestSVM(data=data, features=features, label=label, kernelFunction=kernel, randomState=42+i)
+        acc = metricsContainer.acc
+        f1 = metricsContainer.f1score
         printAndWriteInFileAcc(acc)
+        printAndWriteInFileF1Score(f1)
         sumAcc += acc
+        sumF1 += f1
 
     averageAcc = sumAcc / trainRange
+    averageF1 = sumF1 / trainRange
+    printAndWriteInAvgFileF1Score(f"Average f1score: {averageF1}")
     printAndWriteInFileAvgAcc(f"Average Acc for {kernel}: {averageAcc}")
 
 
-def startNNAverageCreation(data, features, label, trainRange=10, datasetName=None): 
-    printAndWriteInFileAcc(f"Start {datasetName} default-NN")
-    printAndWriteInFileAvgAcc(f"Start {datasetName} default-NN")
+def startNNAverageCreation(data, features, label, trainRange=10, datasetName=None,hiddenLayerSizes=(100)): 
+    printAndWriteInFileAcc(f"Start {datasetName} default-NN with layers {hiddenLayerSizes}")
+    printAndWriteInFileAvgAcc(f"Start {datasetName} default-NN with layers {hiddenLayerSizes}")
+    printAndWriteInFileF1Score(f"Start {datasetName} default-NN with layers {hiddenLayerSizes}")
+    printAndWriteInAvgFileF1Score(f"Start {datasetName} default-NN with layers {hiddenLayerSizes}")
     # Cross-validation
     sumAcc = 0
-
+    sumF1 = 0
     for i in range(trainRange):
-        acc = trainAndTestMLP(data=data, features=features, label=label, randomState=42+i)
+        metricContainer = trainAndTestMLP(data=data, features=features, label=label, randomState=42+i)
+        acc = metricContainer.acc
+        f1 = metricContainer.f1score
         printAndWriteInFileAcc(acc)
+        printAndWriteInFileF1Score(f1)
         sumAcc += acc
+        sumF1 += f1
+
 
     averageAcc = sumAcc / trainRange
+    averageF1 = sumF1 / trainRange
     printAndWriteInFileAvgAcc(f"Average Acc: {averageAcc}")
+    printAndWriteInAvgFileF1Score(f"Average f1score: {averageF1}")
 
 
 def printAndWriteInFileBestFeatures(content):
@@ -554,11 +614,17 @@ def printAndWriteInFileBestFeatures(content):
 def printAndWriteInFileAcc(content):
     printAndWriteInFile(content, "Logs/AccssOfAlgorithms.txt")
 
+def printAndWriteInFileBestComb(content):
+    printAndWriteInFile(content, "Logs/BestComb.txt")
+
 def printAndWriteInFileAvgAcc(content):
     printAndWriteInFile(content, "Logs/AvgAcssOfAlgs.txt")
 
-def printAndWriteInFileBestComb(content):
-    printAndWriteInFile(content, "Logs/BestComb.txt")
+def printAndWriteInFileF1Score(content):
+    printAndWriteInFile(content, "Logs/F1ScoreOfAlgs.txt")
+
+def printAndWriteInAvgFileF1Score(content):
+    printAndWriteInFile(content, "Logs/AvgF1ScoreOfAlgs.txt")
 
 def doFFS(datasetName, data, features, label):
     bestFeatures = ffs(data, features, label, maxIter=1000)
@@ -617,70 +683,70 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
     """
 
     datasets = [
-        # {
-        #     "name": "Titanic",
-        #     "preprocess": lambda: preprocessTitanic(False),
-        #     "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
-        #     "knn": {"neighbors": 1,
-        #             "weights": "uniform"},
-        #     "svmKernel": "linear" 
-        # },
-        # {
-        #     "name": "Cardio",
-        #     "preprocess": lambda: preprocessCardioData(False),
-        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-        #     "knn": {"neighbors": 1,
-        #             "weights": "uniform"},
-        #     "svmKernel": "linear" 
-        # },
+        {
+            "name": "Titanic",
+            "preprocess": lambda: preprocessTitanic(False),
+            # "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "Cardio",
+            "preprocess": lambda: preprocessCardioData(False),
+            # "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
         # {
         #     "name": "Iris",
-            # "preprocess": lambda: preprocessTitanic(False)
+        #     "preprocess": lambda: preprocessTitanic(False)
         #     "features": None,
         #     "knn": {"neighbors": 1,
         #             "weights": "uniform"},
         #     "svmKernel": "linear" 
         # },
-        # {
-        #     "name": "FetalHealth",
-        #     "preprocess": lambda: preprocessFetalHealth(False),
-        #     "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
-        #     "knn": {"neighbors": 1,
-        #             "weights": "distance"},
-        #     "svmKernel": "linear" 
-        # },
-        # {
-        #     "name": "Drug200",
-        #     "preprocess": lambda: preprocessDrug200(False),
-        #     # "features": None,
-        #     # "knn": {"neighbors": 1,
-        #     #         "weights": "uniform"},
-        #     # "svmKernel": "linear" 
-        # },
-        # {
-        #     "name": "Abalone",
-        #     "preprocess": lambda: preprocessAbalone(False),
-        #     # "features": None,
-        #     # "knn": {"neighbors": 1,
-        #     #         "weights": "uniform"},
-        #     # "svmKernel": "linear" 
-        # },
-        # {
-        #     "name": "DataDiagnosis",
-        #     "preprocess": lambda: preprocessDataDiagnosis(False),
-        #     # "features": None,
-        #     # "knn": {"neighbors": 1,
-        #     #         "weights": "uniform"},
-        #     # "svmKernel": "linear" 
-        # },
-        # {
-        #     "name": "Glass",
-        #     "preprocess": lambda: preprocessGlass(False),
-        #     # "features": None,
-        #     # "knn": {"neighbors": 1,
-        #     #         "weights": "uniform"},
-        #     # "svmKernel": "linear" 
-        # },
+        {
+            "name": "FetalHealth",
+            "preprocess": lambda: preprocessFetalHealth(False),
+            # "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
+            # "knn": {"neighbors": 1,
+            #         "weights": "distance"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "Drug200",
+            "preprocess": lambda: preprocessDrug200(False),
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "Abalone",
+            "preprocess": lambda: preprocessAbalone(False),
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "DataDiagnosis",
+            "preprocess": lambda: preprocessDataDiagnosis(False),
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
+        {
+            "name": "Glass",
+            "preprocess": lambda: preprocessGlass(False),
+            # "features": None,
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
         {
             "name": "Mushrooms",
             "preprocess": lambda: preprocessMuschrooms(False),
@@ -723,7 +789,7 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
             doFFS(dataset["name"], preprocessed.data, preprocessed.feature, label)
         
         if bEA:
-            startEA(data=preprocessed.data, features=features, label=label, maxIterEa=2)
+            startEA(data=preprocessed.data, features=features, label=label, maxIterEa=trainRange)
 
         if bfindComb:
             printAndWriteInFileBestComb(f"#######{dataset['name']}#######")
@@ -746,9 +812,36 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
             printAndWriteInFileAvgAcc(f"Length: {len(preprocessed.data)}")
 
             if bKNN:
-                startKNNAverageCreation(data=preprocessed.data, features=features, label=label, dataSetName=dataset["name"], neighborsRange=dataset["knn"]["neighbors"], weights=dataset["knn"]["weights"], trainRange=trainRange)
+                kNNArgs = {
+                    "data": preprocessed.data,
+                    "features": features,
+                    "label": label,
+                    "randomState": 42,
+                    "printValues": False,
+                }
+
+                if "knn" in dataset:
+                    if "neighbors" in dataset["knn"]:
+                        kNNArgs["neighbors"] = dataset["knn"]["neighbors"]
+                    if "weights" in dataset["knn"]:
+                        kNNArgs["knnWeight"] = dataset["knn"]["weights"]
+
+                # Methode aufrufen, nur mit vorhandenen Argumenten
+                trainAndTestKNN(**kNNArgs)
+
             if bSVM:
-                startSVMAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], kernel=dataset["svmKernel"], trainRange=trainRange)
+                svmArgs = {
+                    "data": preprocessed.data,
+                    "features": features,
+                    "label": label,
+                    "datasetName": dataset["name"],
+                    "trainRange": trainRange
+                }
+
+                if "svmKernel" in dataset:
+                    svmArgs["kernel"] = dataset["svmKernel"]
+
+                startSVMAverageCreation(**svmArgs)
             if bNN:
                 startNNAverageCreation(data=preprocessed.data, features=features, label=label, datasetName=dataset["name"], trainRange=trainRange)
             if bRF:
@@ -759,7 +852,8 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
 
 if __name__ == "__main__":
     # Test call
-    analysis(bFFS=True)
+    # analysis(bFFS=True)
+    analysis(bRF=True, bKNN=True, bNN=True, bSVM=True, bCreateAccs=True, bfindComb=True, trainRange=50)
     # titanic_cardio_iris__fetal_analysis(bCreateAccs=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
     # titanic_cardio_iris__fetal_analysis(bfindComb=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
     # titanic_cardio_iris__fetal_analysis(bEA=True, trainRange=2)

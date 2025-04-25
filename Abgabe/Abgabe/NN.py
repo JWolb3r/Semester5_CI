@@ -1,6 +1,7 @@
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, f1_score
 from sklearn.model_selection import train_test_split
+from utilty import MetricsContainer
 
 def trainMLP(dataX, dataY, hiddenLayerSizes, maxIter=4000, randomState=42, activation="relu"):
 
@@ -10,6 +11,9 @@ def trainMLP(dataX, dataY, hiddenLayerSizes, maxIter=4000, randomState=42, activ
 
 def testMLP(model, testDataX, testDataY, uniqueLabelValues: list = None, printValues = False):
     yPred = model.predict(testDataX)
+
+    f1score=f1_score(y_true=testDataY, y_pred=yPred)
+
     if uniqueLabelValues:
         report = classification_report(testDataY, yPred, output_dict=True)
         if printValues: print(report)
@@ -22,9 +26,9 @@ def testMLP(model, testDataX, testDataY, uniqueLabelValues: list = None, printVa
         acScore = accuracy_score(testDataY, yPred)
         if printValues: print(acScore)
 
-        return acScore
+        return MetricsContainer(acc=acScore, f1score=f1score)
 
-def trainAndTestMLP(data, features, label, maxIter=4000, hiddenLayerSizes=(4,8,4), randomState=42, uniqueLabelValues: list = None, printValues = False, activationFunction="relu"):
+def trainAndTestMLP(data, features, label, maxIter=4000, hiddenLayerSizes=(100), randomState=42, uniqueLabelValues: list = None, printValues = False, activationFunction="relu"):
     dataX = data[features]
     dataY = data[label]
     # Random State for comparison reasons

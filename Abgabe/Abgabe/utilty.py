@@ -2,6 +2,11 @@ import pandas as pd
 import shutil
 import os
 
+class MetricsContainer:
+    def __init__(self, acc, f1score):
+        self.acc = acc
+        self.f1score = f1score
+
 def printAndWriteInFile(content, filename):
     print("\n")
     print(content)
@@ -28,3 +33,4 @@ def combineFiles(trainPath, testPath, destinationPath):
     combined_df.to_csv(destinationPath, index=False)
 
     print(combined_df.head())
+

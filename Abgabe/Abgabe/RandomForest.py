@@ -1,6 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, f1_score
 from sklearn.model_selection import train_test_split
+from utilty import MetricsContainer
 
 def trainRF(dataX, dataY, n_estimators=100, randomState=42):
     model = RandomForestClassifier(n_estimators=n_estimators, random_state=randomState)
@@ -9,6 +10,9 @@ def trainRF(dataX, dataY, n_estimators=100, randomState=42):
 
 def testRF(model, testDataX, testDataY, uniqueLabelValues: list = None, printValues = False):
     yPred = model.predict(testDataX)
+
+    f1score=f1_score(y_true=testDataY, y_pred=yPred)
+
     if uniqueLabelValues:
         report = classification_report(testDataY, yPred, output_dict=True)
         if printValues: print(report)
@@ -21,7 +25,7 @@ def testRF(model, testDataX, testDataY, uniqueLabelValues: list = None, printVal
         acScore = accuracy_score(testDataY, yPred)
         if printValues: print(acScore)
 
-        return acScore
+        return MetricsContainer(acc=acScore, f1score=f1score)
 
 def trainAndTestRF(data,features, label, n_estimators=100, randomState=42, uniqueLabelValues: list = None, printValues = False):
     dataY = data[label]

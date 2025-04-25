@@ -19,7 +19,7 @@ def fitness(genome: [], data, features, label: str, numOfIterations: int = 5, ma
     """
     score = 0
     for i in range(numOfIterations):
-        score += trainAndTestMLP(data, features, label, hiddenLayerSizes=genome, randomState=42 + i, maxIter=maxIter)
+        score += trainAndTestMLP(data, features, label, hiddenLayerSizes=genome, randomState=42 + i, maxIter=maxIter).acc
     return round(score / numOfIterations, 6)
 
 ############## Evolve ##############
