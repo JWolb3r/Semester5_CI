@@ -622,3 +622,252 @@ Average Acc Distance: 0.9851206302314126
 Average Acc Uniform: 0.9851206302314126
 Current neighbors: 14
 Average Acc Distance: 0.9850910881339238
+Average Acc Uniform: 0.9850910881339238
+Current neighbors: 15
+Average Acc Distance: 0.9852338749384535
+Average Acc Uniform: 0.9852338749384535
+Current neighbors: 16
+Average Acc Distance: 0.9851846381093052
+Average Acc Uniform: 0.9851846381093052
+Current neighbors: 17
+Average Acc Distance: 0.9852781880846869
+Average Acc Uniform: 0.9852781880846869
+Current neighbors: 18
+Average Acc Distance: 0.9852535696701129
+Average Acc Uniform: 0.9852535696701129
+Current neighbors: 19
+Average Acc Distance: 0.9853077301821759
+Average Acc Uniform: 0.9853077301821759
+Current neighbors: 20
+Average Acc Distance: 0.9853077301821759
+Average Acc Uniform: 0.9853077301821759
+Current neighbors: 21
+Average Acc Distance: 0.9853569670113239
+Average Acc Uniform: 0.9853569670113239
+Current neighbors: 22
+Average Acc Distance: 0.9853274249138351
+Average Acc Uniform: 0.9853274249138351
+Current neighbors: 23
+Average Acc Distance: 0.985411127523387
+Average Acc Uniform: 0.985411127523387
+Current neighbors: 24
+Average Acc Distance: 0.9853372722796648
+Average Acc Uniform: 0.9853372722796648
+Current neighbors: 25
+Average Acc Distance: 0.985411127523387
+Average Acc Uniform: 0.985411127523387
+Current neighbors: 26
+Average Acc Distance: 0.985411127523387
+Average Acc Uniform: 0.985411127523387
+Current neighbors: 27
+Average Acc Distance: 0.985411127523387
+Average Acc Uniform: 0.985411127523387
+Current neighbors: 28
+Average Acc Distance: 0.985411127523387
+Average Acc Uniform: 0.985411127523387
+Current neighbors: 29
+Average Acc Distance: 0.985411127523387
+Average Acc Uniform: 0.985411127523387
+Start Mushrooms SVM
+Current kernel: linear
+Average Acc for linear: 0.9782373215164947
+Current kernel: rbf
+Average Acc for rbf: 0.985411127523387
+Current kernel: poly
+Average Acc for poly: 0.985411127523387
+Current kernel: sigmoid
+Average Acc for sigmoid: 0.9782373215164947
+Start PredictiveMaintenance knn
+Current neighbors: 1
+Average Acc Distance: 0.9904679999999992
+Average Acc Uniform: 0.9904679999999992
+Current neighbors: 2
+Average Acc Distance: 0.9904679999999992
+Average Acc Uniform: 0.990956
+Current neighbors: 3
+Average Acc Distance: 0.9915280000000009
+Average Acc Uniform: 0.9915880000000002
+Current neighbors: 4
+Average Acc Distance: 0.9922320000000003
+Average Acc Uniform: 0.9912480000000001
+Current neighbors: 5
+Average Acc Distance: 0.9919840000000009
+Average Acc Uniform: 0.9918240000000007
+Current neighbors: 6
+Average Acc Distance: 0.9922360000000003
+Average Acc Uniform: 0.9911
+Current neighbors: 7
+Average Acc Distance: 0.9920160000000005
+Average Acc Uniform: 0.9914280000000005
+Current neighbors: 8
+Average Acc Distance: 0.9920720000000004
+Average Acc Uniform: 0.9910520000000002
+Current neighbors: 9
+Average Acc Distance: 0.9919360000000006
+Average Acc Uniform: 0.99126
+Current neighbors: 10
+Average Acc Distance: 0.9919480000000004
+Average Acc Uniform: 0.9910879999999997
+Current neighbors: 11
+Average Acc Distance: 0.9919280000000004
+Average Acc Uniform: 0.9912320000000001
+Current neighbors: 12
+Average Acc Distance: 0.9917960000000002
+Average Acc Uniform: 0.9908919999999999
+Current neighbors: 13
+Average Acc Distance: 0.9917000000000005
+Average Acc Uniform: 0.9909119999999997
+Current neighbors: 14
+Average Acc Distance: 0.9915999999999999
+Average Acc Uniform: 0.9906240000000001
+Current neighbors: 15
+Average Acc Distance: 0.9915400000000001
+Average Acc Uniform: 0.9905799999999999
+Current neighbors: 16
+Average Acc Distance: 0.9914839999999999
+Average Acc Uniform: 0.9903599999999997
+Current neighbors: 17
+Average Acc Distance: 0.9914280000000001
+Average Acc Uniform: 0.9903759999999997
+Current neighbors: 18
+Average Acc Distance: 0.991392
+Average Acc Uniform: 0.9900639999999996
+Current neighbors: 19
+Average Acc Distance: 0.9913040000000004
+Average Acc Uniform: 0.990004
+Current neighbors: 20
+Average Acc Distance: 0.9912400000000002
+Average Acc Uniform: 0.9898439999999998
+Current neighbors: 21
+Average Acc Distance: 0.9911160000000001
+Average Acc Uniform: 0.9896359999999995
+Current neighbors: 22
+Average Acc Distance: 0.9910520000000003
+Average Acc Uniform: 0.9895559999999998
+Current neighbors: 23
+Average Acc Distance: 0.9910519999999999
+Average Acc Uniform: 0.9894319999999994
+Current neighbors: 24
+Average Acc Distance: 0.9909839999999999
+Average Acc Uniform: 0.9892399999999999
+Current neighbors: 25
+Average Acc Distance: 0.9909640000000002
+Average Acc Uniform: 0.989136
+Current neighbors: 26
+Average Acc Distance: 0.9908480000000003
+Average Acc Uniform: 0.9889479999999999
+Current neighbors: 27
+Average Acc Distance: 0.9907800000000003
+Average Acc Uniform: 0.98884
+Current neighbors: 28
+Average Acc Distance: 0.9906960000000002
+Average Acc Uniform: 0.98868
+Current neighbors: 29
+Average Acc Distance: 0.99062
+Average Acc Uniform: 0.9886360000000001
+Start PredictiveMaintenance SVM
+Current kernel: linear
+Average Acc for linear: 0.988232
+Current kernel: rbf
+Average Acc for rbf: 0.9920240000000001
+Current kernel: poly
+Average Acc for poly: 0.9930880000000003
+Current kernel: sigmoid
+Average Acc for sigmoid: 0.959372
+Start WeatherClassificationData knn
+Current neighbors: 1
+Average Acc Distance: 0.8556787878787884
+Average Acc Uniform: 0.8556787878787884
+Current neighbors: 2
+Average Acc Distance: 0.8556515151515153
+Average Acc Uniform: 0.8524303030303031
+Current neighbors: 3
+Average Acc Distance: 0.8659090909090904
+Average Acc Uniform: 0.8740212121212125
+Current neighbors: 4
+Average Acc Distance: 0.8678666666666668
+Average Acc Uniform: 0.8747121212121212
+Current neighbors: 5
+Average Acc Distance: 0.8702727272727273
+Average Acc Uniform: 0.8783484848484845
+Current neighbors: 6
+Average Acc Distance: 0.8716121212121217
+Average Acc Uniform: 0.8795151515151509
+Current neighbors: 7
+Average Acc Distance: 0.872675757575758
+Average Acc Uniform: 0.8808727272727269
+Current neighbors: 8
+Average Acc Distance: 0.8732818181818183
+Average Acc Uniform: 0.88170303030303
+Current neighbors: 9
+Average Acc Distance: 0.8739999999999999
+Average Acc Uniform: 0.8826454545454544
+Current neighbors: 10
+Average Acc Distance: 0.8745060606060605
+Average Acc Uniform: 0.8829212121212122
+Current neighbors: 11
+Average Acc Distance: 0.8751000000000001
+Average Acc Uniform: 0.8836969696969694
+Current neighbors: 12
+Average Acc Distance: 0.8754848484848483
+Average Acc Uniform: 0.8840575757575757
+Current neighbors: 13
+Average Acc Distance: 0.8756727272727274
+Average Acc Uniform: 0.8844848484848485
+Current neighbors: 14
+Average Acc Distance: 0.8758969696969692
+Average Acc Uniform: 0.8846727272727272
+Current neighbors: 15
+Average Acc Distance: 0.8759575757575756
+Average Acc Uniform: 0.8848606060606059
+Current neighbors: 16
+Average Acc Distance: 0.8760969696969696
+Average Acc Uniform: 0.8849303030303034
+Current neighbors: 17
+Average Acc Distance: 0.8761181818181817
+Average Acc Uniform: 0.8848545454545454
+Current neighbors: 18
+Average Acc Distance: 0.8762272727272723
+Average Acc Uniform: 0.8849606060606062
+Current neighbors: 19
+Average Acc Distance: 0.8762696969696967
+Average Acc Uniform: 0.8847727272727275
+Current neighbors: 20
+Average Acc Distance: 0.8763303030303028
+Average Acc Uniform: 0.8849575757575758
+Current neighbors: 21
+Average Acc Distance: 0.8764969696969693
+Average Acc Uniform: 0.8849272727272728
+Current neighbors: 22
+Average Acc Distance: 0.8763787878787876
+Average Acc Uniform: 0.884778787878788
+Current neighbors: 23
+Average Acc Distance: 0.8765060606060608
+Average Acc Uniform: 0.8846636363636367
+Current neighbors: 24
+Average Acc Distance: 0.8766060606060606
+Average Acc Uniform: 0.8847787878787884
+Current neighbors: 25
+Average Acc Distance: 0.8765454545454543
+Average Acc Uniform: 0.8844818181818183
+Current neighbors: 26
+Average Acc Distance: 0.8765666666666667
+Average Acc Uniform: 0.8843424242424243
+Current neighbors: 27
+Average Acc Distance: 0.8765939393939394
+Average Acc Uniform: 0.8840454545454548
+Current neighbors: 28
+Average Acc Distance: 0.8767181818181821
+Average Acc Uniform: 0.884227272727273
+Current neighbors: 29
+Average Acc Distance: 0.876718181818182
+Average Acc Uniform: 0.8841424242424243
+Start WeatherClassificationData SVM
+Current kernel: linear
+Average Acc for linear: 0.8623848484848483
+Current kernel: rbf
+Average Acc for rbf: 0.8790878787878785
+Current kernel: poly
+Average Acc for poly: 0.8576090909090911
+Current kernel: sigmoid
+Average Acc for sigmoid: 0.2823727272727272

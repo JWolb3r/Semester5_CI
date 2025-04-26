@@ -647,3 +647,148 @@ Columns of Dataset: Index(['class', 'cap-shape_b', 'cap-shape_c', 'cap-shape_f',
 Finished Preprocessing
 
 Remove Columns
+Preprocess Predictive Maintenance
+Good preprocessing is used
+
+Start preprocessing of file DataSets\Conference\predictive_maintenance.csv
+
+Load Data
+
+Remove Duplicates
+
+Label Encode
+
+OneHotEncode
+
+Normalize Data
+
+Print NaN Values
+NaN values (absolute):
+UDI                        0
+Product ID                 0
+Air temperature [K]        0
+Process temperature [K]    0
+Rotational speed [rpm]     0
+Torque [Nm]                0
+Tool wear [min]            0
+Target                     0
+Failure Type               0
+Type_H                     0
+Type_L                     0
+Type_M                     0
+
+
+NaN values (percentage):
+UDI                        0.0
+Product ID                 0.0
+Air temperature [K]        0.0
+Process temperature [K]    0.0
+Rotational speed [rpm]     0.0
+Torque [Nm]                0.0
+Tool wear [min]            0.0
+Target                     0.0
+Failure Type               0.0
+Type_H                     0.0
+Type_L                     0.0
+Type_M                     0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 10000
+
+Length of dataset (after NaN removal): 10000
+
+
+Print Datset Infos
+
+Length of Dataset: 10000
+
+Columns of Dataset: Index(['UDI', 'Product ID', 'Air temperature [K]', 'Process temperature [K]',
+       'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]', 'Target',
+       'Failure Type', 'Type_H', 'Type_L', 'Type_M'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Weather Classification Data
+Good preprocessing is used
+
+Start preprocessing of file DataSets\Conference\weather_classification_data.csv
+
+Load Data
+
+Remove Duplicates
+
+Label Encode
+
+OneHotEncode
+
+Normalize Data
+
+Print NaN Values
+NaN values (absolute):
+Temperature                  0
+Humidity                     0
+Wind Speed                   0
+Precipitation (%)            0
+Atmospheric Pressure         0
+UV Index                     0
+Visibility (km)              0
+Weather Type                 0
+Cloud Cover_clear            0
+Cloud Cover_cloudy           0
+Cloud Cover_overcast         0
+Cloud Cover_partly cloudy    0
+Season_Autumn                0
+Season_Spring                0
+Season_Summer                0
+Season_Winter                0
+Location_coastal             0
+Location_inland              0
+Location_mountain            0
+
+
+NaN values (percentage):
+Temperature                  0.0
+Humidity                     0.0
+Wind Speed                   0.0
+Precipitation (%)            0.0
+Atmospheric Pressure         0.0
+UV Index                     0.0
+Visibility (km)              0.0
+Weather Type                 0.0
+Cloud Cover_clear            0.0
+Cloud Cover_cloudy           0.0
+Cloud Cover_overcast         0.0
+Cloud Cover_partly cloudy    0.0
+Season_Autumn                0.0
+Season_Spring                0.0
+Season_Summer                0.0
+Season_Winter                0.0
+Location_coastal             0.0
+Location_inland              0.0
+Location_mountain            0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 13200
+
+Length of dataset (after NaN removal): 13200
+
+
+Print Datset Infos
+
+Length of Dataset: 13200
+
+Columns of Dataset: Index(['Temperature', 'Humidity', 'Wind Speed', 'Precipitation (%)',
+       'Atmospheric Pressure', 'UV Index', 'Visibility (km)', 'Weather Type',
+       'Cloud Cover_clear', 'Cloud Cover_cloudy', 'Cloud Cover_overcast',
+       'Cloud Cover_partly cloudy', 'Season_Autumn', 'Season_Spring',
+       'Season_Summer', 'Season_Winter', 'Location_coastal', 'Location_inland',
+       'Location_mountain'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns

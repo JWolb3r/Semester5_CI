@@ -622,3 +622,252 @@ Average F1 Distance: 0.985107380335478
 Average F1 Uniform: 0.985107380335478
 Current neighbors: 14
 Average F1 Distance: 0.9850776877326003
+Average F1 Uniform: 0.9850776877326003
+Current neighbors: 15
+Average F1 Distance: 0.9852208142042868
+Average F1 Uniform: 0.9852208142042868
+Current neighbors: 16
+Average F1 Distance: 0.9851714637111942
+Average F1 Uniform: 0.9851714637111942
+Current neighbors: 17
+Average F1 Distance: 0.9852651223508304
+Average F1 Uniform: 0.9852651223508304
+Current neighbors: 18
+Average F1 Distance: 0.9852404488362495
+Average F1 Uniform: 0.9852404488362495
+Current neighbors: 19
+Average F1 Distance: 0.9852948127244235
+Average F1 Uniform: 0.9852948127244235
+Current neighbors: 20
+Average F1 Distance: 0.9852948127244235
+Average F1 Uniform: 0.9852948127244235
+Current neighbors: 21
+Average F1 Distance: 0.9853442380187976
+Average F1 Uniform: 0.9853442380187976
+Current neighbors: 22
+Average F1 Distance: 0.9853146288274259
+Average F1 Uniform: 0.9853146288274259
+Current neighbors: 23
+Average F1 Distance: 0.9853986041362561
+Average F1 Uniform: 0.9853986041362561
+Current neighbors: 24
+Average F1 Distance: 0.9853245376392684
+Average F1 Uniform: 0.9853245376392684
+Current neighbors: 25
+Average F1 Distance: 0.9853986041362561
+Average F1 Uniform: 0.9853986041362561
+Current neighbors: 26
+Average F1 Distance: 0.9853986041362561
+Average F1 Uniform: 0.9853986041362561
+Current neighbors: 27
+Average F1 Distance: 0.9853986041362561
+Average F1 Uniform: 0.9853986041362561
+Current neighbors: 28
+Average F1 Distance: 0.9853986041362561
+Average F1 Uniform: 0.9853986041362561
+Current neighbors: 29
+Average F1 Distance: 0.9853986041362561
+Average F1 Uniform: 0.9853986041362561
+Start Mushrooms SVM
+Current kernel: linear
+Average f1 for linear: 0.978205252097801
+Current kernel: rbf
+Average f1 for rbf: 0.9853986041362561
+Current kernel: poly
+Average f1 for poly: 0.9853986041362561
+Current kernel: sigmoid
+Average f1 for sigmoid: 0.978205252097801
+Start PredictiveMaintenance knn
+Current neighbors: 1
+Average F1 Distance: 0.7166637233875233
+Average F1 Uniform: 0.7166637233875233
+Current neighbors: 2
+Average F1 Distance: 0.7166637233875233
+Average F1 Uniform: 0.697772215435111
+Current neighbors: 3
+Average F1 Distance: 0.711934213166104
+Average F1 Uniform: 0.711399388883644
+Current neighbors: 4
+Average F1 Distance: 0.7243973272649931
+Average F1 Uniform: 0.6993144717118269
+Current neighbors: 5
+Average F1 Distance: 0.7182644109317482
+Average F1 Uniform: 0.714200870476487
+Current neighbors: 6
+Average F1 Distance: 0.7241226676805514
+Average F1 Uniform: 0.6986723465563464
+Current neighbors: 7
+Average F1 Distance: 0.7189779989030146
+Average F1 Uniform: 0.7060186243977479
+Current neighbors: 8
+Average F1 Distance: 0.7198858204554177
+Average F1 Uniform: 0.6981161896243454
+Current neighbors: 9
+Average F1 Distance: 0.7167196987687469
+Average F1 Uniform: 0.7031975512397431
+Current neighbors: 10
+Average F1 Distance: 0.71723879211839
+Average F1 Uniform: 0.6991345454920941
+Current neighbors: 11
+Average F1 Distance: 0.716122490821997
+Average F1 Uniform: 0.7016211530613916
+Current neighbors: 12
+Average F1 Distance: 0.7136819131099272
+Average F1 Uniform: 0.6946397421583548
+Current neighbors: 13
+Average F1 Distance: 0.7116039986879161
+Average F1 Uniform: 0.6950778872292221
+Current neighbors: 14
+Average F1 Distance: 0.7085113883976407
+Average F1 Uniform: 0.6876972572266018
+Current neighbors: 15
+Average F1 Distance: 0.7074413485697438
+Average F1 Uniform: 0.6860501774328301
+Current neighbors: 16
+Average F1 Distance: 0.7060952173189492
+Average F1 Uniform: 0.6817252584531347
+Current neighbors: 17
+Average F1 Distance: 0.7049189561833554
+Average F1 Uniform: 0.6806775066034413
+Current neighbors: 18
+Average F1 Distance: 0.7039401871212345
+Average F1 Uniform: 0.6736678896542461
+Current neighbors: 19
+Average F1 Distance: 0.7020372725595435
+Average F1 Uniform: 0.6711569193510095
+Current neighbors: 20
+Average F1 Distance: 0.7005375538691929
+Average F1 Uniform: 0.6670391266357517
+Current neighbors: 21
+Average F1 Distance: 0.6973078907878724
+Average F1 Uniform: 0.6616877427061942
+Current neighbors: 22
+Average F1 Distance: 0.6956626728261746
+Average F1 Uniform: 0.6589683576667638
+Current neighbors: 23
+Average F1 Distance: 0.6956090536395826
+Average F1 Uniform: 0.6562769179160115
+Current neighbors: 24
+Average F1 Distance: 0.693281348693828
+Average F1 Uniform: 0.6511112129406967
+Current neighbors: 25
+Average F1 Distance: 0.6927776916102727
+Average F1 Uniform: 0.6483034420687992
+Current neighbors: 26
+Average F1 Distance: 0.6898377298373063
+Average F1 Uniform: 0.643401962062238
+Current neighbors: 27
+Average F1 Distance: 0.6882410139669533
+Average F1 Uniform: 0.6402896215066801
+Current neighbors: 28
+Average F1 Distance: 0.6858716389923595
+Average F1 Uniform: 0.6356249450427516
+Current neighbors: 29
+Average F1 Distance: 0.6845708754599251
+Average F1 Uniform: 0.63494361098241
+Start PredictiveMaintenance SVM
+Current kernel: linear
+Average f1 for linear: 0.6302120288245315
+Current kernel: rbf
+Average f1 for rbf: 0.7181193786709226
+Current kernel: poly
+Average f1 for poly: 0.738807603296252
+Current kernel: sigmoid
+Average f1 for sigmoid: 0.16435944964330892
+Start WeatherClassificationData knn
+Current neighbors: 1
+Average F1 Distance: 0.8555657256750976
+Average F1 Uniform: 0.8555657256750976
+Current neighbors: 2
+Average F1 Distance: 0.8557431250925852
+Average F1 Uniform: 0.8539952439869105
+Current neighbors: 3
+Average F1 Distance: 0.8657807330089551
+Average F1 Uniform: 0.8744947636053746
+Current neighbors: 4
+Average F1 Distance: 0.867722043408883
+Average F1 Uniform: 0.8748747845065263
+Current neighbors: 5
+Average F1 Distance: 0.8700894838700743
+Average F1 Uniform: 0.8784552263815654
+Current neighbors: 6
+Average F1 Distance: 0.8714351621427334
+Average F1 Uniform: 0.8796832405664619
+Current neighbors: 7
+Average F1 Distance: 0.8724885055830801
+Average F1 Uniform: 0.88089669404954
+Current neighbors: 8
+Average F1 Distance: 0.8730809404051801
+Average F1 Uniform: 0.8817161470932787
+Current neighbors: 9
+Average F1 Distance: 0.8738041095760173
+Average F1 Uniform: 0.8826081134380064
+Current neighbors: 10
+Average F1 Distance: 0.8743103306627276
+Average F1 Uniform: 0.8828952338397397
+Current neighbors: 11
+Average F1 Distance: 0.8749006133749282
+Average F1 Uniform: 0.8836160848448539
+Current neighbors: 12
+Average F1 Distance: 0.8752809849677345
+Average F1 Uniform: 0.8839729733709218
+Current neighbors: 13
+Average F1 Distance: 0.8754663655443378
+Average F1 Uniform: 0.8843754746516308
+Current neighbors: 14
+Average F1 Distance: 0.875692366600874
+Average F1 Uniform: 0.8845656446283863
+Current neighbors: 15
+Average F1 Distance: 0.8757492510168458
+Average F1 Uniform: 0.8847262278236004
+Current neighbors: 16
+Average F1 Distance: 0.8758909189531928
+Average F1 Uniform: 0.8847824906723214
+Current neighbors: 17
+Average F1 Distance: 0.8759104634547225
+Average F1 Uniform: 0.8846710754549652
+Current neighbors: 18
+Average F1 Distance: 0.8760151120457206
+Average F1 Uniform: 0.8847801797773502
+Current neighbors: 19
+Average F1 Distance: 0.8760543820563806
+Average F1 Uniform: 0.8845667386960951
+Current neighbors: 20
+Average F1 Distance: 0.8761179471306909
+Average F1 Uniform: 0.8847422100629427
+Current neighbors: 21
+Average F1 Distance: 0.8762860773863782
+Average F1 Uniform: 0.8846874486870513
+Current neighbors: 22
+Average F1 Distance: 0.876153568136609
+Average F1 Uniform: 0.8845444247239646
+Current neighbors: 23
+Average F1 Distance: 0.8762819566349508
+Average F1 Uniform: 0.8844001449780063
+Current neighbors: 24
+Average F1 Distance: 0.8763791216764117
+Average F1 Uniform: 0.8845192425737095
+Current neighbors: 25
+Average F1 Distance: 0.8763165046898718
+Average F1 Uniform: 0.8841963748628043
+Current neighbors: 26
+Average F1 Distance: 0.8763330116032515
+Average F1 Uniform: 0.88407093707864
+Current neighbors: 27
+Average F1 Distance: 0.8763598992572408
+Average F1 Uniform: 0.8837483733473779
+Current neighbors: 28
+Average F1 Distance: 0.8764787588393075
+Average F1 Uniform: 0.8839354007883063
+Current neighbors: 29
+Average F1 Distance: 0.8764823009999466
+Average F1 Uniform: 0.8838259575866024
+Start WeatherClassificationData SVM
+Current kernel: linear
+Average f1 for linear: 0.8625546375803481
+Current kernel: rbf
+Average f1 for rbf: 0.8790066940697305
+Current kernel: poly
+Average f1 for poly: 0.8572185771086458
+Current kernel: sigmoid
+Average f1 for sigmoid: 0.30861830495488934

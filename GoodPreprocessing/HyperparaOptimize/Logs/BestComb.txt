@@ -69,3 +69,31 @@ Dataset Informations
 Features: ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r']
 Label: class
 Length: 8124
+KNN
+DataSet: Mushrooms with trainrange: 100 and neighborsrange: 30
+Best comb: ['Uniform', 23, 0.985411127523387]
+SVM:
+DataSet: Mushrooms with trainrange: 100
+Best  kernel: ['rbf', 0.985411127523387]
+#######PredictiveMaintenance#######
+Dataset Informations
+Features: ['Air temperature [K]', 'Torque [Nm]', 'Tool wear [min]', 'Target']
+Label: Failure Type
+Length: 10000
+KNN
+DataSet: PredictiveMaintenance with trainrange: 100 and neighborsrange: 30
+Best comb: ['Distance', 6, 0.9922360000000003]
+SVM:
+DataSet: PredictiveMaintenance with trainrange: 100
+Best  kernel: ['poly', 0.9930880000000003]
+#######WeatherClassificationData#######
+Dataset Informations
+Features: ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear']
+Label: Weather Type
+Length: 13200
+KNN
+DataSet: WeatherClassificationData with trainrange: 100 and neighborsrange: 30
+Best comb: ['Uniform', 18, 0.8849606060606062]
+SVM:
+DataSet: WeatherClassificationData with trainrange: 100
+Best  kernel: ['rbf', 0.8790878787878785]
