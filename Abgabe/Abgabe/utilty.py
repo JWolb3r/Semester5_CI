@@ -24,6 +24,30 @@ def printAndWriteInFile(content, filename):
 def printAndWriteInPreprocessingFile(content):
     printAndWriteInFile(content, "Logs/Preprocessing.txt")
 
+def printAndWriteInEAOptimizeFile(content):
+    printAndWriteInFile(content, "Logs/NN_EA_OPTIMIZE.txt")
+
+def printAndWriteInEAOptimizeFile(content):
+    printAndWriteInFile(content, "Logs/NN_EA_OPTIMIZE.txt")
+
+def printAndWriteInFileBestFeatures(content):
+    printAndWriteInFile(content, "Logs/BestFeatures.txt")
+
+def printAndWriteInFileAcc(content):
+    printAndWriteInFile(content, "Logs/AccssOfAlgorithms.txt")
+
+def printAndWriteInFileBestComb(content):
+    printAndWriteInFile(content, "Logs/BestComb.txt")
+
+def printAndWriteInFileAvgAcc(content):
+    printAndWriteInFile(content, "Logs/AvgAcssOfAlgs.txt")
+
+def printAndWriteInFileF1Score(content):
+    printAndWriteInFile(content, "Logs/F1ScoreOfAlgs.txt")
+
+def printAndWriteInAvgFileF1Score(content):
+    printAndWriteInFile(content, "Logs/AvgF1ScoreOfAlgs.txt")
+
 def combineFiles(trainPath, testPath, destinationPath):
     train_df = pd.read_csv(trainPath)
     test_df = pd.read_csv(testPath)

@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import random
 from NN import trainAndTestMLP
+from utilty import printAndWriteInEAOptimizeFile, printAndWriteInFileAcc, printAndWriteInFileAvgAcc, printAndWriteInFileF1Score, printAndWriteInAvgFileF1Score
 
 ############## Determine Fitness ##############
 
@@ -17,10 +18,24 @@ def fitness(genome: [], data, features, label: str, numOfIterations: int = 5, ma
     Returns:
         float: The average accuracy of the genome rounded to 6 decimal places
     """
-    score = 0
+    f1score = 0
+    accscore = 0
     for i in range(numOfIterations):
-        score += trainAndTestMLP(data, features, label, hiddenLayerSizes=genome, randomState=42 + i, maxIter=maxIter).acc
-    return round(score / numOfIterations, 6)
+        metricscontainer = trainAndTestMLP(data, features, label, hiddenLayerSizes=genome, randomState=42 + i, maxIter=maxIter)
+        acc = metricscontainer.acc
+        f1 = metricscontainer.f1score
+        accscore += acc
+        f1score += f1
+
+        printAndWriteInFileAcc(accscore)
+        printAndWriteInFileF1Score(f1)
+
+    accroundresult = round(accscore / numOfIterations, 6)
+    f1roundresult = round(f1score / numOfIterations, 6)
+    printAndWriteInFileAvgAcc(accroundresult)
+    printAndWriteInAvgFileF1Score(f1roundresult)
+
+    return accroundresult
 
 ############## Evolve ##############
 
@@ -32,11 +47,20 @@ def evolve(data,features, label: str, maxIterations = 50, popSize = 20, fitnessI
                                                    minNeurons=4,
                                                    maxNeurons=128,
                                                    maxTotalNeurons=512)
-    print(f"Population: {population}")
+    printAndWriteInEAOptimizeFile(f"Population: {population}")
+    printAndWriteInFileAcc(f"Population: {population}")
+    printAndWriteInFileAvgAcc(f"Population: {population}")
+    printAndWriteInFileF1Score(f"Population: {population}")
+    printAndWriteInAvgFileF1Score(f"Population: {population}")
+
 
     iter = 0
     while maxIterations > iter:
-        print(f"Iteration {iter}")
+        printAndWriteInEAOptimizeFile(f"Iteration {iter}")
+        printAndWriteInFileAcc(f"Iteration {iter}")
+        printAndWriteInFileAvgAcc(f"Iteration {iter}")
+        printAndWriteInFileF1Score(f"Iteration {iter}")
+        printAndWriteInAvgFileF1Score(f"Iteration {iter}")
         # population["fitness"] = [fitness(genome, data, label, fitnessIter) for genome in population["genomes"]]
 
         with ThreadPoolExecutor() as executor:
@@ -56,10 +80,10 @@ def evolve(data,features, label: str, maxIterations = 50, popSize = 20, fitnessI
                                                 reverse=True)]
 
         # if iter % 100 == 0:
-            # print(f"Population: {population['genomes'][0:10]}")
-        print(f"Population: {sorted_population}")
-        print(f"Best accuracy: {max(population['fitness'])}")
-        # print(f"Best accuracy for: {sorted_population[0]}")
+            # printAndWriteInEAOptimizeFile(f"Population: {population['genomes'][0:10]}")
+        printAndWriteInEAOptimizeFile(f"Population: {sorted_population}")
+        printAndWriteInEAOptimizeFile(f"Best accuracy: {max(population['fitness'])}")
+        # printAndWriteInEAOptimizeFile(f"Best accuracy for: {sorted_population[0]}")
 
         nextPopulation = sorted_population[:popSize // 2]
         # tournamentWinner = tournamentSelection(population["genomes"], population["fitness"], 5)
@@ -69,7 +93,11 @@ def evolve(data,features, label: str, maxIterations = 50, popSize = 20, fitnessI
             children[index] = mutate(child)
         population["genomes"] = nextPopulation + children
         iter += 1
-    print(f"Population: {population}")
+    printAndWriteInEAOptimizeFile(f"Population: {population}")
+    printAndWriteInFileAcc(f"Population: {population}")
+    printAndWriteInFileAvgAcc(f"Population: {population}")
+    printAndWriteInFileF1Score(f"Population: {population}")
+    printAndWriteInAvgFileF1Score(f"Population: {population}")
     
 
 ############## Create Population ##############

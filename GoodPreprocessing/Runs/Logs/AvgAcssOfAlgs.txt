@@ -1,0 +1,130 @@
+#######Titanic#######
+Dataset Informations
+Features: ['Age', 'Parch', 'Sex_female', 'Sex_male']
+Label: Survived
+Length: 714
+Start Titanic knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.769832402234637
+Start Titanic SVM with kernel: rbf
+Average Acc for rbf: 0.7896089385474861
+Start Titanic default-NN with layers 100
+Average Acc: 0.788491620111732
+Start Titanic rf
+Average Acc: 0.753519553072626
+#######Cardio#######
+Dataset Informations
+Features: ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+Label: cardio
+Length: 68205
+Start Cardio knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.6918988974900305
+Start Cardio SVM with kernel: rbf
+Average Acc for rbf: 0.7277726952850107
+Start Cardio default-NN with layers 100
+Average Acc: 0.7304890921885995
+Start Cardio rf
+Average Acc: 0.650154820548909
+#######FetalHealth#######
+Dataset Informations
+Features: ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median']
+Label: fetal_health
+Length: 2113
+Start FetalHealth knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.8691493383742909
+Start FetalHealth SVM with kernel: rbf
+Average Acc for rbf: 0.8308884688090739
+Start FetalHealth default-NN with layers 100
+Average Acc: 0.8763705103969754
+Start FetalHealth rf
+Average Acc: 0.8584120982986764
+#######Drug200#######
+Dataset Informations
+Features: ['Age', 'Na_to_K', 'Sex_M', 'BP_HIGH']
+Label: Drug
+Length: 200
+Start Drug200 knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.7576
+Start Drug200 SVM with kernel: rbf
+Average Acc for rbf: 0.8064
+Start Drug200 default-NN with layers 100
+Average Acc: 0.8795999999999999
+Start Drug200 rf
+Average Acc: 0.8824000000000006
+#######Abalone#######
+Dataset Informations
+Features: ['Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_M']
+Label: Rings
+Length: 4177
+Start Abalone knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.22918660287081344
+Start Abalone SVM with kernel: rbf
+Average Acc for rbf: 0.2567846889952153
+Start Abalone default-NN with layers 100
+Average Acc: 0.2745454545454545
+Start Abalone rf
+Average Acc: 0.23079425837320577
+#######DataDiagnosis#######
+Dataset Informations
+Features: ['radius_mean', 'texture_mean', 'concave points_mean', 'fractal_dimension_mean']
+Label: diagnosis
+Length: 569
+Start DataDiagnosis knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.9247552447552448
+Start DataDiagnosis SVM with kernel: rbf
+Average Acc for rbf: 0.9374825174825179
+Start DataDiagnosis default-NN with layers 100
+Average Acc: 0.9367832167832172
+Start DataDiagnosis rf
+Average Acc: 0.9376223776223775
+#######Glass#######
+Dataset Informations
+Features: ['RI', 'Al', 'Ca', 'Ba']
+Label: Type
+Length: 213
+Start Glass knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.6914814814814813
+Start Glass SVM with kernel: rbf
+Average Acc for rbf: 0.6525925925925925
+Start Glass default-NN with layers 100
+Average Acc: 0.6492592592592592
+Start Glass rf
+Average Acc: 0.7177777777777778
+#######Mushrooms#######
+Dataset Informations
+Features: ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r']
+Label: class
+Length: 8124
+Start Mushrooms knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.9849729197439682
+Start Mushrooms SVM with kernel: rbf
+Average Acc for rbf: 0.9855539143279168
+Start Mushrooms default-NN with layers 100
+Average Acc: 0.9855539143279168
+Start Mushrooms rf
+Average Acc: 0.9855539143279168
+#######PredictiveMaintenance#######
+Dataset Informations
+Features: ['Air temperature [K]', 'Torque [Nm]', 'Tool wear [min]', 'Target']
+Label: Failure Type
+Length: 10000
+Start PredictiveMaintenance knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.9917120000000001
+Start PredictiveMaintenance SVM with kernel: rbf
+Average Acc for rbf: 0.991976
+Start PredictiveMaintenance default-NN with layers 100
+Average Acc: 0.9924319999999999
+Start PredictiveMaintenance rf
+Average Acc: 0.9932239999999999
+#######WeatherClassificationData#######
+Dataset Informations
+Features: ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear']
+Label: Weather Type
+Length: 13200
+Start WeatherClassificationData knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.8790727272727272
+Start WeatherClassificationData SVM with kernel: rbf
+Average Acc for rbf: 0.8788848484848485
+Start WeatherClassificationData default-NN with layers 100
+Average Acc: 0.8806242424242425
+Start WeatherClassificationData rf
+Average Acc: 0.8751454545454546

@@ -1,0 +1,78 @@
+Preprocess Cardio Data
+Bad preprocessing is used
+
+Start preprocessing of file DataSets\Conference\cardio_data_processed.csv
+
+Load Data
+
+Remove Duplicates
+
+OneHotEncode
+
+Print NaN Values
+NaN values (absolute):
+id                                  0
+age                                 0
+gender                              0
+height                              0
+weight                              0
+ap_hi                               0
+ap_lo                               0
+cholesterol                         0
+gluc                                0
+smoke                               0
+alco                                0
+active                              0
+cardio                              0
+age_years                           0
+bmi                                 0
+bp_category_encoded                 0
+bp_category_Elevated                0
+bp_category_Hypertension Stage 1    0
+bp_category_Hypertension Stage 2    0
+bp_category_Normal                  0
+
+
+NaN values (percentage):
+id                                  0.0
+age                                 0.0
+gender                              0.0
+height                              0.0
+weight                              0.0
+ap_hi                               0.0
+ap_lo                               0.0
+cholesterol                         0.0
+gluc                                0.0
+smoke                               0.0
+alco                                0.0
+active                              0.0
+cardio                              0.0
+age_years                           0.0
+bmi                                 0.0
+bp_category_encoded                 0.0
+bp_category_Elevated                0.0
+bp_category_Hypertension Stage 1    0.0
+bp_category_Hypertension Stage 2    0.0
+bp_category_Normal                  0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 68205
+
+Length of dataset (after NaN removal): 68205
+
+
+Print Datset Infos
+
+Length of Dataset: 68205
+
+Columns of Dataset: Index(['id', 'age', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo',
+       'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio', 'age_years',
+       'bmi', 'bp_category_encoded', 'bp_category_Elevated',
+       'bp_category_Hypertension Stage 1', 'bp_category_Hypertension Stage 2',
+       'bp_category_Normal'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns

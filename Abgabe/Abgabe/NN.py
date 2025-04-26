@@ -14,19 +14,10 @@ def testMLP(model, testDataX, testDataY, uniqueLabelValues: list = None, printVa
 
     f1score=f1_score(y_true=testDataY, y_pred=yPred, average='macro')
 
-    if uniqueLabelValues:
-        report = classification_report(testDataY, yPred, output_dict=True)
-        if printValues: print(report)
+    acScore = accuracy_score(testDataY, yPred)
+    if printValues: print(acScore)
 
-        sum = 0
-        for value in uniqueLabelValues:
-            sum += report[f"{value}"]["f1-score"]
-        return sum / len(uniqueLabelValues)
-    else:
-        acScore = accuracy_score(testDataY, yPred)
-        if printValues: print(acScore)
-
-        return MetricsContainer(acc=acScore, f1score=f1score)
+    return MetricsContainer(acc=acScore, f1score=f1score)
 
 def trainAndTestMLP(data, features, label, maxIter=4000, hiddenLayerSizes=(100), randomState=42, uniqueLabelValues: list = None, printValues = False, activationFunction="relu"):
     dataX = data[features]

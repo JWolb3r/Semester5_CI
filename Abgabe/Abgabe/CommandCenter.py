@@ -5,7 +5,7 @@ from NN import trainAndTestMLP
 from Preprocessing import getColumns, preprocessing, removeColumns, deleteNaNValues, printLengthAndColumns
 from kNN import trainAndTestKNN
 from SVM import trainAndTestSVM
-from utilty import MetricsContainer, printAndWriteInFile, printAndWriteInPreprocessingFile
+from utilty import MetricsContainer, printAndWriteInFile, printAndWriteInPreprocessingFile, printAndWriteInEAOptimizeFile, printAndWriteInAvgFileF1Score, printAndWriteInFileAcc, printAndWriteInFileAvgAcc, printAndWriteInFileBestComb, printAndWriteInFileBestFeatures, printAndWriteInFileF1Score
 import pandas as pd
 
 class PreprocessedData:
@@ -608,24 +608,6 @@ def startNNAverageCreation(data, features, label, trainRange=10, datasetName=Non
     printAndWriteInAvgFileF1Score(f"Average f1score: {averageF1}")
 
 
-def printAndWriteInFileBestFeatures(content):
-    printAndWriteInFile(content, "Logs/BestFeatures.txt")
-
-def printAndWriteInFileAcc(content):
-    printAndWriteInFile(content, "Logs/AccssOfAlgorithms.txt")
-
-def printAndWriteInFileBestComb(content):
-    printAndWriteInFile(content, "Logs/BestComb.txt")
-
-def printAndWriteInFileAvgAcc(content):
-    printAndWriteInFile(content, "Logs/AvgAcssOfAlgs.txt")
-
-def printAndWriteInFileF1Score(content):
-    printAndWriteInFile(content, "Logs/F1ScoreOfAlgs.txt")
-
-def printAndWriteInAvgFileF1Score(content):
-    printAndWriteInFile(content, "Logs/AvgF1ScoreOfAlgs.txt")
-
 def doFFS(datasetName, data, features, label):
     bestFeatures = ffs(data, features, label, maxIter=1000)
 
@@ -685,16 +667,16 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
     datasets = [
         {
             "name": "Titanic",
-            "preprocess": lambda: preprocessTitanic(False),
-            # "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
+            "preprocess": lambda: preprocessTitanic(),
+            "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
         # {
         #     "name": "Cardio",
-        #     "preprocess": lambda: preprocessCardioData(False),
-        #     # "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+        #     "preprocess": lambda: preprocessCardioData(),
+        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
         #     # "knn": {"neighbors": 1,
         #     #         "weights": "uniform"},
         #     # "svmKernel": "linear" 
@@ -709,64 +691,64 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         # },
         {
             "name": "FetalHealth",
-            "preprocess": lambda: preprocessFetalHealth(False),
-            # "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
+            "preprocess": lambda: preprocessFetalHealth(),
+            "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
             # "knn": {"neighbors": 1,
             #         "weights": "distance"},
             # "svmKernel": "linear" 
         },
         {
             "name": "Drug200",
-            "preprocess": lambda: preprocessDrug200(False),
-            # "features": ['Age', 'Na_to_K', 'Sex_M', 'BP_HIGH'],
+            "preprocess": lambda: preprocessDrug200(),
+            "features": ['Age', 'Na_to_K', 'Sex_M', 'BP_HIGH'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
         {
             "name": "Abalone",
-            "preprocess": lambda: preprocessAbalone(False),
-            # "features": ['Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_M'],
+            "preprocess": lambda: preprocessAbalone(),
+            "features": ['Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_M'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
         {
             "name": "DataDiagnosis",
-            "preprocess": lambda: preprocessDataDiagnosis(False),
-            # "features": ['radius_mean', 'texture_mean', 'concave points_mean', 'fractal_dimension_mean'],
+            "preprocess": lambda: preprocessDataDiagnosis(),
+            "features": ['radius_mean', 'texture_mean', 'concave points_mean', 'fractal_dimension_mean'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
         {
             "name": "Glass",
-            "preprocess": lambda: preprocessGlass(False),
-            # "features": ['RI', 'Al', 'Ca', 'Ba'],
+            "preprocess": lambda: preprocessGlass(),
+            "features": ['RI', 'Al', 'Ca', 'Ba'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
         {
             "name": "Mushrooms",
-            "preprocess": lambda: preprocessMuschrooms(False),
-            # "features": ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r'],
+            "preprocess": lambda: preprocessMuschrooms(),
+            "features": ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
         {
             "name": "PredictiveMaintenance",
-            "preprocess": lambda: preprocessPredictivemaintenance(False),
-            # "features": ['Air temperature [K]', 'Torque [Nm]', 'Tool wear [min]', 'Target'],
+            "preprocess": lambda: preprocessPredictivemaintenance(),
+            "features": ['Air temperature [K]', 'Torque [Nm]', 'Tool wear [min]', 'Target'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
         },
         {
             "name": "WeatherClassificationData",
-            "preprocess": lambda: preprocessWeatherClassificationData(False),
-            # "features": ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear'],
+            "preprocess": lambda: preprocessWeatherClassificationData(),
+            "features": ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear'],
             # "knn": {"neighbors": 1,
             #         "weights": "uniform"},
             # "svmKernel": "linear" 
@@ -789,6 +771,11 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
             doFFS(dataset["name"], preprocessed.data, preprocessed.feature, label)
         
         if bEA:
+            printAndWriteInEAOptimizeFile(f"Start EA NN Optimize for dataset: {dataset['name']}")
+            printAndWriteInFileAcc(f"Start EA NN Optimize for dataset: {dataset['name']}")
+            printAndWriteInFileAvgAcc(f"Start EA NN Optimize for dataset: {dataset['name']}")
+            printAndWriteInFileF1Score(f"Start EA NN Optimize for dataset: {dataset['name']}")
+            printAndWriteInAvgFileF1Score(f"Start EA NN Optimize for dataset: {dataset['name']}")
             startEA(data=preprocessed.data, features=features, label=label, maxIterEa=trainRange)
 
         if bfindComb:
@@ -858,8 +845,5 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
 if __name__ == "__main__":
     # Test call
     # analysis(bFFS=True)
-    analysis(bKNN=True, bCreateAccs=True, bNN=True, bSVM=True, bRF=True, trainRange=50)
-    # titanic_cardio_iris__fetal_analysis(bCreateAccs=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
-    # titanic_cardio_iris__fetal_analysis(bfindComb=True, bKNN=True, bSVM=True, bNN=True, bRF=True, trainRange=2)
-    # titanic_cardio_iris__fetal_analysis(bEA=True, trainRange=2)
-    # titanic_cardio_iris__fetal_analysis(bFFS=True, trainRange=10)
+    # analysis(bKNN=True, bCreateAccs=True, bNN=True, bSVM=True, bRF=True, trainRange=50)
+    analysis(bfindComb=True, trainRange=100, bKNN=True, bSVM=True)

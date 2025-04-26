@@ -1,0 +1,13 @@
+#######Cardio#######
+Dataset Informations
+Features: ['id', 'age', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'bmi', 'bp_category_Elevated', 'bp_category_Hypertension Stage 1', 'bp_category_Hypertension Stage 2', 'bp_category_Normal']
+Label: cardio
+Length: 68205
+Start Cardio knn with neighbors: 5 and weights: uniform
+Average Acc with neighbors 5 and weight uniform: 0.5529357260145438
+Start Cardio SVM with kernel: rbf
+Average Acc for rbf: 0.5963230119634061
+Start Cardio default-NN with layers 100
+Average Acc: 0.5858034248182029
+Start Cardio rf
+Average Acc: 0.7205747126436782

@@ -1,0 +1,71 @@
+#######Titanic#######
+Dataset Informations
+Features: ['Age', 'Parch', 'Sex_female', 'Sex_male']
+Label: Survived
+Length: 714
+KNN
+DataSet: Titanic with trainrange: 100 and neighborsrange: 30
+Best comb: ['Uniform', 29, 0.7820111731843575]
+SVM:
+DataSet: Titanic with trainrange: 100
+Best  kernel: ['rbf', 0.7868156424581007]
+#######FetalHealth#######
+Dataset Informations
+Features: ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median']
+Label: fetal_health
+Length: 2113
+KNN
+DataSet: FetalHealth with trainrange: 100 and neighborsrange: 30
+Best comb: ['Uniform', 15, 0.8714366729678639]
+SVM:
+DataSet: FetalHealth with trainrange: 100
+Best  kernel: ['poly', 0.8359546313799622]
+#######Drug200#######
+Dataset Informations
+Features: ['Age', 'Na_to_K', 'Sex_M', 'BP_HIGH']
+Label: Drug
+Length: 200
+KNN
+DataSet: Drug200 with trainrange: 100 and neighborsrange: 30
+Best comb: ['Distance', 12, 0.8104]
+SVM:
+DataSet: Drug200 with trainrange: 100
+Best  kernel: ['poly', 0.8218000000000002]
+#######Abalone#######
+Dataset Informations
+Features: ['Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_M']
+Label: Rings
+Length: 4177
+KNN
+DataSet: Abalone with trainrange: 100 and neighborsrange: 30
+Best comb: ['Uniform', 22, 0.2538660287081339]
+SVM:
+DataSet: Abalone with trainrange: 100
+Best  kernel: ['rbf', 0.2571866028708134]
+#######DataDiagnosis#######
+Dataset Informations
+Features: ['radius_mean', 'texture_mean', 'concave points_mean', 'fractal_dimension_mean']
+Label: diagnosis
+Length: 569
+KNN
+DataSet: DataDiagnosis with trainrange: 100 and neighborsrange: 30
+Best comb: ['Uniform', 27, 0.9425174825174829]
+SVM:
+DataSet: DataDiagnosis with trainrange: 100
+Best  kernel: ['rbf', 0.9394405594405596]
+#######Glass#######
+Dataset Informations
+Features: ['RI', 'Al', 'Ca', 'Ba']
+Label: Type
+Length: 213
+KNN
+DataSet: Glass with trainrange: 100 and neighborsrange: 30
+Best comb: ['Distance', 6, 0.715]
+SVM:
+DataSet: Glass with trainrange: 100
+Best  kernel: ['poly', 0.6596296296296295]
+#######Mushrooms#######
+Dataset Informations
+Features: ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r']
+Label: class
+Length: 8124
