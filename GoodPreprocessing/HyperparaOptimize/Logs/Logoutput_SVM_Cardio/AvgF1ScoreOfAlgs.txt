@@ -1,0 +1,9 @@
+Start Cardio SVM
+Current kernel: linear
+Average f1 for linear: 0.7207200595038072
+Current kernel: rbf
+Average f1 for rbf: 0.7251764567046761
+Current kernel: poly
+Average f1 for poly: 0.7102260597791327
+Current kernel: sigmoid
+Average f1 for sigmoid: 0.36337729532607355

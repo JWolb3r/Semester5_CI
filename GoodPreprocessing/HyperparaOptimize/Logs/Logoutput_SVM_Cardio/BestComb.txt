@@ -1,0 +1,8 @@
+#######Cardio#######
+Dataset Informations
+Features: ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+Label: cardio
+Length: 68205
+SVM:
+DataSet: Cardio with trainrange: 20
+Best  kernel: ['rbf', 0.7276771053248888]

@@ -27,7 +27,7 @@ def fitness(genome: [], data, features, label: str, numOfIterations: int = 5, ma
         accscore += acc
         f1score += f1
 
-        printAndWriteInFileAcc(accscore)
+        printAndWriteInFileAcc(acc)
         printAndWriteInFileF1Score(f1)
 
     accroundresult = round(accscore / numOfIterations, 6)

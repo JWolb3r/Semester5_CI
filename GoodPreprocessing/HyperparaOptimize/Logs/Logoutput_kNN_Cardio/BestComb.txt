@@ -1,0 +1,8 @@
+#######Cardio#######
+Dataset Informations
+Features: ['age', 'ap_hi', 'ap_lo', 'cholesterol']
+Label: cardio
+Length: 68205
+KNN
+DataSet: Cardio with trainrange: 100 and neighborsrange: 30
+Best comb: ['Uniform', 28, 0.7230653295801082]
