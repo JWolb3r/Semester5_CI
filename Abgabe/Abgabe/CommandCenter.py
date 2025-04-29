@@ -673,14 +673,14 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         #     #         "weights": "uniform"},
         #     # "svmKernel": "linear" 
         # },
-        # {
-        #     "name": "Cardio",
-        #     "preprocess": lambda: preprocessCardioData(),
-        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-        #     # "knn": {"neighbors": 1,
-        #     #         "weights": "uniform"},
-        #     # "svmKernel": "linear" 
-        # },
+        {
+            "name": "Cardio",
+            "preprocess": lambda: preprocessCardioData(),
+            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
         # {
         #     "name": "Iris",
         #     "preprocess": lambda: preprocessTitanic(False)
@@ -745,14 +745,14 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         #     #         "weights": "uniform"},
         #     # "svmKernel": "linear" 
         # },
-        {
-            "name": "WeatherClassificationData",
-            "preprocess": lambda: preprocessWeatherClassificationData(),
-            "features": ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "WeatherClassificationData",
+        #     "preprocess": lambda: preprocessWeatherClassificationData(),
+        #     "features": ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
     ]
 
     for dataset in datasets:
