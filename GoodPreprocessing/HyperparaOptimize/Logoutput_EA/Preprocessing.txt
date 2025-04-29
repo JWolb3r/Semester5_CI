@@ -1,5 +1,5 @@
 Preprocess Titanic Data
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\titanic_combined.csv
 
@@ -8,6 +8,8 @@ Load Data
 Remove Duplicates
 
 OneHotEncode
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -56,13 +58,15 @@ Length of dataset (before NaN removal): 1309
 Length of dataset (after NaN removal): 714
 
 Preprocess Fetal Health Data
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\fetal_health.csv
 
 Load Data
 
 Remove Duplicates
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -116,6 +120,12 @@ fetal_health                                              0.0
 
 
 
+Delete NaN Values
+Length of dataset (before NaN removal): 2113
+
+Length of dataset (after NaN removal): 2113
+
+
 Print Datset Infos
 
 Length of Dataset: 2113
@@ -132,10 +142,8 @@ Columns of Dataset: Index(['baseline value', 'accelerations', 'fetal_movement',
        'fetal_health'],
       dtype='object')
 Finished Preprocessing
-
-Remove Columns
 Preprocess Drug200
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\drug200.csv
 
@@ -146,6 +154,8 @@ Remove Duplicates
 Label Encode
 
 OneHotEncode
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -192,7 +202,7 @@ Finished Preprocessing
 
 Remove Columns
 Preprocess Abalone
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\abalone.csv
 
@@ -201,6 +211,8 @@ Load Data
 Remove Duplicates
 
 OneHotEncode
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -232,6 +244,12 @@ Sex_M             0.0
 
 
 
+Delete NaN Values
+Length of dataset (before NaN removal): 4177
+
+Length of dataset (after NaN removal): 4177
+
+
 Print Datset Infos
 
 Length of Dataset: 4177
@@ -243,7 +261,7 @@ Finished Preprocessing
 
 Remove Columns
 Preprocess Diagnosis
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\data_diagnosis.csv
 
@@ -252,6 +270,8 @@ Load Data
 Remove Duplicates
 
 Label Encode
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -297,13 +317,15 @@ Finished Preprocessing
 
 Remove Columns
 Preprocess Glass
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\glass.csv
 
 Load Data
 
 Remove Duplicates
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -348,7 +370,7 @@ Finished Preprocessing
 
 Remove Columns
 Preprocess Mushrooms
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\mushrooms.csv
 
@@ -626,7 +648,7 @@ Finished Preprocessing
 
 Remove Columns
 Preprocess Predictive Maintenance
-Bad preprocessing is used
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\predictive_maintenance.csv
 
@@ -637,6 +659,8 @@ Remove Duplicates
 Label Encode
 
 OneHotEncode
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -686,9 +710,8 @@ Columns of Dataset: Index(['UDI', 'Product ID', 'Air temperature [K]', 'Process 
       dtype='object')
 Finished Preprocessing
 
-Remove Columns
-Preprocess Weather Classification Data
-Bad preprocessing is used
+Remove ColumnsPreprocess Weather Classification Data
+Good preprocessing is used
 
 Start preprocessing of file DataSets\Conference\weather_classification_data.csv
 
@@ -699,6 +722,8 @@ Remove Duplicates
 Label Encode
 
 OneHotEncode
+
+Normalize Data
 
 Print NaN Values
 NaN values (absolute):
@@ -762,6 +787,86 @@ Columns of Dataset: Index(['Temperature', 'Humidity', 'Wind Speed', 'Precipitati
        'Cloud Cover_partly cloudy', 'Season_Autumn', 'Season_Spring',
        'Season_Summer', 'Season_Winter', 'Location_coastal', 'Location_inland',
        'Location_mountain'],
+      dtype='object')
+Finished Preprocessing
+
+Remove Columns
+Preprocess Cardio Data
+Good preprocessing is used
+
+Start preprocessing of file DataSets\Conference\cardio_data_processed.csv
+
+Load Data
+
+Remove Duplicates
+
+OneHotEncode
+
+Normalize Data
+
+Print NaN Values
+NaN values (absolute):
+id                                  0
+age                                 0
+gender                              0
+height                              0
+weight                              0
+ap_hi                               0
+ap_lo                               0
+cholesterol                         0
+gluc                                0
+smoke                               0
+alco                                0
+active                              0
+cardio                              0
+age_years                           0
+bmi                                 0
+bp_category_encoded                 0
+bp_category_Elevated                0
+bp_category_Hypertension Stage 1    0
+bp_category_Hypertension Stage 2    0
+bp_category_Normal                  0
+
+
+NaN values (percentage):
+id                                  0.0
+age                                 0.0
+gender                              0.0
+height                              0.0
+weight                              0.0
+ap_hi                               0.0
+ap_lo                               0.0
+cholesterol                         0.0
+gluc                                0.0
+smoke                               0.0
+alco                                0.0
+active                              0.0
+cardio                              0.0
+age_years                           0.0
+bmi                                 0.0
+bp_category_encoded                 0.0
+bp_category_Elevated                0.0
+bp_category_Hypertension Stage 1    0.0
+bp_category_Hypertension Stage 2    0.0
+bp_category_Normal                  0.0
+
+
+
+Delete NaN Values
+Length of dataset (before NaN removal): 68205
+
+Length of dataset (after NaN removal): 68205
+
+
+Print Datset Infos
+
+Length of Dataset: 68205
+
+Columns of Dataset: Index(['id', 'age', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo',
+       'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio', 'age_years',
+       'bmi', 'bp_category_encoded', 'bp_category_Elevated',
+       'bp_category_Hypertension Stage 1', 'bp_category_Hypertension Stage 2',
+       'bp_category_Normal'],
       dtype='object')
 Finished Preprocessing
 
