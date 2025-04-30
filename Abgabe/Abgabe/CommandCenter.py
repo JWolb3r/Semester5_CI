@@ -665,22 +665,22 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
     """
 
     datasets = [
-        {
-            "name": "Titanic",
-            "preprocess": lambda: preprocessTitanic(False),
-            "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
         # {
-        #     "name": "Cardio",
-        #     "preprocess": lambda: preprocessCardioData(False),
-        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+        #     "name": "Titanic",
+        #     "preprocess": lambda: preprocessTitanic(False),
+        #     "features": ['Age', 'Parch', 'Sex_female', 'Sex_male'],
         #     # "knn": {"neighbors": 1,
         #     #         "weights": "uniform"},
         #     # "svmKernel": "linear" 
         # },
+        {
+            "name": "Cardio",
+            "preprocess": lambda: preprocessCardioData(False),
+            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+            # "knn": {"neighbors": 1,
+            #         "weights": "uniform"},
+            # "svmKernel": "linear" 
+        },
         # {
         #     "name": "Iris",
         #     "preprocess": lambda: preprocessTitanic(False),
@@ -689,70 +689,70 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         #             "weights": "uniform"},
         #     "svmKernel": "linear" 
         # },
-        {
-            "name": "FetalHealth",
-            "preprocess": lambda: preprocessFetalHealth(False),
-            "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "distance"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "Drug200",
-            "preprocess": lambda: preprocessDrug200(False),
-            "features": ['Age', 'Na_to_K', 'Sex_M', 'BP_HIGH'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "Abalone",
-            "preprocess": lambda: preprocessAbalone(False),
-            "features": ['Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_M'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "DataDiagnosis",
-            "preprocess": lambda: preprocessDataDiagnosis(False),
-            "features": ['radius_mean', 'texture_mean', 'concave points_mean', 'fractal_dimension_mean'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "Glass",
-            "preprocess": lambda: preprocessGlass(False),
-            "features": ['RI', 'Al', 'Ca', 'Ba'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "Mushrooms",
-            "preprocess": lambda: preprocessMuschrooms(False),
-            "features": ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "PredictiveMaintenance",
-            "preprocess": lambda: preprocessPredictivemaintenance(False),
-            "features": ['Air temperature [K]', 'Torque [Nm]', 'Tool wear [min]', 'Target'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
-        {
-            "name": "WeatherClassificationData",
-            "preprocess": lambda: preprocessWeatherClassificationData(False),
-            "features": ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "FetalHealth",
+        #     "preprocess": lambda: preprocessFetalHealth(False),
+        #     "features": ['severe_decelerations', 'prolongued_decelerations', 'mean_value_of_short_term_variability', 'histogram_median'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "distance"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Drug200",
+        #     "preprocess": lambda: preprocessDrug200(False),
+        #     "features": ['Age', 'Na_to_K', 'Sex_M', 'BP_HIGH'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Abalone",
+        #     "preprocess": lambda: preprocessAbalone(False),
+        #     "features": ['Shucked weight', 'Viscera weight', 'Shell weight', 'Sex_M'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "DataDiagnosis",
+        #     "preprocess": lambda: preprocessDataDiagnosis(False),
+        #     "features": ['radius_mean', 'texture_mean', 'concave points_mean', 'fractal_dimension_mean'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Glass",
+        #     "preprocess": lambda: preprocessGlass(False),
+        #     "features": ['RI', 'Al', 'Ca', 'Ba'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "Mushrooms",
+        #     "preprocess": lambda: preprocessMuschrooms(False),
+        #     "features": ['odor_n', 'stalk-root_c', 'stalk-surface-below-ring_y', 'spore-print-color_r'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "PredictiveMaintenance",
+        #     "preprocess": lambda: preprocessPredictivemaintenance(False),
+        #     "features": ['Air temperature [K]', 'Torque [Nm]', 'Tool wear [min]', 'Target'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
+        # {
+        #     "name": "WeatherClassificationData",
+        #     "preprocess": lambda: preprocessWeatherClassificationData(False),
+        #     "features": ['Temperature', 'UV Index', 'Visibility (km)', 'Cloud Cover_clear'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
     ]
 
     for dataset in datasets:
