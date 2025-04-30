@@ -673,14 +673,14 @@ def analysis(bEA=False, bRF=False, bKNN=False, bNN=False, bSVM=False, bFFS=False
         #     #         "weights": "uniform"},
         #     # "svmKernel": "linear" 
         # },
-        {
-            "name": "Cardio",
-            "preprocess": lambda: preprocessCardioData(False),
-            "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
-            # "knn": {"neighbors": 1,
-            #         "weights": "uniform"},
-            # "svmKernel": "linear" 
-        },
+        # {
+        #     "name": "Cardio",
+        #     "preprocess": lambda: preprocessCardioData(False),
+        #     "features": ['age', 'ap_hi', 'ap_lo', 'cholesterol'],
+        #     # "knn": {"neighbors": 1,
+        #     #         "weights": "uniform"},
+        #     # "svmKernel": "linear" 
+        # },
         # {
         #     "name": "Iris",
         #     "preprocess": lambda: preprocessTitanic(False),
